@@ -1,10 +1,14 @@
 import styled from "styled-components";
+import Content from "../components/Content";
+
+
 
 function MainContent() {
-    
+
     return (
       <StyledMainContent>
         주요 콘텐츠 
+        <Content serverName="characterName" />
       </StyledMainContent>
     );
 };

@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import MainContent from "./components/MainContent";
-import Sidebar from "./components/Sidebar";
+import Footer from "./pages/Footer";
+import Header from "./pages/Header";
+import MainContent from "./pages/MainContent";
+import Sidebar from "./pages/Sidebar";
 
 function App() {
   return (
