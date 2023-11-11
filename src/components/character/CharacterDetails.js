@@ -27,6 +27,7 @@ function CharacterDetails() {
           .then(response => {
             // API가 배열을 반환하지 않는 경우를 대비하여 체크
             setSiblings(Array.isArray(response.data) ? response.data : []);
+            console.log(response.data)
             setIsLoading(false);
           })
           .catch(error => {
@@ -51,7 +52,9 @@ function CharacterDetails() {
         <ul>
           {siblings.map((sibling, index) => (
             <li key={index}>
-              {sibling.CharacterName} - {sibling.CharacterLevel}
+              {sibling.CharacterName} - {sibling.CharacterLevel} -
+              {sibling.ItemMaxLevel} - {sibling.ServerName} -
+              {sibling.CharacterClassName}
             </li>
           ))}
         </ul>
