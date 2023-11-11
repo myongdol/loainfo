@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Footer from "./pages/Footer";
-import Header from "./pages/Header";
-import MainContent from "./pages/MainContent";
-import Sidebar from "./pages/Sidebar";
+import Footer from "./mainCotent/Footer";
+import Header from "./mainCotent/Header";
+import MainContent from "./mainCotent/MainContent";
+import Sidebar from "./mainCotent/Sidebar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CharacterDetails from "./components/character/CharacterDetails";
 
