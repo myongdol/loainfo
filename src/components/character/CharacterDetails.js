@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 
 const APIKEY = process.env.REACT_APP_API_KEY;
 
@@ -13,7 +14,8 @@ const api = axios.create({
 
 
 
-function Content({ characterName }) {
+function CharacterDetails() {
+  const { characterName } = useParams();
     const [siblings, setSiblings] = useState([]);
 
     useEffect(() => {
@@ -25,6 +27,7 @@ function Content({ characterName }) {
           })
           .catch(error => {
             console.error('원정대 정보를 불러올 수 없습니다.', error);
+            alert('존재하지 않는 캐릭터명 입니다.')
             setSiblings([]); // 오류 발생 시 상태를 빈 배열로 재설정
           });
       }
@@ -33,7 +36,6 @@ function Content({ characterName }) {
     
     return (
       <div>
-        {siblings.length > 0 ? (
           <ul>
             {siblings.map((sibling, index) => (
               <li key={index}>
@@ -41,11 +43,8 @@ function Content({ characterName }) {
               </li>
             ))}
           </ul>
-        ) : (
-          <p>캐릭터명을 입력해주세요.</p>
-        )}
       </div>
     );
   }
   
-  export default Content;
+  export default CharacterDetails;

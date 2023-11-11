@@ -4,7 +4,6 @@ import SearchCharacter from "../components/SearchCharacter";
 function Header() {
     return (
         <StyledHeader>
-            헤더, 캐릭터명 검색 
             <SearchCharacter />
         </StyledHeader>
     )

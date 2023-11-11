@@ -3,19 +3,26 @@ import Footer from "./pages/Footer";
 import Header from "./pages/Header";
 import MainContent from "./pages/MainContent";
 import Sidebar from "./pages/Sidebar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CharacterDetails from "./components/character/CharacterDetails";
 
 function App() {
   return (
+    <BrowserRouter>
     <AppContainer>
       <Header />
         <ContentContainer>
           <MainSection>
-            <MainContent />
+            <Routes>
+              <Route path="/" element={<MainContent/>} />
+              <Route path="/character/:characterName" element={<CharacterDetails />} />
+            </Routes>
           </MainSection>
           <Sidebar />
         </ContentContainer>
       <Footer />
     </AppContainer>
+    </BrowserRouter>
   );
 }
 

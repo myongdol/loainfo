@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Content from "../components/Content";
+
 
 
 
@@ -7,8 +7,7 @@ function MainContent() {
 
     return (
       <StyledMainContent>
-        주요 콘텐츠 
-        <Content serverName="characterName" />
+        메인화면
       </StyledMainContent>
     );
 };

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import Content from './Content';
+import { useNavigate } from 'react-router-dom';
+
 
 function SearchCharacter() {
   const [characterName, setCharacterName] = useState('');
-  const [nextSearch, setNextSearch] = useState('');
+  let navigate = useNavigate();
 
   const handleSearch = () => {
-    setNextSearch(characterName);
+    navigate(`/character/${characterName}`)
   };
 
   return (
@@ -18,7 +19,6 @@ function SearchCharacter() {
       placeholder="캐릭터명을 입력하세요"
     />
     <button onClick={handleSearch}>검색</button>
-    <Content characterName={nextSearch} />
   </div>
   );
 }
