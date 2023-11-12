@@ -1,75 +1,42 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Notices from "../components/Notice";
 import Events from "../components/Events";
+import useApi from "../util/useApi";
 
-const APIKEY = process.env.REACT_APP_API_KEY;
-const baseURL = 'https://developer-lostark.game.onstove.com/';
+
 const itemsPerPage = 10;
-
-const api = axios.create({
-  baseURL: baseURL,
-  headers: {
-    'accept': 'application/json',
-    'Authorization': `Bearer ${APIKEY}`
-  }
-});
 
 
 function MainContent() {
   const [notices, setNotices] = useState([]);
-  const [events, setEvents] = useState([]);
   const [currentPageNotices, setCurrentPageNotices] = useState(1);
-  const [currentPageEvents, setCurrentPageEvents] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
-
-  
+  const { data: noticesData, isLoading: isLoadingNotices, error: errorNotices } = useApi('/news/notices');
+  const { data: eventsData, isLoading: isLoadingEvents, error: errorEvents } = useApi('/news/events');
 
   useEffect(() => {
-    // 공지사항 가져오기
-    api.get('/news/notices')
-      .then(response => {
-        setNotices(response.data);
-      })
-      .catch(error => {
-        console.error('공지사항을 불러오는 중 에러가 발생했습니다.', error);
-      });
+    if (noticesData) { 
+      setNotices(noticesData);
 
-    // 진행 중인 이벤트 가져오기
-    api.get('/news/events')
-      .then(response => {
-        setEvents(response.data);
-      })
-      .catch(error => {
-        console.error('이벤트 정보를 불러오는 중 에러가 발생했습니다.', error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+      }    
+    }, [noticesData])
+
 
   const paginateNotices = (pageNumber) => {
     setCurrentPageNotices(pageNumber);
   };
 
-  const paginateEvents = (pageNumber) => {
-    setCurrentPageEvents(pageNumber);
-  };
-
   // 현재 페이지에 표시할 항목 계산
   const indexOfLastNotice = currentPageNotices * itemsPerPage;
   const indexOfFirstNotice = indexOfLastNotice - itemsPerPage;
-  const currentNotices = notices.slice(indexOfFirstNotice, indexOfLastNotice);
+  const currentNotices = noticesData ? noticesData.slice(indexOfFirstNotice, indexOfLastNotice) : [];
 
-  const indexOfLastEvent = currentPageEvents * itemsPerPage;
-  const indexOfFirstEvent = indexOfLastEvent - itemsPerPage;
-  const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
-
-  if (isLoading) {
+  if (isLoadingNotices || isLoadingEvents) {
     return <div>로딩 중...</div>;
   }
-
+  if (errorNotices || errorEvents) {
+    return <div>데이터를 불러오는 중 에러가 발생했습니다.</div>
+  }
 
 
     return (
@@ -77,15 +44,13 @@ function MainContent() {
        <Notices 
         notices={currentNotices}
         itemsPerPage={itemsPerPage}
-        totalItems={notices.length}
+        totalItems={noticesData ? notices.length : 0}
         paginate={paginateNotices}
        />
 
       <Events
-        events={currentEvents}
+        events={eventsData}
         itemsPerPage={itemsPerPage}
-        totalItems={events.length}
-        paginate={paginateEvents}
       />
       </StyledMainContent>
     );

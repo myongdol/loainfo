@@ -26,7 +26,7 @@ const Events = ({ events, itemsPerPage, totalItems, paginate }) => {
       <TItle>진행중인 이벤트 바로가기</TItle>
       <SliderContainer>
         {events.map((event, index) => (
-          <Slide key={index} isActive={index === current}>
+          <Slide key={index} $isActive={index === current}>
             {index === current && (
                 <StyledLink to={event.Link} target="_blank" rel="noopener noreferrer">
                   <Thumbnail src={event.Thumbnail} alt={event.Title}/>              
@@ -90,7 +90,7 @@ const SliderContainer = styled.div`
 `;
 
 const Slide = styled.div`
-  display: ${props => props.isActive ? 'block' : 'none'};
+  display: ${props => props.$isActive ? 'block' : 'none'};
   justify-content: center;
   flex-direction: column;
   align-items: center;
