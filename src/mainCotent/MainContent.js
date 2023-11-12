@@ -61,5 +61,5 @@ export default MainContent;
 const StyledMainContent = styled.main`
   flex: 1;
   padding: 1rem;
-  background-color: #f5f5f5;
+  background-color: #ece7e7;
 `;
