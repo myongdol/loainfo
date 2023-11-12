@@ -6,7 +6,7 @@ import Pagination from './Pagination';
 const Notices = ({ notices, itemsPerPage, totalItems, paginate }) => {
     return (
       <>
-        <h1>공지사항</h1>
+        <h3>공지사항 바로가기</h3>
         <List>
           {notices.map((notice, index) => (
             <ListItem key={index}>
