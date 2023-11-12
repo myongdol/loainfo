@@ -72,4 +72,5 @@ const StyledSearchIcon = styled(MdOutlineSearch)`
   top: 50%;
   transform: translateY(-50%); 
   color: #000000;
+  cursor: pointer;
 `;
