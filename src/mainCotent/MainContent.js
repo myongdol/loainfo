@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Notices from "../components/Notice";
 import Events from "../components/Events";
 import useApi from "../util/useApi";
+import GameContents from "../components/GameContent";
 
 
 const itemsPerPage = 10;
@@ -52,6 +53,8 @@ function MainContent() {
         events={eventsData}
         itemsPerPage={itemsPerPage}
       />
+
+      <GameContents />
       </StyledMainContent>
     );
 };
