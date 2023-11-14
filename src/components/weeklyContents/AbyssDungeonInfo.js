@@ -17,7 +17,21 @@ const AbyssDungeonInfo = () => {
             <h2>도전 어비스 던전</h2>
             <List>
             {abyssDungeons?.map((dungeon, index) => (
-                <ListItem key={index}>{dungeon.name}</ListItem> 
+                <ListItem key={index}>
+                     <h3>{dungeon.AreaName}</h3> {dungeon.Name} <br />
+                        <h4>시작: {dungeon.StartTime} / 종료: {dungeon.EndTime}</h4>
+                        <DungeonImg src={dungeon.Image}/>
+                        {dungeon.RewardItems && (
+                            <RewardList>
+                                {dungeon.RewardItems.map((reward, rewardIndex) => (
+                                    <RewardItem key={rewardIndex}>
+                                        <RewardIcon src={reward.Icon} alt={reward.Name} />
+                                        {reward.Name} ({reward.Grade})
+                                    </RewardItem>
+                                ))}
+                            </RewardList>
+                        )}
+                </ListItem> 
             ))}
             </List>
       </Section>
@@ -47,4 +61,26 @@ const ListItem = styled.li`
   &:last-child {
     border-bottom: none;
   }
+`;
+
+const DungeonImg = styled.img`
+  width: 300px;
+  height: 300px;
+  margin-right: 10px;
+`;
+
+const RewardList = styled.ul`
+  list-style: none;
+  padding-left: 20px;
+`;
+
+const RewardItem = styled.li`
+  display: flex;
+  align-items: center;
+`;
+
+const RewardIcon = styled.img`
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 `;
