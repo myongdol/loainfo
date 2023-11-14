@@ -1,9 +1,13 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Notices from "../components/Notice";
 import Events from "../components/Events";
 import useApi from "../util/useApi";
-import GameContents from "../components/GameContent";
+import AbyssDungeonInfo from "../components/weeklyContents/AbyssDungeonInfo";
+import CalendarEventsInfo from "../components/weeklyContents/CalendarEventsInfo";
+import GuardianRaidsInfo from "../components/weeklyContents/GuardianRaidsInfo";
+
 
 
 const itemsPerPage = 10;
@@ -54,7 +58,9 @@ function MainContent() {
         itemsPerPage={itemsPerPage}
       />
 
-      <GameContents />
+      <AbyssDungeonInfo />
+      <CalendarEventsInfo />
+      <GuardianRaidsInfo />
       </StyledMainContent>
     );
 };
