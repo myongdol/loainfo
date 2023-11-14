@@ -6,7 +6,8 @@ import useApi from "../../util/useApi";
 
 const GuardianRaidsInfo = () => {
     const { data: guardianRaidsData, isLoading, error} = useApi('/gamecontents/challenge-guardian-raids');
-    const guardianRaids = Array.isArray(guardianRaidsData) ? guardianRaidsData : [];
+    const raids = guardianRaidsData?.Raids || [];
+    const rewardItems = guardianRaidsData?.RewardItems || [];
 
     if (isLoading) return <div>로딩 중...</div>;
     if (error) return <div>에러 발생: {error.message}</div>;
@@ -17,8 +18,12 @@ const GuardianRaidsInfo = () => {
         <Section>
             <h2>도전 가디언 레이드</h2>
             <List>
-                {guardianRaids?.map((raid, index) => (
-                <ListItem key={index}>{raid.name}</ListItem> 
+                {raids?.map((raid, index) => (
+                <ListItem key={index}>
+                    <h3>{raid.Name}</h3>
+                    <h4>{raid.Description}</h4>
+                    <GuardianImg src={raid.Image}/>
+                </ListItem> 
                 ))}
             </List>
         </Section>
@@ -48,4 +53,10 @@ const ListItem = styled.li`
   &:last-child {
     border-bottom: none;
   }
+`;
+
+const GuardianImg = styled.img`
+  width: 200px;
+  height: 150px;
+  margin-right: 10px;
 `;
