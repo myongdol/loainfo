@@ -1,20 +1,71 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { MdClose } from 'react-icons/md';
 
 
-const GuardianRewardModal = ({ isOpen, onClose, title, children }) => {
-  if (!isOpen) return null;
+const GuardianRewardModal = ({ isOpen, onClose, guardianRaidsData }) => {
+  
+  const [selectedItemLevel, setSelectedItemLevel] = useState(null);
+  const [rewardItems, setRewardItems] = useState([]);
+  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+
+  useEffect(() => {
+    if (selectedItemLevel !== null) {
+      const items = guardianRaidsData?.RewardItems.find(
+        (item) => item.ExpeditionItemLevel === selectedItemLevel
+      )?.Items || [];
+      setRewardItems(items);
+    }
+  }, [selectedItemLevel, guardianRaidsData]);
+
+  const startClosingAnimation = () => {
+    setIsAnimatingOut(true);
+  };
+
+  const onAnimationEnd = () => {
+    if (isAnimatingOut) onClose();
+  };
+
+  useEffect(() => {
+    if (isOpen) setIsAnimatingOut(false);
+  }, [isOpen]);
+
+  
+  if (!isOpen && !isAnimatingOut) return null;
 
   return (
     <>
-      <ModalBackdrop onClick={onClose} />
-      <ModalContainer>
+      <ModalBackdrop onClick={startClosingAnimation} />
+      <ModalContainer 
+        isAnimatingOut={isAnimatingOut}
+        onAnimationEnd={onAnimationEnd}
+      >
         <ModalHeader>
-          <ModalTitle>{title}</ModalTitle>
+          <ModalTitle>보상 아이템 - 아이템 레벨 {selectedItemLevel || ''}</ModalTitle>
           <CloseButton onClick={onClose}><MdClose /></CloseButton>
         </ModalHeader>
-        <ModalBody>{children}</ModalBody>
+        <ModalBody>
+          <div>
+            <label htmlFor="itemLevelSelect">아이템 레벨 선택:</label>
+            <select
+              id="itemLevelSelect"
+              onChange={(e) => setSelectedItemLevel(Number(e.target.value))}
+              value={selectedItemLevel || ''}
+            >
+              {guardianRaidsData?.RewardItems.map((item) => (
+                <option key={item.ExpeditionItemLevel} value={item.ExpeditionItemLevel}>
+                  {item.ExpeditionItemLevel}
+                </option>
+              ))}
+            </select>
+          </div>
+          {rewardItems.map((item, index) => (
+            <Item key={index}>
+              <img src={item.Icon} alt={item.Name} />
+              <span>{item.Name}</span>
+            </Item>
+          ))}
+        </ModalBody>
       </ModalContainer>
     </>
   );
@@ -71,6 +122,8 @@ const ModalContainer = styled.div`
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   animation-name: ${fadeIn};
   animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-name: ${({ isAnimatingOut }) => isAnimatingOut ? fadeOut : fadeIn};
 `;
 
 const CloseButton = styled.button`
@@ -95,4 +148,15 @@ const ModalTitle = styled.h4`
 
 const ModalBody = styled.div`
   padding-top: 0.5rem;
+`;
+
+const Item = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  
+  img {
+    width: 30px;
+  }
 `;
