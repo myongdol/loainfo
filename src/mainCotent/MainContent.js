@@ -46,16 +46,16 @@ function MainContent() {
 
     return (
       <StyledMainContent>
-       <Notices 
+      
+      <Events
+        events={eventsData}
+        itemsPerPage={itemsPerPage}
+      />
+      <Notices 
         notices={currentNotices}
         itemsPerPage={itemsPerPage}
         totalItems={noticesData ? notices.length : 0}
         paginate={paginateNotices}
-       />
-
-      <Events
-        events={eventsData}
-        itemsPerPage={itemsPerPage}
       />
 
       <AbyssDungeonInfo />
@@ -72,3 +72,4 @@ const StyledMainContent = styled.main`
   padding: 1rem;
   background-color: #ece7e7;
 `;
+
