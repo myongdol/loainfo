@@ -58,9 +58,9 @@ function MainContent() {
         paginate={paginateNotices}
       />
 
+      <GuardianRaidsInfo />
       <AbyssDungeonInfo />
       <CalendarEventsInfo />
-      <GuardianRaidsInfo />
       </StyledMainContent>
     );
 };
@@ -70,6 +70,6 @@ export default MainContent;
 const StyledMainContent = styled.main`
   flex: 1;
   padding: 1rem;
-  background-color: #ece7e7;
+  background-color: ${(props) => props.theme.colors.dark};
+  color: #ffffff;
 `;
-

@@ -1,27 +1,31 @@
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import Footer from "./mainCotent/Footer";
 import Header from "./mainCotent/Header";
 import MainContent from "./mainCotent/MainContent";
 import Sidebar from "./mainCotent/Sidebar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CharacterDetails from "./components/character/CharacterDetails";
+import theme from "./styles/theme";
+
 
 function App() {
   return (
     <BrowserRouter>
-    <AppContainer>
-      <Header />
-        <ContentContainer>
-          <MainSection>
-            <Routes>
-              <Route path="/" element={<MainContent/>} />
-              <Route path="/character/:characterName" element={<CharacterDetails />} />
-            </Routes>
-          </MainSection>
-          <Sidebar />
-        </ContentContainer>
-      <Footer />
-    </AppContainer>
+    <ThemeProvider theme={theme}>
+      <AppContainer>
+        <Header />
+          <ContentContainer>
+            <MainSection>
+              <Routes>
+                <Route path="/" element={<MainContent/>} />
+                <Route path="/character/:characterName" element={<CharacterDetails />} />
+              </Routes>
+            </MainSection>
+            <Sidebar />
+          </ContentContainer>
+        <Footer />
+      </AppContainer>
+    </ThemeProvider>
     </BrowserRouter>
   );
 }

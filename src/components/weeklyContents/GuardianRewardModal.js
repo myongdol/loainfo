@@ -140,6 +140,7 @@ const ModalHeader = styled.div`
   justify-content: space-between;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid #e5e5e5;
+  color: ${(props) => props.theme.colors.dark};
 `;
 
 const ModalTitle = styled.h4`
@@ -155,6 +156,7 @@ const Item = styled.li`
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 0;
+  color: ${(props) => props.theme.colors.dark};
   
   img {
     width: 30px;

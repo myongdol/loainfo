@@ -22,13 +22,12 @@ const GuardianRaidsInfo = () => {
         {raids.map((raid, index) => (
           <ListItem key={index}>
             <h3>{raid.Name}</h3>
-            <h4>{raid.Description}</h4>
             <GuardianImg src={raid.Image} />
           </ListItem>
         ))}
       </List>
       <button onClick={() => setModalOpen(true)}>
-        보상 아이템 보기
+        레벨별 보상 아이템 보기
       </button>
 
       {modalOpen && (
@@ -48,6 +47,8 @@ const Section = styled.section`
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: ${(props) => props.theme.colors.text};
+  background-color: ${(props) => props.theme.colors.dark};
 `;
 
 const List = styled.ul`
@@ -58,6 +59,7 @@ const List = styled.ul`
 const ListItem = styled.li`
   padding: 10px 0;
   border-bottom: 1px solid #eee;
+  color: ${(props) => props.theme.colors.text};
 
   &:last-child {
     border-bottom: none;

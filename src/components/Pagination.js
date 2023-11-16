@@ -39,7 +39,7 @@ const Container = styled.ul`
 
 const PageItems = styled.a`
     text-decoration: none;
-    color: #333;
+    color: ${(props) => props.theme.colors.text};
     padding: 5px 10px;
     border: 1px solid #ddd;
     &:hover {

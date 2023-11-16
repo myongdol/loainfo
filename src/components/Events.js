@@ -58,13 +58,13 @@ export default Events;
 const TItle = styled.h4`
   justify-content: center;
   text-align: center;
-`
+  color: ${(props) => props.theme.colors.text};
+`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: #0077cc;
   font-weight: 500;
-
 
   &:hover {
     text-decoration: underline;
@@ -102,8 +102,8 @@ const EventTitle = styled.div`
   text-align: center;
   margin-top: 0.5rem;
   font-size: 1rem;
-  color: #000000;
   width: 100%;
+  color: ${(props) => props.theme.colors.text};
 `;
 
 const ButtonContainer = styled.div`
@@ -124,7 +124,7 @@ const PrevButton = styled.button`
   z-index: 10;
   background: none;
   border: none;
-  color: black;
+  color: ${(props) => props.theme.colors.text};
   font-size: 2rem;
   cursor: pointer;
   &:hover {
@@ -140,7 +140,7 @@ const NextButton = styled.button`
   z-index: 10;
   background: none;
   border: none;
-  color: black;
+  color: ${(props) => props.theme.colors.text};
   font-size: 2rem;
   cursor: pointer;
 
