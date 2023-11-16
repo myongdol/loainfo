@@ -18,8 +18,11 @@ const AbyssDungeonInfo = () => {
             <List>
             {abyssDungeons?.map((dungeon, index) => (
                 <ListItem key={index}>
-                     <h3>{dungeon.AreaName}</h3> {dungeon.Name} <br />
-                        <h4>시작: {dungeon.StartTime} / 종료: {dungeon.EndTime}</h4>
+                     <h3>{dungeon.AreaName} <br/>{dungeon.Name}</h3> 
+                        <h4>
+                          시작: {dungeon.StartTime} <br />
+                          종료: {dungeon.EndTime}
+                        </h4>
                         <DungeonImg src={dungeon.Image}/>
                         {dungeon.RewardItems && (
                             <RewardList>
@@ -47,40 +50,40 @@ const Section = styled.section`
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: ${(props) => props.theme.colors.dark};
+  flex: 1;
 `;
 
 const List = styled.ul`
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-direction: row;
 `;
 
 const ListItem = styled.li`
   padding: 10px 0;
-  border-bottom: 1px solid #eee;
-
+  flex: 1;
   &:last-child {
     border-bottom: none;
   }
 `;
 
 const DungeonImg = styled.img`
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   margin-right: 10px;
 `;
 
 const RewardList = styled.ul`
   list-style: none;
-  padding-left: 20px;
+  padding-left: 1px;
 `;
 
 const RewardItem = styled.li`
   display: flex;
-  align-items: center;
 `;
 
 const RewardIcon = styled.img`
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
+  width: 20px;
+  height: 20px;
 `;

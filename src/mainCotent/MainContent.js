@@ -58,8 +58,11 @@ function MainContent() {
         paginate={paginateNotices}
       />
 
-      <GuardianRaidsInfo />
-      <AbyssDungeonInfo />
+      <GuardianAbyssContainer>
+        <AbyssDungeonInfo />
+        <GuardianRaidsInfo />
+      </GuardianAbyssContainer>
+
       <CalendarEventsInfo />
       </StyledMainContent>
     );
@@ -72,4 +75,23 @@ const StyledMainContent = styled.main`
   padding: 1rem;
   background-color: ${(props) => props.theme.colors.dark};
   color: #ffffff;
+`;
+
+const GuardianAbyssContainer = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px; 
+  align-items: stretch;
+  border-top: 1px solid ${(props) =>  props.theme.colors.highlight};
+  > * { 
+    flex: 1;
+    min-width: 0;
+  }
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;

@@ -20,7 +20,7 @@ function Header() {
 export default Header;
 
 const StyledHeader = styled.header`
-  background-color: #333;
+  background-color: ${(props) => props.theme.colors.dark};
   color: white;
   padding: 1rem;
   display: flex;
