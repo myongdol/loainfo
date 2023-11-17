@@ -50,7 +50,6 @@ const Section = styled.section`
   color: ${(props) => props.theme.colors.text};
   background-color: ${(props) => props.theme.colors.dark};
   margin: auto;
-  border: 1px solid red;
 `;
 
 const List = styled.ul`

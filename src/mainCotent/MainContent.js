@@ -5,8 +5,12 @@ import Notices from "../components/Notice";
 import Events from "../components/Events";
 import useApi from "../util/useApi";
 import AbyssDungeonInfo from "../components/weeklyContents/AbyssDungeonInfo";
-import CalendarEventsInfo from "../components/weeklyContents/CalendarEventsInfo";
 import GuardianRaidsInfo from "../components/weeklyContents/GuardianRaidsInfo";
+import Rowen from "../components/weeklyContents/calendarEvents/Rowen";
+import AdventureIsland from "../components/weeklyContents/calendarEvents/AdventureIsland";
+import ChaosGate from "../components/weeklyContents/calendarEvents/ChaosGate";
+import FieldBoss from "../components/weeklyContents/calendarEvents/FieldBoss";
+import Sailing from "../components/weeklyContents/calendarEvents/Sailing";
 
 
 
@@ -18,6 +22,13 @@ function MainContent() {
   const [currentPageNotices, setCurrentPageNotices] = useState(1);
   const { data: noticesData, isLoading: isLoadingNotices, error: errorNotices } = useApi('/news/notices');
   const { data: eventsData, isLoading: isLoadingEvents, error: errorEvents } = useApi('/news/events');
+  const { data: calendarEventsData, isLoadingCalendar, error: errorCalendar } = useApi('/gamecontents/calendar');
+
+  const [rowen, setRowen] = useState([]);
+  const [adventureIsland, setAdventureIsland] = useState([]);
+  const [chaosGate, setChaosGate] = useState([]);
+  const [fieldBoss, setFieldBoss] = useState([]);
+  const [sailing, setSailing] = useState([]);
 
   useEffect(() => {
     if (noticesData) { 
@@ -25,6 +36,16 @@ function MainContent() {
 
       }    
     }, [noticesData])
+
+    useEffect(() => {
+      if (calendarEventsData && calendarEventsData.length > 0) {
+        setRowen(calendarEventsData.filter(e => e.CategoryName === "로웬"));
+        setAdventureIsland(calendarEventsData.filter(e => e.CategoryName === "모험 섬"));
+        setChaosGate(calendarEventsData.filter(e => e.CategoryName === "카오스게이트"));
+        setFieldBoss(calendarEventsData.filter(e => e.CategoryName === "필드보스"));
+        setSailing(calendarEventsData.filter(e => e.CategoryName === "항해"));
+      }
+    }, [calendarEventsData]);  
 
 
   const paginateNotices = (pageNumber) => {
@@ -36,10 +57,10 @@ function MainContent() {
   const indexOfFirstNotice = indexOfLastNotice - itemsPerPage;
   const currentNotices = noticesData ? noticesData.slice(indexOfFirstNotice, indexOfLastNotice) : [];
 
-  if (isLoadingNotices || isLoadingEvents) {
+  if (isLoadingNotices || isLoadingEvents || isLoadingCalendar) {
     return <div>로딩 중...</div>;
   }
-  if (errorNotices || errorEvents) {
+  if (errorNotices || errorEvents || errorCalendar) {
     return <div>데이터를 불러오는 중 에러가 발생했습니다.</div>
   }
 
@@ -47,23 +68,28 @@ function MainContent() {
     return (
       <StyledMainContent>
       
-      <Events
-        events={eventsData}
-        itemsPerPage={itemsPerPage}
-      />
-      <Notices 
-        notices={currentNotices}
-        itemsPerPage={itemsPerPage}
-        totalItems={noticesData ? notices.length : 0}
-        paginate={paginateNotices}
-      />
+        <Events
+          events={eventsData}
+          itemsPerPage={itemsPerPage}
+        />
+        <Notices 
+          notices={currentNotices}
+          itemsPerPage={itemsPerPage}
+          totalItems={noticesData ? notices.length : 0}
+          paginate={paginateNotices}
+        />
 
-      <GuardianAbyssContainer>
-        <AbyssDungeonInfo />
-        <GuardianRaidsInfo />
-      </GuardianAbyssContainer>
+        <GuardianAbyssContainer>
+          <AbyssDungeonInfo />
+          <GuardianRaidsInfo />
+        </GuardianAbyssContainer>
 
-      <CalendarEventsInfo />
+        {rowen.length > 0 && <Rowen events={rowen} />}
+        {adventureIsland.length > 0 && <AdventureIsland events={adventureIsland} />}
+        {chaosGate.length > 0 && <ChaosGate events={chaosGate} />}
+        {fieldBoss.length > 0 && <FieldBoss events={fieldBoss} />}
+        {sailing.length > 0 && <Sailing events={sailing} />}
+
       </StyledMainContent>
     );
 };
