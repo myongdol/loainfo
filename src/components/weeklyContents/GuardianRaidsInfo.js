@@ -17,15 +17,16 @@ const GuardianRaidsInfo = () => {
 
     return (
         <Section>
-            <h2>도전 가디언 레이드</h2>
-            <List>
-        {raids.map((raid, index) => (
-          <ListItem key={index}>
-            <h3>{raid.Name}</h3>
-            <GuardianImg src={raid.Image} />
-          </ListItem>
-        ))}
-      </List>
+          <h2>도전 가디언 레이드</h2>
+          <List>
+            {raids.map((raid, index) => (
+              <ListItem key={index}>
+                <h3>{raid.Name}</h3>
+                <GuardianImg src={raid.Image} />
+              </ListItem>
+            ))}
+          </List>
+        
       <StyledButton onClick={() => setModalOpen(true)}>
         레벨별 보상 아이템 보기
       </StyledButton>
@@ -43,26 +44,27 @@ const GuardianRaidsInfo = () => {
 export default GuardianRaidsInfo;
 
 const Section = styled.section`
-  background: #fff;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: ${(props) => props.theme.colors.text};
   background-color: ${(props) => props.theme.colors.dark};
-  flex: 1;
+  margin: auto;
+  border: 1px solid red;
 `;
 
 const List = styled.ul`
   list-style: none;
   padding: 0;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
 const ListItem = styled.li`
   padding: 10px 0;
   color: ${(props) => props.theme.colors.text};
   flex: 1;
+  overflow: hidden;
 
   &:last-child {
     border-bottom: none;
@@ -70,9 +72,9 @@ const ListItem = styled.li`
 `;
 
 const GuardianImg = styled.img`
-  width: 200px;
-  height: 150px;
-  margin-right: 10px;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
 `;
 
 const StyledButton = styled.button`
@@ -88,7 +90,7 @@ const StyledButton = styled.button`
   font-size: 1rem;
   font-weight: 700;
   line-height: 1;
-  margin: 20px;
+  margin: 10px;
   padding: 1.2em 2.8em;
   text-decoration: none;
   text-align: center;

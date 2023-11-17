@@ -78,20 +78,20 @@ const StyledMainContent = styled.main`
 `;
 
 const GuardianAbyssContainer = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
   gap: 10px; 
   align-items: stretch;
+  margin: 0 auto;
   border-top: 1px solid ${(props) =>  props.theme.colors.highlight};
   > * { 
-    flex: 1;
     min-width: 0;
   }
   
   @media (max-width: 768px) {
     flex-direction: column;
+    align-items: center;
   }
 `;
+

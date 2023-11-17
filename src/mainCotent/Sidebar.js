@@ -12,9 +12,8 @@ function Sidebar() {
 export default Sidebar;
 
 const StyledSidebar = styled.aside`
-width: 250px; 
+width: 150px; 
 background-color: #e4e4e4;
 padding: 1rem;
-height: calc(100vh - 60px); 
 box-sizing: border-box;
 `;
