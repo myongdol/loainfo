@@ -4,10 +4,31 @@ import styled from "styled-components";
 
 
 const AdventureIsland = ({ events }) => {
+
+  const today = new Date().toISOString().split('T')[0];
+
   return (
     <Section>
       <h2>모험 섬</h2>
       
+      {events.map((event, index) => {
+        const todayEvents = event.StartTimes.filter(time => time.includes(today));
+
+        if (todayEvents.length > 0) {
+          return (
+            <div key={index}>
+              <h3>{event.ContentsName}</h3>
+              <img src={event.ContentsIcon} alt={event.ContentsName} />
+              <ul>
+                {todayEvents.map((time, timeIndex) => (
+                  <li key={timeIndex}>{time}</li>
+                ))}
+              </ul>
+            </div>
+          );
+        }
+        return null;
+      })}
     </Section>
   );
 };

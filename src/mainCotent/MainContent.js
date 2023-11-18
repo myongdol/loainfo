@@ -29,7 +29,7 @@ function MainContent() {
   const [chaosGate, setChaosGate] = useState([]);
   const [fieldBoss, setFieldBoss] = useState([]);
   const [sailing, setSailing] = useState([]);
-
+  console.log(calendarEventsData);
   useEffect(() => {
     if (noticesData) { 
       setNotices(noticesData);
