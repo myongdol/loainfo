@@ -120,6 +120,9 @@ const ModalTitle = styled.h4`
 
 const ModalBody = styled.div`
   padding-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 `;
 
 const Item = styled.li`
@@ -128,6 +131,7 @@ const Item = styled.li`
   gap: 0.5rem;
   padding: 0.5rem 0;
   color: ${(props) => props.theme.colors.dark};
+  width: 45%;
   
   img {
     width: 30px;
