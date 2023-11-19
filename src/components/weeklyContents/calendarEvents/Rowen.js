@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import EventRewardModal from "../../UI/EventRewardModal";
+import { StyledButton } from "../../UI/StyeldButton";
 
 
 
 const Rowen = ({ events }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = (event) => {
+    setModalOpen(true);
+  };
+
+
   return (
     <Section>
       <h2>로웬 이벤트</h2>
@@ -13,23 +22,25 @@ const Rowen = ({ events }) => {
           <h3>{event.ContentsName}</h3>
           <p>위치: {event.Location}</p>
           <ContentsIcon src={event.ContentsIcon}/>
-          <p>최소 아이템 레벨: {event.MinItemLevel}</p>
-          <p>보상 아이템:</p>
-          <ul>
-            {event.RewardItems.map((item, itemIndex) => (
-              <li key={itemIndex}>
-                <RewardIcon src={item.Icon}/>{item.Name} (등급: {item.Grade})
-              </li>
-            ))}
-          </ul>
           <p>시작 시간:</p>
           <ul>
             {event.StartTimes.map((startTime, timeIndex) => (
               <li key={timeIndex}>{startTime}</li>
             ))}
           </ul>
+          <p>최소 아이템 레벨: {event.MinItemLevel}</p>
         </div>
       ))}
+
+      <StyledButton onClick={handleOpenModal}>보상 보기</StyledButton>
+
+      {modalOpen && (
+        <EventRewardModal 
+          isOpen={modalOpen} 
+          onClose={() => setModalOpen(false)} 
+          rewardItems={events[0].RewardItems || []} 
+        />
+      )}
     </Section>
   );
 };
@@ -51,9 +62,4 @@ const Section = styled.section`
 const ContentsIcon = styled.img`
  width: 120px;
  height: 120px;
-`
-
-const RewardIcon = styled.img`
- width: 20px;
- height: 20px;
 `
