@@ -1,51 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import EventRewardModal from "../../UI/EventRewardModal";
 import { StyledButton } from "../../UI/StyeldButton";
+import useRemainingTimer from "../../../util/useRemainingTimer";
 
 
 
 const ChaosGate = ({ events }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [remainingTime, setRemainingTime] = useState("");
+  const remainingTime = useRemainingTimer(events);
 
   const handleOpenModal = () => {
     setSelectedEvent(events[0]);
     setModalOpen(true);
   };
 
-  useEffect(() => {
-    const calculateRemainingTime = () => {
-      const now = new Date();
-      const futureTimes = events.flatMap(event => event.StartTimes)
-                                .map(time => new Date(time + 'Z'))
-                                .filter(time => time > now);
-    
-      if (futureTimes.length === 0) {
-        return '출현하지 않는 날입니다.';
-      }
-    
-      const nextTime = futureTimes.sort()[0];
-      let delta = Math.abs(nextTime - now) / 1000;
-      const hours = Math.floor(delta / 3600) % 24;
-      delta -= hours * 3600;
-      const minutes = Math.floor(delta / 60) % 60;
-      delta -= minutes * 60;
-      const seconds = Math.floor(delta % 60);
-    
-      return `${hours}시간 ${minutes}분 ${seconds}초 남음`;
-    };
-    
-    setRemainingTime(calculateRemainingTime());
-    const timer = setInterval(() => {
-      setRemainingTime(calculateRemainingTime());
-    }, 1000);
-  
-    return () => clearInterval(timer);
-  }, [events]);
 
- 
   return (
     <Section>
       <h2>카오스 게이트</h2>
