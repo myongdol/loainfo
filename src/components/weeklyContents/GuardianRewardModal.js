@@ -37,7 +37,7 @@ const GuardianRewardModal = ({ isOpen, onClose, guardianRaidsData }) => {
     <>
       <ModalBackdrop onClick={startClosingAnimation} />
       <ModalContainer 
-        isAnimatingOut={isAnimatingOut}
+        $isAnimatingOut={isAnimatingOut}
         onAnimationEnd={onAnimationEnd}
       >
         <ModalHeader>
@@ -123,7 +123,7 @@ const ModalContainer = styled.div`
   animation-name: ${fadeIn};
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
-  animation-name: ${({ isAnimatingOut }) => isAnimatingOut ? fadeOut : fadeIn};
+  animation-name: ${({ $isAnimatingOut }) => $isAnimatingOut ? fadeOut : fadeIn};
 `;
 
 const CloseButton = styled.button`

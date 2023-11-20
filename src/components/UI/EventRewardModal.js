@@ -24,7 +24,7 @@ const EventRewardModal = ({ isOpen, onClose, rewardItems }) => {
   return (
     <>
       <ModalBackdrop onClick={startClosingAnimation} />
-      <ModalContainer isAnimatingOut={isAnimatingOut} onAnimationEnd={onAnimationEnd}>
+      <ModalContainer $isAnimatingOut={isAnimatingOut} onAnimationEnd={onAnimationEnd}>
         <ModalHeader>
           <ModalTitle>보상 아이템</ModalTitle>
           <CloseButton onClick={onClose}><MdClose /></CloseButton>
@@ -94,7 +94,7 @@ const ModalContainer = styled.div`
   animation-name: ${fadeIn};
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
-  animation-name: ${({ isAnimatingOut }) => isAnimatingOut ? fadeOut : fadeIn};
+  animation-name: ${({ $isAnimatingOut }) => $isAnimatingOut ? fadeOut : fadeIn};
 `;
 
 const CloseButton = styled.button`
