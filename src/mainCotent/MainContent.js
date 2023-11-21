@@ -11,6 +11,7 @@ import AdventureIsland from "../components/weeklyContents/calendarEvents/Adventu
 import ChaosGate from "../components/weeklyContents/calendarEvents/ChaosGate";
 import FieldBoss from "../components/weeklyContents/calendarEvents/FieldBoss";
 import Sailing from "../components/weeklyContents/calendarEvents/Sailing";
+import CalendarIsland from "../components/weeklyContents/calendarEvents/CalendarIsland";
 
 
 
@@ -29,6 +30,7 @@ function MainContent() {
   const [chaosGate, setChaosGate] = useState([]);
   const [fieldBoss, setFieldBoss] = useState([]);
   const [sailing, setSailing] = useState([]);
+  const [calendarIsland, setCalendarIsland] = useState([]);
   console.log(calendarEventsData);
   useEffect(() => {
     if (noticesData) { 
@@ -44,6 +46,7 @@ function MainContent() {
         setChaosGate(calendarEventsData.filter(e => e.CategoryName === "카오스게이트"));
         setFieldBoss(calendarEventsData.filter(e => e.CategoryName === "필드보스"));
         setSailing(calendarEventsData.filter(e => e.CategoryName === "항해"));
+        setCalendarIsland(calendarEventsData.filter(e => e.CategoryName === "섬"))
       }
     }, [calendarEventsData]);  
 
@@ -89,6 +92,7 @@ function MainContent() {
         {chaosGate.length > 0 && <ChaosGate events={chaosGate} />}
         {fieldBoss.length > 0 && <FieldBoss events={fieldBoss} />}
         {sailing.length > 0 && <Sailing events={sailing} />}
+        {calendarIsland.length > 0 && <CalendarIsland events={calendarIsland} />}
 
       </StyledMainContent>
     );
