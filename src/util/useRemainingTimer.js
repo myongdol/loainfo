@@ -7,7 +7,7 @@ const useRemainingTimer = (events) => {
         const calculateRemainingTime = () => {
           const now = new Date();
           const futureTimes = events.flatMap(event => event.StartTimes)
-                                    .map(time => new Date(time + 'Z'))
+                                    .map(time => new Date(time))
                                     .filter(time => time > now);
         
           if (futureTimes.length === 0) {
@@ -21,8 +21,9 @@ const useRemainingTimer = (events) => {
           const minutes = Math.floor(delta / 60) % 60;
           delta -= minutes * 60;
           const seconds = Math.floor(delta % 60);
-        
-          return `${hours}시간 ${minutes}분 ${seconds}초 남음`;
+          const koreanHours = (hours + 9) % 24;
+          
+          return `${koreanHours}시간 ${minutes}분 ${seconds}초 남음`;
         };
         
         setRemainingTimer(calculateRemainingTime());
