@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import EventRewardModal from "../../UI/EventRewardModal";
 import { StyledButton } from "../../UI/StyeldButton";
@@ -7,10 +7,19 @@ import { StyledButton } from "../../UI/StyeldButton";
 
 const Rowen = ({ events }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [todayEvents, setTodayEvents] = useState([]);
 
-  const handleOpenModal = (event) => {
+  const handleOpenModal = () => {
     setModalOpen(true);
   };
+
+  const today = new Date().toLocaleDateString('en-CA');
+  useEffect(() => {
+    const filteredEvents = events.filter(event => 
+      event.StartTimes.some(time => time.startsWith(today))
+    );
+    setTodayEvents(filteredEvents);
+  }, [events, today]);
 
   const formatDateTime = (dateTimeStr) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
@@ -24,19 +33,21 @@ const Rowen = ({ events }) => {
       <EventContainer>
       {events.map((event, index) => (
         <EventItem key={index}>
-          <h3>{event.ContentsName}</h3>
-          <p>위치: {event.Location}</p>
+          <h4>{event.ContentsName}</h4>
+          <div>최소 아이템 레벨: {event.MinItemLevel}</div>
+          <div>위치: {event.Location}</div>
           <ContentsIcon src={event.ContentsIcon}/>
           <ul>
-          <p>로웬 일정</p>
-            {event.StartTimes.map((startTime, timeIndex) => (
-              <li key={timeIndex}>{formatDateTime(startTime)}</li>
-            ))}
+            {todayEvents.length > 0 && todayEvents.includes(event) ? 
+              event.StartTimes.filter(time => time.startsWith(today)).map((startTime, timeIndex) => (
+                <li key={timeIndex}>{formatDateTime(startTime)}</li>
+              )) : 
+              <NoEventMsg>오늘은 로웬 이벤트가 없습니다.</NoEventMsg>
+            }
           </ul>
-          <p>최소 아이템 레벨: {event.MinItemLevel}</p>
         </EventItem>
       ))}
-    </EventContainer>
+      </EventContainer>
       <StyledButton onClick={handleOpenModal}>보상 보기</StyledButton>
 
       {modalOpen && (
@@ -66,8 +77,8 @@ const Section = styled.section`
 `;
 
 const ContentsIcon = styled.img`
- width: 120px;
- height: 120px;
+ width: 100px;
+ height: 100px;
 `
 
 const EventContainer = styled.div`
@@ -91,3 +102,7 @@ const EventItem = styled.div`
     flex-basis: 100%;
   }
 `;
+
+const NoEventMsg = styled.li`
+  color: #daa035;
+`

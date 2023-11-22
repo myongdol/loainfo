@@ -82,12 +82,18 @@ function MainContent() {
           paginate={paginateNotices}
         />
 
-        <GuardianAbyssContainer>
-          <AbyssDungeonInfo />
-          <GuardianRaidsInfo />
-        </GuardianAbyssContainer>
+        <ContentContainer>
+          <AbyssDungeonContainer>
+            <AbyssDungeonInfo />
+          </AbyssDungeonContainer>
+          <GuardianRaidsContainer>
+            <GuardianRaidsInfo />
+          </GuardianRaidsContainer>
+          <RowenContainer>
+            {rowen.length > 0 && <Rowen events={rowen} />}
+          </RowenContainer>
+        </ContentContainer>
 
-        {rowen.length > 0 && <Rowen events={rowen} />}
         {adventureIsland.length > 0 && <AdventureIsland events={adventureIsland} />}
         {chaosGate.length > 0 && <ChaosGate events={chaosGate} />}
         {fieldBoss.length > 0 && <FieldBoss events={fieldBoss} />}
@@ -107,7 +113,7 @@ const StyledMainContent = styled.main`
   color: #ffffff;
 `;
 
-const GuardianAbyssContainer = styled.div`
+const ContentContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -125,3 +131,17 @@ const GuardianAbyssContainer = styled.div`
   }
 `;
 
+const AbyssDungeonContainer = styled.div`
+  flex: 2;
+  min-height: 300px;
+`;
+
+const GuardianRaidsContainer = styled.div`
+  flex: 1;
+  min-height: 300px;
+`;
+
+const RowenContainer = styled.div`
+  flex: 3;
+  min-height: 300px;
+`;
