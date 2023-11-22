@@ -9,13 +9,14 @@ import useRemainingTimer from "../../../util/useRemainingTimer";
 const ChaosGate = ({ events }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const remainingTime = useRemainingTimer(events);
+  const remainingTimes = useRemainingTimer(events);
 
   const handleOpenModal = () => {
     setSelectedEvent(events[0]);
     setModalOpen(true);
   };
 
+  const nextStartTime = remainingTimes.length > 0 ? remainingTimes[0].time : '정보 없음';
 
   return (
     <Section>
@@ -23,7 +24,7 @@ const ChaosGate = ({ events }) => {
       <ContentsIcon src={events[0].ContentsIcon} />
       <div>
         <p>등장 지역: {events.map(event => event.Location).join(', ')}</p>
-        <p>시작 시간: {remainingTime}</p>
+        <p>시작 시간: {nextStartTime}</p>
         <StyledButton onClick={handleOpenModal}>보상 보기</StyledButton>
       </div>
 

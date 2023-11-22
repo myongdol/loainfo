@@ -8,12 +8,14 @@ import FieldBossRewardModal from "../../UI/FieldBossRewardModal";
 
 const FieldBoss = ({ events }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const remainingTime = useRemainingTimer(events);
+  const remainingTimes = useRemainingTimer(events);
 
   const handleOpenModal = () => {
     setModalOpen(true);
   };
   
+  const nextStartTime = remainingTimes.length > 0 ? remainingTimes[0].time : '정보 없음';
+
 
   return (
     <Section>
@@ -21,7 +23,7 @@ const FieldBoss = ({ events }) => {
       <ContentsIcon src={events[0].ContentsIcon} />
       <div>
         <p>등장 지역: {events.map(event => event.Location).join(', ')}</p>
-        <p>시작 시간: {remainingTime}</p>
+        <p>시작 시간: {nextStartTime}</p>
         <StyledButton onClick={handleOpenModal}>보스별 보상 보기</StyledButton>
       </div>
 

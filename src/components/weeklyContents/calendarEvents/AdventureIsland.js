@@ -10,11 +10,12 @@ const AdventureIsland = ({ events }) => {
 
   const today = new Date().toISOString().split('T')[0];
   const [modalOpen, setModalOpen] = useState(false);
-  const remainingTime = useRemainingTimer(events);
-
+  const remainingTimes = useRemainingTimer(events);
+  
   const todayEvents = events.filter(event =>
     event.StartTimes.some(startTime => startTime.includes(today))
   );
+    
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -26,14 +27,17 @@ const AdventureIsland = ({ events }) => {
     <Section>
       <EventContainer>
         {todayEvents.length > 0 ? (
-          todayEvents.slice(0, 3).map((event, index) => (
-            <EventItemContainer key={index}>
-              <h3>{event.ContentsName}</h3>
-              <ContentsIcon src={event.ContentsIcon}/>
-              <p>위치: {event.Location}</p>
-              <p>시작 시간: {remainingTime}</p>
-            </EventItemContainer>
-          ))
+          todayEvents.slice(0, 3).map((event, index) => {
+            const remainingTime = remainingTimes.find(time => time.eventId === event.id)?.time || '정보 없음';
+            return (
+              <EventItemContainer key={index}>
+                <h3>{event.ContentsName}</h3>
+                <ContentsIcon src={event.ContentsIcon}/>
+                <p>위치: {event.Location}</p>
+                <p>시작 시간: {remainingTime}</p>
+              </EventItemContainer>
+            );
+            })
         ) : (
           <p>오늘은 모험섬이 등장하지 않습니다.</p>
         )}

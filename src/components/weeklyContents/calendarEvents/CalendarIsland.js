@@ -8,7 +8,8 @@ import FieldBossRewardModal from "../../UI/FieldBossRewardModal";
 
 const CalendarIsland = ({ events }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const remainingTime = useRemainingTimer(events);
+  const remainingTimes = useRemainingTimer(events);
+
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -19,14 +20,17 @@ const CalendarIsland = ({ events }) => {
     <>
      <h2>캘린더 섬</h2>
       <Section>
-      {events.map((event, index) => (
+      {events.map((event, index) => {
+        const remainingTime = remainingTimes.find(time => time.eventId === event.id)?.time || '정보 없음';
+        return (
         <IslandContainer key={index}>
           <ContentsIcon src={event.ContentsIcon} />
           <p>{event.ContentsName}</p>
           <p>등장 지역: {event.Location}</p>
           <p>시작 시간: {remainingTime}</p>
         </IslandContainer>
-      ))}
+        );
+      })}
       <StyeldBtn onClick={handleOpenModal}>섬 보상 보기</StyeldBtn>
 
       {modalOpen && (

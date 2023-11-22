@@ -8,7 +8,7 @@ import useRemainingTimer from "../../../util/useRemainingTimer";
 
 const Sailing = ({ events }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const remainingTime = useRemainingTimer(events);
+  const remainingTimes = useRemainingTimer(events);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -21,7 +21,10 @@ const Sailing = ({ events }) => {
       <ContentsIcon src={events[0].ContentsIcon} />
       <div>
         <p>등장 지역: {events.map(event => event.Location).join(', ')}</p>
-        <p>시작 시간: {remainingTime}</p>
+        {events.map((event, index) => {
+          const remainingTime = remainingTimes.find(time => time.eventId === event.id)?.time || '정보 없음';
+          return <p key={index}>시작 시간 ({event.ContentsName}): {remainingTime}</p>;
+        })}
         <StyledButton onClick={handleOpenModal}>항해별 보상 보기</StyledButton>
       </div>
 

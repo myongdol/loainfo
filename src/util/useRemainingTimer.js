@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 
 const useRemainingTimer = (events) => {
-    const [remainingTimer, setRemainingTimer] = useState("");
+    const [remainingTimer, setRemainingTimer] = useState([]);
 
     useEffect(() => {
         const calculateRemainingTime = () => {
-          const now = new Date();
-          const futureTimes = events.flatMap(event => event.StartTimes)
-                                    .map(time => new Date(time))
-                                    .filter(time => time > now);
+            return events.map(event => {
+              const now = new Date();
+              const futureTimes = event.StartTimes.map(time => new Date(time))
+                                                  .filter(time => time > now);
         
           if (futureTimes.length === 0) {
-            return '출현하지 않는 날입니다.';
+            return { eventId: event.id, time: '출현하지 않는 날입니다.'};
           }
         
           const nextTime = futureTimes.sort()[0];
@@ -21,11 +21,11 @@ const useRemainingTimer = (events) => {
           const minutes = Math.floor(delta / 60) % 60;
           delta -= minutes * 60;
           const seconds = Math.floor(delta % 60);
-          const koreanHours = (hours + 9) % 24;
-          
-          return `${koreanHours}시간 ${minutes}분 ${seconds}초 남음`;
-        };
-        
+          // const koreanHours = (hours + 9) % 24;
+          return { eventId: event.id, time: `${hours}시간 ${minutes}분 ${seconds}초 남음` };
+          // return `${koreanHours}시간 ${minutes}분 ${seconds}초 남음`;
+          });
+        } 
         setRemainingTimer(calculateRemainingTime());
         const timer = setInterval(() => {
             setRemainingTimer(calculateRemainingTime());
