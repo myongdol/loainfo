@@ -42,8 +42,13 @@ const PageItems = styled.a`
     color: ${(props) => props.theme.colors.text};
     padding: 5px 10px;
     border: 1px solid #ddd;
-    &:hover {
-        background-color: #333131;
+    &:hover,
+    &:focus {
+      color: #fff;
+      outline: 0;
+      box-shadow: 0 0 40px 40px ${props => props.theme.colors.highlight} inset;
     }
+
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
     `
 
