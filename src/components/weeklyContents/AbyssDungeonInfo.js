@@ -47,31 +47,36 @@ export default AbyssDungeonInfo;
 
 const Section = styled.section`
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: ${(props) => props.theme.colors.dark};
-  flex: 1;
 `;
 
 const List = styled.ul`
   list-style: none;
-  padding: 0;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const ListItem = styled.li`
-  padding: 10px 0;
+  padding: 10px;
   flex: 1;
-  &:last-child {
-    border-bottom: none;
+  border-bottom: none;
+  max-width: calc(50% - 20px);
+
+  @media (max-width: 768px) {
+    max-width: calc(100% - 20px);
+  }
+
+  @media (max-width: 480px) {
+    max-width: 100%;
   }
 `;
 
 const DungeonImg = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: auto;
   margin-right: 10px;
+  max-width: 200px;
 `;
 
 const RewardList = styled.ul`
@@ -81,9 +86,11 @@ const RewardList = styled.ul`
 
 const RewardItem = styled.li`
   display: flex;
+  align-items: center;
 `;
 
 const RewardIcon = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
 `;

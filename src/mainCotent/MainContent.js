@@ -121,8 +121,13 @@ const ContentContainer = styled.div`
   align-items: stretch;
   margin: 0 auto;
   border-top: 1px solid ${(props) =>  props.theme.colors.highlight};
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: ${(props) => props.theme.colors.text};
+  background-color: ${(props) => props.theme.colors.dark};
   > * { 
     min-width: 0;
+    flex: 1 1 auto;
   }
   
   @media (max-width: 768px) {
@@ -133,15 +138,15 @@ const ContentContainer = styled.div`
 
 const AbyssDungeonContainer = styled.div`
   flex: 2;
-  min-height: 300px;
+  min-height: 350px;
 `;
 
 const GuardianRaidsContainer = styled.div`
   flex: 1;
-  min-height: 300px;
+  min-height: 350px;
 `;
 
 const RowenContainer = styled.div`
   flex: 3;
-  min-height: 300px;
+  min-height: 350px;
 `;

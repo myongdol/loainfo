@@ -46,11 +46,6 @@ export default GuardianRaidsInfo;
 
 const Section = styled.section`
   padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  color: ${(props) => props.theme.colors.text};
-  background-color: ${(props) => props.theme.colors.dark};
-  margin: auto;
 `;
 
 const List = styled.ul`
@@ -58,7 +53,6 @@ const List = styled.ul`
   padding: 0;
   display: flex;
   flex-direction: column;
-  
 `;
 
 const ListItem = styled.li`
