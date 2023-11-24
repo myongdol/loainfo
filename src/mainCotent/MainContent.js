@@ -12,6 +12,7 @@ import ChaosGate from "../components/weeklyContents/calendarEvents/ChaosGate";
 import FieldBoss from "../components/weeklyContents/calendarEvents/FieldBoss";
 import Sailing from "../components/weeklyContents/calendarEvents/Sailing";
 import CalendarIsland from "../components/weeklyContents/calendarEvents/CalendarIsland";
+import CouponInfo from "../components/CouponInfo";
 
 
 
@@ -70,7 +71,7 @@ function MainContent() {
 
     return (
       <StyledMainContent>
-      
+        
         <Events
           events={eventsData}
           itemsPerPage={itemsPerPage}
@@ -81,6 +82,7 @@ function MainContent() {
           totalItems={noticesData ? notices.length : 0}
           paginate={paginateNotices}
         />
+        <CouponInfo />
 
         <ContentContainer>
           <AbyssDungeonContainer>
