@@ -76,13 +76,15 @@ function MainContent() {
           events={eventsData}
           itemsPerPage={itemsPerPage}
         />
-        <Notices 
-          notices={currentNotices}
-          itemsPerPage={itemsPerPage}
-          totalItems={noticesData ? notices.length : 0}
-          paginate={paginateNotices}
-        />
-        <CouponInfo />
+        <NoticeCouponContainer>
+          <Notices 
+            notices={currentNotices}
+            itemsPerPage={itemsPerPage}
+            totalItems={noticesData ? notices.length : 0}
+            paginate={paginateNotices}
+          />
+          <CouponInfo />
+        </NoticeCouponContainer>
 
         <ContentContainer>
           <AbyssDungeonContainer>
@@ -152,3 +154,15 @@ const RowenContainer = styled.div`
   flex: 3;
   min-height: 350px;
 `;
+
+const NoticeCouponContainer = styled.div`
+  display: flex;
+  > :first-child {
+    flex: 7;
+  }
+  > :last-child {
+    flex: 3;
+  }
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`

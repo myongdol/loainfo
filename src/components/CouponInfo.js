@@ -27,7 +27,6 @@ export default CouponInfo;
 
 
 const CouponInfoContainer = styled.div`
-    background-color: #f8f9fa;
     border-radius: 8px;
     padding: 20px;
     margin-top: 20px;
@@ -35,7 +34,7 @@ const CouponInfoContainer = styled.div`
 `;
     
 const CouponTitle = styled.h2`
-    color: #333;
+    color: ${(props) => props.theme.colors.text};
     margin-bottom: 15px;
 `;
     
@@ -46,7 +45,7 @@ const CouponList = styled.ul`
     
 const CouponItem = styled.li`
     margin-bottom: 10px;
-    color: ${(props) => props.theme.colors.dark};
+    color: ${(props) => props.theme.colors.text};
     &:last-child {
     margin-bottom: 0;
     }

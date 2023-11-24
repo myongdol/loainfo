@@ -5,8 +5,8 @@ import Pagination from './Pagination';
 
 const Notices = ({ notices, itemsPerPage, totalItems, paginate }) => {
     return (
-      <>
-        <h4>공지사항 바로가기</h4>
+      <NoticesContainer>
+        <h3>공지사항 바로가기</h3>
         <List>
           {notices.map((notice, index) => (
             <ListItem key={index}>
@@ -21,12 +21,18 @@ const Notices = ({ notices, itemsPerPage, totalItems, paginate }) => {
           totalItems={totalItems}
           paginate={paginate}
         />
-      </>
+      </NoticesContainer>
     );
   };
   
 export default Notices;
 
+
+const NoticesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+`;
 
 const List = styled.ul`
   list-style: none;
