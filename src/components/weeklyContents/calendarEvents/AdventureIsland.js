@@ -15,8 +15,6 @@ const AdventureIsland = ({ events }) => {
   const todayEvents = events.filter(event =>
     event.StartTimes.some(startTime => startTime.includes(today))
   );
-  // console.log(today)
-  // console.log(todayEvents)
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -24,8 +22,8 @@ const AdventureIsland = ({ events }) => {
   
   return (
     <>
-    <h2>모험 섬</h2>
     <Section>
+    <h2>모험 섬</h2>
       <EventContainer>
         {todayEvents.length > 0 ? (
           todayEvents.slice(0, 3).map((event, index) => {
@@ -43,7 +41,7 @@ const AdventureIsland = ({ events }) => {
           <p>오늘은 모험섬이 등장하지 않습니다.</p>
         )}
       </EventContainer>
-      <StyledButton onClick={handleOpenModal}>보상 보기</StyledButton>
+      <StyeldBtn onClick={handleOpenModal}>보상 보기</StyeldBtn>
 
       {modalOpen && (
         <FieldBossRewardModal
@@ -62,16 +60,7 @@ export default AdventureIsland;
 
 
 const Section = styled.section`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  color: ${(props) => props.theme.colors.text};
-  background-color: ${(props) => props.theme.colors.dark};
-  margin: auto;
-  flex-direction: column;
+  padding: 15px;
 `;
 
 const EventContainer = styled.div`
@@ -98,4 +87,12 @@ const EventItemContainer = styled.div`
 const ContentsIcon = styled.img`
   width: 120px;
   height: 120px;
+`;
+
+const StyeldBtn = styled(StyledButton)`
+  width: 100%;
+  margin-top: 15px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
 `;

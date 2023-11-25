@@ -98,9 +98,12 @@ function MainContent() {
           </RowenContainer>
         </ContentContainer>
 
-        {adventureIsland.length > 0 && <AdventureIsland events={adventureIsland} />}
-        {chaosGate.length > 0 && <ChaosGate events={chaosGate} />}
-        {fieldBoss.length > 0 && <FieldBoss events={fieldBoss} />}
+        <CalendarContainer>
+          {adventureIsland.length > 0 && <AdventureIsland events={adventureIsland} />}
+          {chaosGate.length > 0 && <ChaosGate events={chaosGate} />}
+          {fieldBoss.length > 0 && <FieldBoss events={fieldBoss} />}
+        </CalendarContainer>
+
         {sailing.length > 0 && <Sailing events={sailing} />}
         {calendarIsland.length > 0 && <CalendarIsland events={calendarIsland} />}
 
@@ -166,3 +169,26 @@ const NoticeCouponContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `
+
+const CalendarContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px; 
+  align-items: stretch;
+  margin: 0 auto;
+  border-top: 1px solid ${(props) =>  props.theme.colors.highlight};
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: ${(props) => props.theme.colors.text};
+  background-color: ${(props) => props.theme.colors.dark};
+  > * { 
+    min-width: 0;
+    flex: 1;
+  }
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
