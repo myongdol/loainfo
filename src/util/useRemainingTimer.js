@@ -2,14 +2,23 @@ import { useEffect, useState } from "react";
 
 const useRemainingTimer = (events) => {
     const [remainingTimer, setRemainingTimer] = useState([]);
+    
+    const convertToKST = (utcTimeString) => {
+      const utcTime = new Date(utcTimeString);
+      const kstOffset = 9 * 60 * 60000;
+      return new Date(utcTime.getTime() + kstOffset);
+  };
+//   const testUtcTime = "2023-11-25T09:00:00";
+// const convertedTime = convertToKST(testUtcTime);
+// console.log(`변환된 시간: ${convertedTime}`); 
 
     useEffect(() => {
         const calculateRemainingTime = () => {
             return events.map(event => {
               const now = new Date();
-              const futureTimes = event.StartTimes.map(time => new Date(time))
+              const futureTimes = event.StartTimes.map(time => convertToKST(time))
                                                   .filter(time => time > now);
-        
+              
           if (futureTimes.length === 0) {
             return { eventId: event.id, time: '출현하지 않는 날입니다.'};
           }
@@ -21,9 +30,8 @@ const useRemainingTimer = (events) => {
           const minutes = Math.floor(delta / 60) % 60;
           delta -= minutes * 60;
           const seconds = Math.floor(delta % 60);
-          // const koreanHours = (hours + 9) % 24;
+
           return { eventId: event.id, time: `${hours}시간 ${minutes}분 ${seconds}초 남음` };
-          // return `${koreanHours}시간 ${minutes}분 ${seconds}초 남음`;
           });
         } 
         setRemainingTimer(calculateRemainingTime());
@@ -33,7 +41,7 @@ const useRemainingTimer = (events) => {
       
         return () => clearInterval(timer);
       }, [events]);
-    
+      
     return remainingTimer;
 };
 

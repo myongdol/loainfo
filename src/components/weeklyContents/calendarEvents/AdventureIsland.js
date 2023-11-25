@@ -15,12 +15,13 @@ const AdventureIsland = ({ events }) => {
   const todayEvents = events.filter(event =>
     event.StartTimes.some(startTime => startTime.includes(today))
   );
-    
+  // console.log(today)
+  // console.log(todayEvents)
 
   const handleOpenModal = () => {
     setModalOpen(true);
   };
-
+  
   return (
     <>
     <h2>모험 섬</h2>
