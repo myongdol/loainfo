@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { StyledButton } from "../../UI/StyeldButton";
-import FieldBossRewardModal from "../../UI/FieldBossRewardModal";
+import FieldBossRewardModal from "../../UI/Modals/FieldBossRewardModal";
 import useAdventureTimer from "../../../util/useAdventureTimer";
 
 
@@ -19,7 +19,6 @@ const AdventureIsland = ({ events }) => {
   };
   
   return (
-    <>
     <Section>
     <h2>모험 섬</h2>
       <EventContainer>
@@ -30,7 +29,7 @@ const AdventureIsland = ({ events }) => {
               <EventItemContainer key={index}>
                 <Title>{event.ContentsName}</Title>
                 <ContentsIcon src={event.ContentsIcon}/>
-                <EventInfo>위치: {event.Location}</EventInfo>
+                {/* <EventInfo>위치: {event.Location}</EventInfo> */}
                 <EventInfo>시작 시간
                   <RemainingTime>{remainingTime}</RemainingTime>
                 </EventInfo>
@@ -51,7 +50,6 @@ const AdventureIsland = ({ events }) => {
         />
       )}
     </Section>
-    </>
   );
 };
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import useRemainingTimer from "../../../util/useRemainingTimer";
 import { StyledButton } from "../../UI/StyeldButton";
-import FieldBossRewardModal from "../../UI/FieldBossRewardModal";
+import FieldBossRewardModal from "../../UI/Modals/FieldBossRewardModal";
 
 
 

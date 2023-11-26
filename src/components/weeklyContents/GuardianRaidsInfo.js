@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import useApi from "../../util/useApi";
-import GuardianRewardModal from "./GuardianRewardModal";
+import GuardianRewardModal from "../UI/Modals/GuardianRewardModal";
 import { StyledButton } from "../UI/StyeldButton";
 
 
