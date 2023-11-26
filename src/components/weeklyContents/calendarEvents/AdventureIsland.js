@@ -28,10 +28,12 @@ const AdventureIsland = ({ events }) => {
             const remainingTime = remainingTimes.find(time => time.eventId === event.id)?.time || '정보 없음';
             return (
               <EventItemContainer key={index}>
-                <h3>{event.ContentsName}</h3>
+                <Title>{event.ContentsName}</Title>
                 <ContentsIcon src={event.ContentsIcon}/>
-                <p>위치: {event.Location}</p>
-                <p>시작 시간: {remainingTime}</p>
+                <EventInfo>위치: {event.Location}</EventInfo>
+                <EventInfo>시작 시간
+                  <RemainingTime>{remainingTime}</RemainingTime>
+                </EventInfo>
               </EventItemContainer>
             );
             })
@@ -72,6 +74,11 @@ const EventItemContainer = styled.div`
   width: calc(25% - 20px); 
   margin: 10px;
   text-align: center;
+  min-height: 150px;
+
+  @media (max-width: 1024px) {
+    width: calc(33% - 20px);
+  }
 
   @media (max-width: 768px) {
     width: calc(50% - 20px); 
@@ -85,6 +92,16 @@ const EventItemContainer = styled.div`
 const ContentsIcon = styled.img`
   width: 120px;
   height: 120px;
+
+  @media (max-width: 768px) {
+    width: 80px;
+    height: 80px;
+  }
+
+  @media (max-width: 480px) {
+    width: 60px;
+    height: 60px;
+  }
 `;
 
 const StyeldBtn = styled(StyledButton)`
@@ -93,4 +110,32 @@ const StyeldBtn = styled(StyledButton)`
   text-align: center;
   justify-content: center;
   display: flex;
+
+  @media (max-width: 480px) {
+    font-size: 1.2em;
+  }
+`;
+
+const Title = styled.h3`
+  font-size: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 768px) {
+    font-size: 0.9em;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8em;
+  }
+`;
+
+const EventInfo = styled.p`
+  margin: 5px 0; 
+`;
+
+const RemainingTime = styled.span`
+  display: block;
+  color: ${(props) => props.theme.colors.orange}
 `;
