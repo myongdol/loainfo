@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import useRemainingTimer from "../../../util/useRemainingTimer";
 import { StyledButton } from "../../UI/StyeldButton";
 import FieldBossRewardModal from "../../UI/FieldBossRewardModal";
+import useAdventureTimer from "../../../util/useAdventureTimer";
 
 
 
 const AdventureIsland = ({ events }) => {
-
-  const today = new Date().toISOString().split('T')[0];
   const [modalOpen, setModalOpen] = useState(false);
-  const remainingTimes = useRemainingTimer(events);
-  
+  const remainingTimes = useAdventureTimer(events);
+
   const todayEvents = events.filter(event =>
-    event.StartTimes.some(startTime => startTime.includes(today))
+    event.StartTimes.some(startTime => new Date(startTime).toDateString() === new Date().toDateString())
   );
 
   const handleOpenModal = () => {
