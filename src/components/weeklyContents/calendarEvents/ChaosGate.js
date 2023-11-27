@@ -30,12 +30,12 @@ const ChaosGate = ({ events }) => {
       <EventItemContainer>
         <ContentsIcon src={events[0].ContentsIcon} />
         <EventDetails>
-          <EventInfo>시작 시간
+          <EventInfo>
             <StartTime>{nextStartTime}</StartTime>
           </EventInfo>
-          <StyeldBtn onClick={handleLocationModalOpen}>등장지역 보기</StyeldBtn>
-          <StyeldBtn onClick={handleOpenModal}>보상 보기</StyeldBtn>
         </EventDetails>
+          <StyeldBtn onClick={handleLocationModalOpen}>등장지역 보기</StyeldBtn>
+          <StyeldBtn onClick={handleOpenModal}>카오스게이트 보상 보기</StyeldBtn>
       </EventItemContainer>
       
       {modalOpen && selectedEvent && (
@@ -73,7 +73,8 @@ const EventItemContainer = styled.div`
   min-height: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ContentsIcon = styled.img`
@@ -83,11 +84,17 @@ const ContentsIcon = styled.img`
 
 const EventDetails = styled.div`
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const EventInfo = styled.p`
   margin: 5px 0; 
   white-space: pre-wrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const StartTime = styled.span`

@@ -29,8 +29,7 @@ const AdventureIsland = ({ events }) => {
               <EventItemContainer key={index}>
                 <Title>{event.ContentsName}</Title>
                 <ContentsIcon src={event.ContentsIcon}/>
-                {/* <EventInfo>위치: {event.Location}</EventInfo> */}
-                <EventInfo>시작 시간
+                <EventInfo>
                   <RemainingTime>{remainingTime}</RemainingTime>
                 </EventInfo>
               </EventItemContainer>
@@ -40,7 +39,7 @@ const AdventureIsland = ({ events }) => {
           <p>오늘은 모험섬이 등장하지 않습니다.</p>
         )}
       </EventContainer>
-      <StyeldBtn onClick={handleOpenModal}>보상 보기</StyeldBtn>
+      <StyeldBtn onClick={handleOpenModal}>모험섬 별 보상 보기</StyeldBtn>
 
       {modalOpen && (
         <FieldBossRewardModal
@@ -119,6 +118,7 @@ const Title = styled.h3`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-top: 30px;
 
   @media (max-width: 768px) {
     font-size: 0.9em;
