@@ -127,7 +127,6 @@ const ContentContainer = styled.div`
   gap: 10px; 
   align-items: stretch;
   margin: 0 auto;
-  border-top: 1px solid ${(props) =>  props.theme.colors.highlight};
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: ${(props) => props.theme.colors.text};
@@ -177,7 +176,6 @@ const CalendarContainer = styled.div`
   gap: 10px; 
   align-items: stretch;
   margin: 0 auto;
-  border-top: 1px solid ${(props) =>  props.theme.colors.highlight};
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: ${(props) => props.theme.colors.text};

@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import useRemainingTimer from "../../../util/useRemainingTimer";
 import { StyledButton } from "../../UI/StyeldButton";
 import FieldBossRewardModal from "../../UI/Modals/FieldBossRewardModal";
-
+import useAdventureTimer from "../../../util/useAdventureTimer";
 
 
 const CalendarIsland = ({ events }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const remainingTimes = useRemainingTimer(events);
-
+  const remainingTimes = useAdventureTimer(events);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -21,13 +19,12 @@ const CalendarIsland = ({ events }) => {
      <h2>캘린더 섬</h2>
       <Section>
       {events.map((event, index) => {
-        const remainingTime = remainingTimes.find(time => time.eventId === event.id)?.time || '정보 없음';
+        const remainingTime = remainingTimes.find(time => time.eventId === event.ContentsName)?.time || '정보 없음';
         return (
         <IslandContainer key={index}>
           <ContentsIcon src={event.ContentsIcon} />
           <p>{event.ContentsName}</p>
-          <p>등장 지역: {event.Location}</p>
-          <p>시작 시간: {remainingTime}</p>
+          <RemainingTime>{remainingTime}</RemainingTime>
         </IslandContainer>
         );
       })}
@@ -87,4 +84,9 @@ const StyeldBtn = styled(StyledButton)`
   text-align: center;
   justify-content: center;
   display: flex;
+`;
+
+const RemainingTime = styled.span`
+  display: block;
+  color: ${(props) => props.theme.colors.orange}
 `;
