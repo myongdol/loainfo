@@ -13,7 +13,8 @@ const Rowen = ({ events }) => {
     setModalOpen(true);
   };
 
-  const today = new Date().toLocaleDateString('en-CA');
+  const today = new Date().toLocaleDateString('en-CA')
+
   useEffect(() => {
     const filteredEvents = events.filter(event => 
       event.StartTimes.some(time => time.startsWith(today))
@@ -25,7 +26,11 @@ const Rowen = ({ events }) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
     return new Date(dateTimeStr).toLocaleString('ko-KR', options);
   };
-
+  
+  const extractName = (name) => {
+    const match = name.match(/프라이겔리|리베르탄|툴루비크/);
+    return match ? match[0] : name;
+};
 
   return (
     <Section>
@@ -33,9 +38,8 @@ const Rowen = ({ events }) => {
       <EventContainer>
       {events.map((event, index) => (
         <EventItem key={index}>
-          <h4>{event.ContentsName}</h4>
+          <h4>{extractName(event.ContentsName)}</h4>
           <div>최소 아이템 레벨: {event.MinItemLevel}</div>
-          <div>위치: {event.Location}</div>
           <ContentsIcon src={event.ContentsIcon}/>
           <ul>
             {todayEvents.length > 0 && todayEvents.includes(event) ? 

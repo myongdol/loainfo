@@ -23,11 +23,13 @@ const Sailing = ({ events }) => {
   return (
     <Section>
       <h2>항해 협동</h2>
-      <ContentsIcon src={events[0].ContentsIcon} />
-      <div>
-        <StyledButton onClick={handleOpenTimeModal}>등장지역, 남은 시간 보기</StyledButton>
-        <StyledButton onClick={handleOpenModal}>항해별 보상 보기</StyledButton>
-      </div>
+      <EventItemContainer>
+        <ContentsIcon src={events[0].ContentsIcon} />
+        <div>
+          <StyeldBtn onClick={handleOpenTimeModal}>등장지역, 남은 시간 보기</StyeldBtn>
+          <StyeldBtn onClick={handleOpenModal}>항해별 보상 보기</StyeldBtn>
+        </div>
+      </EventItemContainer>
 
       {modalOpen && (
         <FieldBossRewardModal
@@ -64,4 +66,24 @@ const Section = styled.section`
 const ContentsIcon = styled.img`
   width: 120px;
   height: 120px;
+`;
+
+const EventItemContainer = styled.div`
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyeldBtn = styled(StyledButton)`
+  width: 100%;
+  margin-top: 15px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+
+  @media (max-width: 480px) {
+    font-size: 1.2em;
+  }
 `;
