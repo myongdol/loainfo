@@ -50,5 +50,5 @@ const PageItems = styled.a`
     }
 
   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-    `
+`;
 

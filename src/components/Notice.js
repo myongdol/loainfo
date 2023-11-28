@@ -32,6 +32,7 @@ const NoticesContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding-right: 10px;
+  
 `;
 
 const List = styled.ul`
@@ -40,20 +41,22 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  background-color: #ffffff;
-  border-bottom: 1px solid #dddddd;
+  background-color: ${props => props.theme.colors.darker};
   padding: 10px;
   margin: 5px 0;
   transition: background-color 0.2s;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 
-  &:hover {
-    background-color: #f8f8f8;
+  &:hover{
+    color: #000000;
+    outline: 0;
+    box-shadow: 0 0 40px 40px ${props => props.theme.colors.highlight} inset;
   }
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: #0077cc;
+  color: white;
   font-weight: 500;
 
   &:hover {
