@@ -24,7 +24,7 @@ const AdventureIsland = ({ events }) => {
       <EventContainer>
         {todayEvents.length > 0 ? (
           todayEvents.slice(0, 3).map((event, index) => {
-            const remainingTime = remainingTimes.find(time => time.eventId === event.id)?.time || '정보 없음';
+            const remainingTime = remainingTimes.find(time => time.eventId === event.ContentsName)?.time || '정보 없음';
             return (
               <EventItemContainer key={index}>
                 <Title>{event.ContentsName}</Title>
