@@ -2,29 +2,30 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import FieldBossRewardModal from "../../UI/Modals/FieldBossRewardModal";
 import { StyledButton } from "../../UI/StyeldButton";
-import useRemainingTimer from "../../../util/useRemainingTimer";
+import useAdventureTimer from "../../../util/useAdventureTimer";
+import RemainingTimeModal from "../../UI/Modals/RemainingTimeModal";
 
 
 
 const Sailing = ({ events }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const remainingTimes = useRemainingTimer(events);
+  const remainingTimes = useAdventureTimer(events);
+  const [timeModalOpen, setTimeModalOpen] = useState(false);
 
   const handleOpenModal = () => {
     setModalOpen(true);
   };
   
+  const handleOpenTimeModal = () => {
+    setTimeModalOpen(true);
+  };
 
   return (
     <Section>
-      <h2>항해</h2>
+      <h2>항해 협동</h2>
       <ContentsIcon src={events[0].ContentsIcon} />
       <div>
-        <p>등장 지역: {events.map(event => event.Location).join(', ')}</p>
-        {events.map((event, index) => {
-          const remainingTime = remainingTimes.find(time => time.eventId === event.id)?.time || '정보 없음';
-          return <p key={index}>시작 시간 ({event.ContentsName}): {remainingTime}</p>;
-        })}
+        <StyledButton onClick={handleOpenTimeModal}>등장지역, 남은 시간 보기</StyledButton>
         <StyledButton onClick={handleOpenModal}>항해별 보상 보기</StyledButton>
       </div>
 
@@ -35,6 +36,14 @@ const Sailing = ({ events }) => {
           events={events}
         />
       )}
+
+        {timeModalOpen && (
+          <RemainingTimeModal
+            isOpen={timeModalOpen}
+            onClose={() => setTimeModalOpen(false)}
+            remainingTimes={remainingTimes}
+          />
+        )}
     </Section>
   );
 };
