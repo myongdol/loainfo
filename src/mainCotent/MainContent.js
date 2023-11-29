@@ -105,8 +105,9 @@ function MainContent() {
           </RowenContainer>
         </ContentContainer>
 
+      <CalendarIslandContainer>
         {calendarIsland.length > 0 && <CalendarIsland events={calendarIsland} />}
-
+      </CalendarIslandContainer>
       </StyledMainContent>
     );
 };
@@ -130,7 +131,8 @@ const ContentContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: ${(props) => props.theme.colors.text};
-  background-color: ${(props) => props.theme.colors.dark};
+  background-color: ${(props) => props.theme.colors.background};
+  border: 2px solid ${(props) => props.theme.colors.container};
   padding-top: 20px;
   > * { 
     min-width: 0;
@@ -167,7 +169,8 @@ const NoticeCouponContainer = styled.div`
     flex: 3;
   }
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: ${(props) => props.theme.colors.background};
+  border: 2px solid ${(props) => props.theme.colors.container};
 `
 
 const CalendarContainer = styled.div`
@@ -180,7 +183,8 @@ const CalendarContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: ${(props) => props.theme.colors.text};
-  background-color: ${(props) => props.theme.colors.dark};
+  background-color: ${(props) => props.theme.colors.background};
+  border: 2px solid ${(props) => props.theme.colors.container};
   > * { 
     min-width: 0;
     flex: 1;
@@ -190,4 +194,9 @@ const CalendarContainer = styled.div`
     flex-direction: column;
     align-items: center;
   }
+`;
+
+const CalendarIslandContainer = styled.div`
+  background-color: ${(props) => props.theme.colors.background};
+  border: 2px solid ${(props) => props.theme.colors.container};
 `;

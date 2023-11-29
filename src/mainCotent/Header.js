@@ -26,6 +26,7 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 4px solid ${(props) => props.theme.colors.container};
 `;
 
 const StyledHomeIcon = styled(ImHome)`

@@ -32,7 +32,7 @@ const NoticesContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding-right: 10px;
-  
+  border-right: 2px solid ${(props) => props.theme.colors.container};
 `;
 
 const List = styled.ul`
@@ -41,7 +41,6 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  background-color: ${props => props.theme.colors.darker};
   padding: 10px;
   margin: 5px 0;
   transition: background-color 0.2s;
@@ -58,6 +57,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   color: white;
   font-weight: 500;
+  display: block;
 
   &:hover {
     text-decoration: underline;

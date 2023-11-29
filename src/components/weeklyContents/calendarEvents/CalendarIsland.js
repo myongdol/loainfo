@@ -28,7 +28,7 @@ const CalendarIsland = ({ events }) => {
         </IslandContainer>
         );
       })}
-      <StyeldBtn onClick={handleOpenModal}>섬 보상 보기</StyeldBtn>
+      <StyeldBtn onClick={handleOpenModal}>섬별 보상 보기</StyeldBtn>
 
       {modalOpen && (
         <FieldBossRewardModal
@@ -51,7 +51,6 @@ const Section = styled.section`
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: ${(props) => props.theme.colors.text};
-  background-color: ${(props) => props.theme.colors.dark};
   margin: auto;
   display: flex;
   flex-wrap: wrap;

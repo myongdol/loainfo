@@ -55,7 +55,7 @@ const Events = ({ events, itemsPerPage, totalItems, paginate }) => {
 export default Events;
 
 
-const TItle = styled.h4`
+const TItle = styled.h3`
   justify-content: center;
   text-align: center;
   color: ${(props) => props.theme.colors.text};

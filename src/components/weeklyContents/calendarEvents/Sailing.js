@@ -58,7 +58,6 @@ const Section = styled.section`
   padding: 10px;
   border-radius: 10px;
   color: ${(props) => props.theme.colors.text};
-  background-color: ${(props) => props.theme.colors.dark};
   margin: auto;
 `;
 
