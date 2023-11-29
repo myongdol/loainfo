@@ -70,7 +70,7 @@ export default Rowen;
 
 
 const Section = styled.section`
-  padding: 10px;
+  padding: 5px;
   margin: auto;
   display: flex;
   flex-direction: column;

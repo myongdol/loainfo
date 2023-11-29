@@ -76,7 +76,8 @@ const DungeonImg = styled.img`
   width: 100%;
   height: auto;
   margin-right: 10px;
-  max-width: 200px;
+  max-width: 260px;
+  min-height: 260px;
 `;
 
 const RewardList = styled.ul`

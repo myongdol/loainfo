@@ -86,6 +86,12 @@ function MainContent() {
           <CouponInfo />
         </NoticeCouponContainer>
 
+        <CalendarContainer>
+          {adventureIsland.length > 0 && <AdventureIsland events={adventureIsland} />}
+          {chaosGate.length > 0 && <ChaosGate events={chaosGate} />}
+          {fieldBoss.length > 0 && <FieldBoss events={fieldBoss} />}
+        </CalendarContainer>
+
         <ContentContainer>
           <AbyssDungeonContainer>
             <AbyssDungeonInfo />
@@ -95,16 +101,10 @@ function MainContent() {
           </GuardianRaidsContainer>
           <RowenContainer>
             {rowen.length > 0 && <Rowen events={rowen} />}
+            {sailing.length > 0 && <Sailing events={sailing} />}
           </RowenContainer>
         </ContentContainer>
 
-        <CalendarContainer>
-          {adventureIsland.length > 0 && <AdventureIsland events={adventureIsland} />}
-          {chaosGate.length > 0 && <ChaosGate events={chaosGate} />}
-          {fieldBoss.length > 0 && <FieldBoss events={fieldBoss} />}
-        </CalendarContainer>
-
-        {sailing.length > 0 && <Sailing events={sailing} />}
         {calendarIsland.length > 0 && <CalendarIsland events={calendarIsland} />}
 
       </StyledMainContent>
@@ -131,6 +131,7 @@ const ContentContainer = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: ${(props) => props.theme.colors.text};
   background-color: ${(props) => props.theme.colors.dark};
+  padding-top: 20px;
   > * { 
     min-width: 0;
     flex: 1 1 auto;
@@ -154,7 +155,7 @@ const GuardianRaidsContainer = styled.div`
 
 const RowenContainer = styled.div`
   flex: 3;
-  min-height: 350px;
+  min-height: 300px;
 `;
 
 const NoticeCouponContainer = styled.div`
