@@ -6,7 +6,7 @@ import Pagination from './Pagination';
 const Notices = ({ notices, itemsPerPage, totalItems, paginate }) => {
     return (
       <NoticesContainer>
-        <h3>공지사항 바로가기</h3>
+        <TItle>공지사항 바로가기</TItle>
         <List>
           {notices.map((notice, index) => (
             <ListItem key={index}>
@@ -64,3 +64,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const TItle = styled.h3`
+  text-align: center;
+  justify-content: center;
+`;

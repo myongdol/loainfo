@@ -23,7 +23,6 @@ const Events = ({ events, itemsPerPage, totalItems, paginate }) => {
 
   return (
     <>
-      <TItle>진행중인 이벤트 바로가기</TItle>
       <SliderContainer>
         {events.map((event, index) => (
           <Slide key={index} $isActive={index === current}>
@@ -55,11 +54,6 @@ const Events = ({ events, itemsPerPage, totalItems, paginate }) => {
 export default Events;
 
 
-const TItle = styled.h3`
-  justify-content: center;
-  text-align: center;
-  color: ${(props) => props.theme.colors.text};
-`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -85,7 +79,6 @@ const SliderContainer = styled.div`
   max-width: 600px;
   margin: auto;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   border-radius: 8px;
 `;
 

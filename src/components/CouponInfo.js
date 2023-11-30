@@ -10,11 +10,13 @@ const CouponInfo = () => {
       <CouponList>
         {coupons.map((coupon, index) => (
           <CouponItem key={index}>
+            <ContentContainer>
             {coupon.title}
-            <br />
-            유효 기간: {coupon.validUntil}
+            <br /> 
+            유효 기간 <ValidUntil>{coupon.validUntil}</ValidUntil>
             <br />
             <CouponCode>{coupon.code}</CouponCode>
+            </ContentContainer>
           </CouponItem>
         ))}
       </CouponList>
@@ -30,6 +32,8 @@ const CouponInfoContainer = styled.div`
     border-radius: 8px;
     padding: 20px;
     margin-top: 20px;
+    text-align: center;
+    justify-content: center;
 `;
     
 const CouponTitle = styled.h2`
@@ -43,7 +47,7 @@ const CouponList = styled.ul`
 `;
     
 const CouponItem = styled.li`
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     color: ${(props) => props.theme.colors.text};
     &:last-child {
     margin-bottom: 0;
@@ -52,5 +56,17 @@ const CouponItem = styled.li`
     
 const CouponCode = styled.span`
     font-weight: bold;
+    font-size: 20px;
     color: #007bff;
+`;
+
+const ValidUntil = styled.li`
+    color:${(props) => props.theme.colors.orange}
+`;
+
+const ContentContainer = styled.div`
+    border-bottom: 1px solid ${props => props.theme.colors.highlight};
+    padding-bottom: 5px;
+    width: 50%;
+    margin: 0 auto;
 `;
