@@ -23,10 +23,12 @@ const StyledLink = styled.a`
   width: 100%;
   font-weight: bold;
   background-color: ${(props) => props.theme.colors.background};
+  border: 3px solid ${(props) => props.theme.colors.softBlueGrey};
 `;
 
 const StyledImage = styled.img`
   width: 100%; 
   height: auto;
   object-fit: contain; 
+  margin-bottom: 5px;
 `;
