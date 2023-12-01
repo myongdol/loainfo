@@ -4,8 +4,8 @@ import Header from "./mainCotent/Header";
 import MainContent from "./mainCotent/MainContent";
 import Sidebar from "./mainCotent/Sidebar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CharacterDetails from "./components/character/CharacterDetails";
 import theme from "./styles/theme";
+import CharacterPage from "./components/CharacterPage";
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
             <MainSection>
               <Routes>
                 <Route path="/" element={<MainContent/>} />
-                <Route path="/character/:characterName" element={<CharacterDetails />} />
+                <Route path="/character/:characterName" element={<CharacterPage />} />
               </Routes>
             </MainSection>
             <Sidebar />
