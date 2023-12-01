@@ -10,7 +10,6 @@ const AbyssDungeonInfo = () => {
     if (isLoading) return <div>로딩 중...</div>;
     if (error) return <div>에러 발생: {error.message}</div>;
   
-    console.log('어비스 던전 정보:', abyssDungeonsData);
 
     return (
         <Section>

@@ -60,7 +60,7 @@ const CouponCode = styled.span`
     color: #007bff;
 `;
 
-const ValidUntil = styled.li`
+const ValidUntil = styled.div`
     color:${(props) => props.theme.colors.orange}
 `;
 

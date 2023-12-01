@@ -14,8 +14,6 @@ const GuardianRaidsInfo = () => {
     if (error) return <div>에러 발생: {error.message}</div>;
 
 
-    console.log('가디언 정보:', guardianRaidsData);
-
     return (
         <Section>
           <h2>도전 가디언 레이드</h2>
