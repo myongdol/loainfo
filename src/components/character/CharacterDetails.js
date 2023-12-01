@@ -1,30 +1,27 @@
 import styled from 'styled-components';
-import useApi from '../../util/useApi';
-import { useParams } from 'react-router-dom';
 
-function CharacterDetails({ character }) {
-  const { characterName } = useParams();
-  const encodedCharacterName = encodeURIComponent(characterName);
-  const { data: characterDetails, isLoading, error } = useApi(`/armories/characters/${encodedCharacterName}`);
 
-  if (isLoading) return <div>로딩중 입니다.</div>;
-  if (error) return <div>오류: {error.message}</div>;
-  if (!characterDetails) return <div>캐릭터 정보가 없습니다. 닉네임을 확인 해주세요.</div>;
+function CharacterDetails({ profile }) {
+
+    if (!profile) {
+        return <div>캐릭터 정보가 없습니다.</div>;
+      }
+
 
   return (
     <CharacterContainer>
-      <CharacterImage src={characterDetails.CharacterImage} alt={characterDetails.CharacterName} />
+      <CharacterImage src={profile.CharacterImage} alt={profile.CharacterName} />
       <CharacterInfo>
-        <h2>{characterDetails.CharacterName} ({characterDetails.ServerName})</h2>
-        <p>클래스: {characterDetails.CharacterClassName}</p>
-        <p>레벨: {characterDetails.CharacterLevel}</p>
-        <p>평균 아이템 레벨: {characterDetails.ItemAvgLevel}</p>
-        <p>최고 아이템 레벨: {characterDetails.ItemMaxLevel}</p>
-        <p>길드: {characterDetails.GuildName} ({characterDetails.GuildMemberGrade})</p>
-        <p>타이틀: {characterDetails.Title}</p>
-        <p>PVP 등급: {characterDetails.PvpGradeName}</p>
-        <p>탐험 레벨: {characterDetails.ExpeditionLevel}</p>
-        <p>항해 레벨: {characterDetails.TownLevel}</p>
+        <h2>{profile.CharacterName} ({profile.ServerName})</h2>
+        <p>클래스: {profile.CharacterClassName}</p>
+        <p>레벨: {profile.CharacterLevel}</p>
+        <p>평균 아이템 레벨: {profile.ItemAvgLevel}</p>
+        <p>최고 아이템 레벨: {profile.ItemMaxLevel}</p>
+        <p>길드: {profile.GuildName} ({profile.GuildMemberGrade})</p>
+        <p>칭호: {profile.Title}</p>
+        <p>PVP 등급: {profile.PvpGradeName}</p>
+        <p>원정대 레벨: {profile.ExpeditionLevel}</p>
+        <p>영지 레벨: {profile.TownLevel}</p>
       </CharacterInfo>
     </CharacterContainer>
   );
