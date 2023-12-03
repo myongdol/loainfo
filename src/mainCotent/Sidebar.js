@@ -129,7 +129,13 @@ padding: 0.25rem;
 box-sizing: border-box;
 background-color: ${(props) => props.theme.colors.dark};
 
+
 @media (max-width: 768px) {
-    width: 100px;
-  }
+    width: 100%; 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: center;
+}
 `;

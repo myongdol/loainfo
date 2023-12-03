@@ -24,11 +24,35 @@ const StyledLink = styled.a`
   font-weight: bold;
   background-color: ${(props) => props.theme.colors.background};
   border: 3px solid ${(props) => props.theme.colors.softBlueGrey};
+  &:hover {
+    outline: 0;
+    box-shadow: 0 0 40px 40px ${props => props.theme.colors.highlight} inset;
+  }
+  
+  @media (max-width: 768px) {
+    flex-basis: calc(50% - 10px);
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    flex-basis: 100%;
+    font-size: 1rem;
+  }
 `;
 
 const StyledImage = styled.img`
-  width: 100%; 
+  width: 80%; 
   height: auto;
   object-fit: contain; 
   margin-bottom: 5px;
+
+  @media (max-width: 768px) {
+    width: 120px;
+    height: 120px;
+  }
+
+  @media (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+  }
 `;

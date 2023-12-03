@@ -43,6 +43,11 @@ const AppContainer = styled.div`
 const ContentContainer = styled.div`
   display: flex;
   flex: 1;
+  flex-direction: column; 
+
+@media (min-width: 768px) {
+  flex-direction: row; 
+}
 `;
 
 const MainSection = styled.div`
