@@ -1,4 +1,4 @@
-import styled, { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import Footer from "./mainCotent/Footer";
 import Header from "./mainCotent/Header";
 import MainContent from "./mainCotent/MainContent";
@@ -12,6 +12,7 @@ function App() {
   return (
     <BrowserRouter>
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <AppContainer>
         <Header />
           <ContentContainer>
@@ -46,4 +47,10 @@ const ContentContainer = styled.div`
 
 const MainSection = styled.div`
   flex: 1;
+`;
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+  }
 `;
