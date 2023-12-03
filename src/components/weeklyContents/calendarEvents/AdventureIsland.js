@@ -10,9 +10,25 @@ const AdventureIsland = ({ events }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const remainingTimes = useAdventureTimer(events);
 
-  const todayEvents = events.filter(event =>
-    event.StartTimes.some(startTime => new Date(startTime).toDateString() === new Date().toDateString())
-  );
+  // const todayEvents = events.filter(event =>
+  //   event.StartTimes.some(startTime => new Date(startTime).toDateString() === new Date().toDateString())
+  // );
+  const now = new Date();
+  const next12Hours = new Date(now.getTime() + 12 * 60 * 60 * 1000); 
+
+  const todayEvents = events
+    .filter(event => event.StartTimes.some(startTime => {
+      const eventDate = new Date(startTime);
+      return eventDate >= now && eventDate <= next12Hours;
+    }))
+    .map(event => {
+      // 남은 시간 계산
+      const eventStartTime = new Date(event.StartTimes[0]);
+      event.remainingTime = eventStartTime - now;
+      return event;
+    })
+    .sort((a, b) => a.remainingTime - b.remainingTime); 
+
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -23,7 +39,8 @@ const AdventureIsland = ({ events }) => {
     <h2>모험 섬</h2>
       <EventContainer>
         {todayEvents.length > 0 ? (
-          todayEvents.slice(0, 3).map((event, index) => {
+          // todayEvents.slice(0, 3).map((event, index) => {
+            todayEvents.map((event, index) => {
             const remainingTime = remainingTimes.find(time => time.eventId === event.ContentsName)?.time || '정보 없음';
             return (
               <EventItemContainer key={index}>
