@@ -25,7 +25,7 @@ function SearchCharacter() {
       value={characterName}
       onChange={(e) => setCharacterName(e.target.value)}
       onKeyDown={handleKeyDown}
-      placeholder="캐릭터명을 입력하세요"
+      placeholder="캐릭터명을 입력하세요 (ex: 묭돌)"
       enterKeyHint="search"
       autoCorrect="off"
       autoComplete="off"
