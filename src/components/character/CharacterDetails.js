@@ -7,20 +7,20 @@ function CharacterDetails({ profile }) {
         return <div>캐릭터 정보가 없습니다.</div>;
       }
 
-
   return (
     <CharacterContainer backgroundImage={profile.CharacterImage}>
       <CharacterInfo>
+        <h2>{profile.CharacterName}</h2>
         <h2>{profile.CharacterName} ({profile.ServerName})</h2>
-        <p>클래스: {profile.CharacterClassName}</p>
-        <p>레벨: {profile.CharacterLevel}</p>
-        <p>평균 아이템 레벨: {profile.ItemAvgLevel}</p>
-        <p>최고 아이템 레벨: {profile.ItemMaxLevel}</p>
-        <p>길드: {profile.GuildName} ({profile.GuildMemberGrade})</p>
-        <p>칭호: {profile.Title}</p>
-        <p>PVP 등급: {profile.PvpGradeName}</p>
-        <p>원정대 레벨: {profile.ExpeditionLevel}</p>
-        <p>영지 레벨: {profile.TownLevel}</p>
+        <div>클래스: {profile.CharacterClassName}</div>
+        <div>레벨: {profile.CharacterLevel}</div>
+        <div>평균 아이템 레벨: {profile.ItemAvgLevel}</div>
+        <div>최고 아이템 레벨: {profile.ItemMaxLevel}</div>
+        <div>길드: {profile.GuildName} ({profile.GuildMemberGrade})</div>
+        <div>칭호: {profile.Title}</div>
+        <div>PVP 등급: {profile.PvpGradeName}</div>
+        <div>원정대 레벨: {profile.ExpeditionLevel}</div>
+        <div>영지 레벨: {profile.TownLevel}</div>
       </CharacterInfo>
     </CharacterContainer>
   );
@@ -29,33 +29,34 @@ function CharacterDetails({ profile }) {
 export default CharacterDetails;
 
 const CharacterContainer = styled.div`
- display: flex;
-  justify-content: center;
+  display: flex;
   align-items: center;
-  background-image: 
-    linear-gradient(to right, rgba(192, 135, 135, 0.7), transparent),
-    linear-gradient(to left, rgba(0, 0, 0, 0.7), transparent),
-    url(${props => props.backgroundImage});
-  background-size: contain, cover; 
+  justify-content: center;
+  background-color: rgb(21, 24, 29);
   background-repeat: no-repeat;
-  background-position: center;
-  height: 300px; 
+  background-size: contain;
+  background-position: center center;
+  background-image: url(${props => props.backgroundImage});
+  height: 400px; 
+  width: 50%;
+  position: relative;
   color: white;
-  overflow: hidden; 
-  position: relative; 
-  width: 100%;
+  overflow: hidden;
+  border: 1px solid red;
 `;
 
+
 const CharacterInfo = styled.div`
-  position: absolute; 
+  position: absolute;
+  top: 0;
   right: 0;
-  bottom: 0; 
-  background-color: rgba(0, 0, 0, 0.5); 
-  padding: 20px;
-  width: 50%;
-  height: 100%;
+  bottom: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   color: white;
+  padding: 20px;
+  align-items: flex-start;
 `;
