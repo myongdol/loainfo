@@ -23,20 +23,27 @@ function CharacterDetails({ profile }) {
         <div>영지 레벨: {profile.TownLevel}</div>
       </CharacterInfo>
 
-      <CharacterStats>
+    <CharacterContent>
+      <CharacterStatsContainer>
         <h3>특성</h3>
         {profile.Stats.map((stat) => (
           <div key={stat.Type}>
             <strong>{stat.Type}</strong>: {stat.Value}
           </div>
         ))}
+      </CharacterStatsContainer>
+
+      <CharacterTendenciesContainer>
         <h3>성향</h3>
         {profile.Tendencies.map((tendency) => (
-          <div key={tendency.Type}>
-            <strong>{tendency.Type}</strong>: {tendency.Point}/{tendency.MaxPoint}
-          </div>
+          <TendencyBarContainer key={tendency.Type}>
+            <strong>{tendency.Type}</strong>: 
+            <TendencyBar width={(tendency.Point / tendency.MaxPoint) * 100} />
+            <TendencyValue>{tendency.Point} / {tendency.MaxPoint}</TendencyValue>
+          </TendencyBarContainer>
         ))}
-      </CharacterStats>
+      </CharacterTendenciesContainer>
+    </CharacterContent>
     </CharacterContainer>
   );
 }
@@ -53,7 +60,7 @@ const CharacterContainer = styled.div`
   background-position: center center;
   background-image: url(${props => props.backgroundImage});
   height: 400px; 
-  width: 50%;
+  width: 70%;
   position: relative;
   color: white;
   overflow: hidden;
@@ -76,13 +83,51 @@ const CharacterInfo = styled.div`
   align-items: flex-start;
 `;
 
-const CharacterStats = styled.div`
+const CharacterContent = styled.div`
   position: absolute;
   top: 0;
   right: 0;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  padding: 20px;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const CharacterStatsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  color: white;
-  text-align: right;
+  align-items: flex-end;
+  margin-right: 20px;
+  min-width: 150px;
+`;
+
+const CharacterTendenciesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 150px;
+`;
+
+const TendencyBarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #8a5858;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 5px 0;
+  width: 100%;
+`;
+
+const TendencyBar = styled.div`
+  background-color: #4caf50;
+  height: 10px;
+  width: ${props => props.width}%;
+  transition: width 0.5s ease-in-out; 
+`;
+
+const TendencyValue = styled.span`
+  margin-left: 10px;
+  min-width: 50px;
 `;
