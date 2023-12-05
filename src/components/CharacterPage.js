@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import OwnedCharacters from "./character/OwnedCharacters";
 import useApi from "../util/useApi";
 import CharacterDetails from "./character/CharacterDetails";
+import CharacterEquipment from "./character/CharacterEquipment";
 
 
 
@@ -42,6 +43,7 @@ function CharacterPage() {
     return (
         <>
             <CharacterDetails profile={profile} />
+            <CharacterEquipment equipments={equipment}/>
             <OwnedCharacters siblings={siblings} />
         </>
     )
