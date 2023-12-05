@@ -22,6 +22,21 @@ function CharacterDetails({ profile }) {
         <div>원정대 레벨: {profile.ExpeditionLevel}</div>
         <div>영지 레벨: {profile.TownLevel}</div>
       </CharacterInfo>
+
+      <CharacterStats>
+        <h3>특성</h3>
+        {profile.Stats.map((stat) => (
+          <div key={stat.Type}>
+            <strong>{stat.Type}</strong>: {stat.Value}
+          </div>
+        ))}
+        <h3>성향</h3>
+        {profile.Tendencies.map((tendency) => (
+          <div key={tendency.Type}>
+            <strong>{tendency.Type}</strong>: {tendency.Point}/{tendency.MaxPoint}
+          </div>
+        ))}
+      </CharacterStats>
     </CharacterContainer>
   );
 }
@@ -59,4 +74,15 @@ const CharacterInfo = styled.div`
   color: white;
   padding: 20px;
   align-items: flex-start;
+`;
+
+const CharacterStats = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  color: white;
+  text-align: right;
 `;
