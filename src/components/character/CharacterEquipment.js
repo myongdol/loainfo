@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 function CharacterEquipment({ equipments }) {
+  if (!equipments || equipments.length === 0) {
+    return <div>장비 정보가 없습니다.</div>;
+  }
+  console.log(equipments)
   return (
     <EquipmentContainer>
       <h3>장비</h3>

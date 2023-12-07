@@ -6,7 +6,6 @@ import styled from 'styled-components';
 const CharacterTendencies = ({ tendencies }) => {
   return (
     <TendenciesContainer>
-      <h3>성향</h3>
       {tendencies.map((tendency) => (
         <TendencyBarContainer key={tendency.Type}>
           <TendencyLabel>
@@ -31,7 +30,7 @@ export default CharacterTendencies;
 const TendenciesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   min-width: 200px;
 `;
     
