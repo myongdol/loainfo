@@ -3,6 +3,24 @@ import CharacterStats from './Details/ChracterStats';
 import CharacterTendencies from './Details/ChracterTendencies';
 
 
+const keyToKorean = {
+  CharacterName: '캐릭터 이름',
+  ServerName: '서버 이름',
+  CharacterClassName: '클래스',
+  CharacterLevel: '레벨',
+  ItemAvgLevel: '평균 아이템 레벨',
+  ItemMaxLevel: '최고 아이템 레벨',
+  GuildName: '길드',
+  GuildMemberGrade: '길드 등급',
+  Title: '칭호',
+  PvpGradeName: 'PVP 등급',
+  ExpeditionLevel: '원정대 레벨',
+  TownLevel: '영지 레벨',
+  TownName: '영지 이름',
+  UsingSkillPoint: '사용 스킬포인트',
+  TotalSkillPoint: '전체 스킬포인트'
+};
+
 function CharacterDetails({ profile }) {
 
     if (!profile) {
@@ -14,15 +32,13 @@ function CharacterDetails({ profile }) {
       <CharacterInfo>
         <h2>{profile.CharacterName}</h2>
         <h2>{profile.CharacterName} ({profile.ServerName})</h2>
-        <div>클래스: {profile.CharacterClassName}</div>
-        <div>레벨: {profile.CharacterLevel}</div>
-        <div>평균 아이템 레벨: {profile.ItemAvgLevel}</div>
-        <div>최고 아이템 레벨: {profile.ItemMaxLevel}</div>
-        <div>길드: {profile.GuildName} ({profile.GuildMemberGrade})</div>
-        <div>칭호: {profile.Title}</div>
-        <div>PVP 등급: {profile.PvpGradeName}</div>
-        <div>원정대 레벨: {profile.ExpeditionLevel}</div>
-        <div>영지 레벨: {profile.TownLevel}</div>
+        {Object.entries(profile).map(([key, value]) => (
+          key !== 'CharacterImage' && key !== 'Stats' && key !== 'Tendencies' &&
+          <InfoItem key={key}>
+            <InfoLabel>{keyToKorean[key] || key}</InfoLabel>
+            <InfoValue>{value}</InfoValue>
+          </InfoItem>
+        ))}
       </CharacterInfo>
 
       <CharacterContent>
@@ -77,4 +93,26 @@ const CharacterContent = styled.div`
   padding: 20px;
   align-items: flex-start;
   justify-content: flex-end;
+`;
+
+const InfoItem = styled.div`
+  display: flex;
+  align-items: center;
+  color: white;
+  margin: 5px 0;
+`;
+
+const InfoLabel = styled.div`
+  background-color: ${(props) => props.theme.colors.container};
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  transition: background-color 0.3s;
+`;
+
+const InfoValue = styled.span`
+  flex-grow: 1;
+  text-align: right;
 `;
