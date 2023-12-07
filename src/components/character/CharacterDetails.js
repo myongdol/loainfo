@@ -5,11 +5,11 @@ import CharacterTendencies from './Details/ChracterTendencies';
 
 const keyToKorean = {
   CharacterName: '캐릭터 이름',
-  ServerName: '서버 이름',
+  ServerName: '서버',
   CharacterClassName: '클래스',
-  CharacterLevel: '레벨',
+  CharacterLevel: '전투레벨',
   ItemAvgLevel: '평균 아이템 레벨',
-  ItemMaxLevel: '최고 아이템 레벨',
+  ItemMaxLevel: '아이템 레벨',
   GuildName: '길드',
   GuildMemberGrade: '길드 등급',
   Title: '칭호',
@@ -21,6 +21,18 @@ const keyToKorean = {
   TotalSkillPoint: '전체 스킬포인트'
 };
 
+
+const displayProfile = [
+  'CharacterClassName',
+  'Title',
+  'GuildName',
+  'ItemMaxLevel',
+  'CharacterLevel',
+  'ExpeditionLevel',
+  'TownName'
+];
+
+
 function CharacterDetails({ profile }) {
 
     if (!profile) {
@@ -30,15 +42,18 @@ function CharacterDetails({ profile }) {
   return (
     <CharacterContainer backgroundImage={profile.CharacterImage}>
       <CharacterInfo>
-        <h2>{profile.CharacterName}</h2>
         <h2>{profile.CharacterName} ({profile.ServerName})</h2>
-        {Object.entries(profile).map(([key, value]) => (
-          key !== 'CharacterImage' && key !== 'Stats' && key !== 'Tendencies' &&
-          <InfoItem key={key}>
-            <InfoLabel>{keyToKorean[key] || key}</InfoLabel>
-            <InfoValue>{value}</InfoValue>
-          </InfoItem>
-        ))}
+        {displayProfile.map(key => {
+                    if (profile[key] && typeof profile[key] !== 'object') {
+                        return (
+                            <InfoItem key={key}>
+                                <InfoLabel>{keyToKorean[key] || key}</InfoLabel>
+                                <InfoValue>{profile[key]}</InfoValue>
+                            </InfoItem>
+                        );
+                    }
+                    return null;
+                })}
       </CharacterInfo>
 
       <CharacterContent>
