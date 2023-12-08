@@ -40,11 +40,14 @@ function CharacterDetails({ profile }) {
 
   return (
     <CharacterContainer backgroundImage={profile.CharacterImage}>
-      <Title>
-        <ServerName>{profile.ServerName}</ServerName>
+      <TitleContainer>
+        <Title>
+          <ServerName>{profile.ServerName}</ServerName>
+          <ClassName>{profile.CharacterClassName}</ClassName>
+        </Title>
         <CharacterName>{profile.CharacterName}</CharacterName>
-        <ClassName>{profile.CharacterClassName}</ClassName>
-      </Title>
+      </TitleContainer>
+      
       <CharacterInfo>
         {displayProfile.map(key => {
                     if (profile[key] && typeof profile[key] !== 'object') {
@@ -140,35 +143,39 @@ const InfoValue = styled.span`
   text-align: right;
 `;
 
+const TitleContainer = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px; 
+  text-align: left;
+  flex-direction: column;
+`;
+
 const Title = styled.div`
   font-weight: bold;
   color: white;
   font-size: 1em;
-  position: absolute;
-  top: 10px;
-  left: 20px;
-  padding-top: 10px;
+  align-items: center;
+  margin-bottom: 15px;
 `;
 
 const ServerName = styled.span`
   margin-right: 10px;
   background-color: ${(props) => props.theme.colors.highlight};
-  padding: 10px 15px;
-  margin-right: 10px;
+  padding: 8px 12px;
   border-radius: 4px;
 `;
 
 const CharacterName = styled.span`
-  margin-right: 10px;
-  background-color: ${(props) => props.theme.colors.highlight};
-  padding: 10px 15px;
-  margin-right: 10px;
-  border-radius: 4px;
+  font-size: 1.5em;
+  font-weight: bolder;
+  margin-bottom: 8px;
+  padding-left: 10px;
 `;
 
 const ClassName = styled.span`
   background-color: ${(props) => props.theme.colors.highlight};
-  padding: 10px 15px;
+  padding: 8px 12px;
   margin-right: 10px;
   border-radius: 4px;
 `;
