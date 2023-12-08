@@ -5,19 +5,40 @@ function CharacterEquipment({ equipments }) {
     return <div>장비 정보가 없습니다.</div>;
   }
   console.log(equipments)
+
+  const leftEquipmentTypes = ['무기', '투구', '상의', '하의', '장갑', '어깨'];
+  const leftEquipments = equipments.filter(equipment => leftEquipmentTypes.includes(equipment.Type));
+  const rightEquipments = equipments.filter(equipment => !leftEquipmentTypes.includes(equipment.Type));
+
   return (
     <EquipmentContainer>
       <h3>장비</h3>
-      {equipments.map((equipment, index) => (
-        <EquipmentItem key={index}>
-          <EquipmentIcon src={equipment.Icon} alt={equipment.Type} />
-          <EquipmentInfo>
-            <EquipmentType>{equipment.Type}</EquipmentType>
-            <EquipmentName>{equipment.Name}</EquipmentName>
-            <EquipmentGrade>{equipment.Grade}</EquipmentGrade>
-          </EquipmentInfo>
-        </EquipmentItem>
-      ))}
+      <EquipmentRow>
+        <LeftEquipmentContainer>
+          {leftEquipments.map((equipment, index) => (
+            <EquipmentItem key={index}>
+              <EquipmentIcon src={equipment.Icon} alt={equipment.Type} />
+              <EquipmentInfo>
+                <EquipmentType>{equipment.Type}</EquipmentType>
+                <EquipmentName>{equipment.Name}</EquipmentName>
+                <EquipmentGrade>{equipment.Grade}</EquipmentGrade>
+              </EquipmentInfo>
+            </EquipmentItem>
+          ))}
+        </LeftEquipmentContainer>
+        <RightEquipmentContainer>
+          {rightEquipments.map((equipment, index) => (
+            <EquipmentItem key={index}>
+              <EquipmentIcon src={equipment.Icon} alt={equipment.Type} />
+              <EquipmentInfo>
+                <EquipmentType>{equipment.Type}</EquipmentType>
+                <EquipmentName>{equipment.Name}</EquipmentName>
+                <EquipmentGrade>{equipment.Grade}</EquipmentGrade>
+              </EquipmentInfo>
+            </EquipmentItem>
+          ))}
+        </RightEquipmentContainer>
+      </EquipmentRow>
     </EquipmentContainer>
   );
 }
@@ -34,7 +55,6 @@ const EquipmentContainer = styled.div`
   color: white;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-  margin-top: 20px;
 `;
 
 const EquipmentItem = styled.div`
@@ -65,4 +85,23 @@ const EquipmentName = styled.span`
 const EquipmentGrade = styled.span`
   font-size: 0.8em;
   color: #d4af37;
+`;
+
+const EquipmentRow = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+`;
+
+const LeftEquipmentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const RightEquipmentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
