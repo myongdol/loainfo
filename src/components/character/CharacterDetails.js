@@ -23,7 +23,6 @@ const keyToKorean = {
 
 
 const displayProfile = [
-  'CharacterClassName',
   'Title',
   'GuildName',
   'ItemMaxLevel',
@@ -41,8 +40,12 @@ function CharacterDetails({ profile }) {
 
   return (
     <CharacterContainer backgroundImage={profile.CharacterImage}>
+      <Title>
+        <ServerName>{profile.ServerName}</ServerName>
+        <CharacterName>{profile.CharacterName}</CharacterName>
+        <ClassName>{profile.CharacterClassName}</ClassName>
+      </Title>
       <CharacterInfo>
-        <h2>{profile.CharacterName} ({profile.ServerName})</h2>
         {displayProfile.map(key => {
                     if (profile[key] && typeof profile[key] !== 'object') {
                         return (
@@ -108,6 +111,11 @@ const CharacterContent = styled.div`
   padding: 20px;
   align-items: flex-start;
   justify-content: flex-end;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const InfoItem = styled.div`
@@ -130,4 +138,37 @@ const InfoLabel = styled.div`
 const InfoValue = styled.span`
   flex-grow: 1;
   text-align: right;
+`;
+
+const Title = styled.div`
+  font-weight: bold;
+  color: white;
+  font-size: 1em;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  padding-top: 10px;
+`;
+
+const ServerName = styled.span`
+  margin-right: 10px;
+  background-color: ${(props) => props.theme.colors.highlight};
+  padding: 10px 15px;
+  margin-right: 10px;
+  border-radius: 4px;
+`;
+
+const CharacterName = styled.span`
+  margin-right: 10px;
+  background-color: ${(props) => props.theme.colors.highlight};
+  padding: 10px 15px;
+  margin-right: 10px;
+  border-radius: 4px;
+`;
+
+const ClassName = styled.span`
+  background-color: ${(props) => props.theme.colors.highlight};
+  padding: 10px 15px;
+  margin-right: 10px;
+  border-radius: 4px;
 `;
