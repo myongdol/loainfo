@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { equipmentColors } from '../../styles/equipmentColors';
+
 
 function CharacterEquipment({ equipments }) {
   if (!equipments || equipments.length === 0) {
@@ -10,14 +12,15 @@ function CharacterEquipment({ equipments }) {
   const leftEquipments = equipments.filter(equipment => leftEquipmentTypes.includes(equipment.Type));
   const rightEquipments = equipments.filter(equipment => !leftEquipmentTypes.includes(equipment.Type));
 
+
   return (
     <EquipmentContainer>
-      <h3>장비</h3>
+      <h3>장비 목록</h3>
       <EquipmentRow>
         <LeftEquipmentContainer>
           {leftEquipments.map((equipment, index) => (
             <EquipmentItem key={index}>
-              <EquipmentIcon src={equipment.Icon} alt={equipment.Type} />
+              <EquipmentIcon src={equipment.Icon} alt={equipment.Type} grade={equipment.Grade} />
               <EquipmentInfo>
                 <EquipmentType>{equipment.Type}</EquipmentType>
                 <EquipmentName>{equipment.Name}</EquipmentName>
@@ -29,7 +32,7 @@ function CharacterEquipment({ equipments }) {
         <RightEquipmentContainer>
           {rightEquipments.map((equipment, index) => (
             <EquipmentItem key={index}>
-              <EquipmentIcon src={equipment.Icon} alt={equipment.Type} />
+              <EquipmentIcon src={equipment.Icon} alt={equipment.Type} grade={equipment.Grade} />
               <EquipmentInfo>
                 <EquipmentType>{equipment.Type}</EquipmentType>
                 <EquipmentName>{equipment.Name}</EquipmentName>
@@ -67,6 +70,10 @@ const EquipmentIcon = styled.img`
   width: 40px;
   height: 40px;
   margin-right: 10px;
+  background-color: ${({ grade }) => equipmentColors[grade]?.background || '#FFFFFF'};
+  border: 2px solid ${({ grade }) => equipmentColors[grade]?.border || '#FFFFFF'};
+  border-radius: 5px;
+  padding: 8px;
 `;
 
 const EquipmentInfo = styled.div`
