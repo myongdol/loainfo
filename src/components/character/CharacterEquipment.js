@@ -8,9 +8,15 @@ function CharacterEquipment({ equipments }) {
   }
   console.log(equipments)
 
+  const excludedTypes = ['문장', '나침반', '부적'];
+
+  const filteredEquipments = equipments.filter(
+    (equipment) => !excludedTypes.includes(equipment.Type)
+  );
+  
   const leftEquipmentTypes = ['무기', '투구', '상의', '하의', '장갑', '어깨'];
-  const leftEquipments = equipments.filter(equipment => leftEquipmentTypes.includes(equipment.Type));
-  const rightEquipments = equipments.filter(equipment => !leftEquipmentTypes.includes(equipment.Type));
+  const leftEquipments = filteredEquipments.filter(equipment => leftEquipmentTypes.includes(equipment.Type));
+  const rightEquipments = filteredEquipments.filter(equipment => !leftEquipmentTypes.includes(equipment.Type));
 
 
   return (
