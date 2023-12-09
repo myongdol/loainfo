@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { equipmentColors } from '../../styles/equipmentColors';
+import QualityOverlay from './Details/QualityOverlay';
 
 
 function CharacterEquipment({ equipments }) {
@@ -17,35 +18,53 @@ function CharacterEquipment({ equipments }) {
   const leftEquipmentTypes = ['무기', '투구', '상의', '하의', '장갑', '어깨'];
   const leftEquipments = filteredEquipments.filter(equipment => leftEquipmentTypes.includes(equipment.Type));
   const rightEquipments = filteredEquipments.filter(equipment => !leftEquipmentTypes.includes(equipment.Type));
+  const qualityValue = equipments.Tooltip?.Element_001?.value?.qualityValue;
 
+  function extractQualityValue(equipment) {
+    try {
+      const tooltipData = JSON.parse(equipment.Tooltip);
+      return tooltipData?.Element_001?.value?.qualityValue;
+    } catch (error) {
+      console.error('Error extracting quality value', error);
+      return null;
+    }
+  }
 
   return (
     <EquipmentContainer>
       <h3>장비 목록</h3>
       <EquipmentRow>
         <LeftEquipmentContainer>
-          {leftEquipments.map((equipment, index) => (
+          {leftEquipments.map((equipment, index) => {
+            const qualityValue = extractQualityValue(equipment);
+            return (
             <EquipmentItem key={index}>
               <EquipmentIcon src={equipment.Icon} alt={equipment.Type} grade={equipment.Grade} />
+              <QualityOverlay qualityValue={qualityValue} />
               <EquipmentInfo>
                 <EquipmentType>{equipment.Type}</EquipmentType>
                 <EquipmentName>{equipment.Name}</EquipmentName>
                 <EquipmentGrade>{equipment.Grade}</EquipmentGrade>
               </EquipmentInfo>
             </EquipmentItem>
-          ))}
+            )
+          })}
         </LeftEquipmentContainer>
         <RightEquipmentContainer>
-          {rightEquipments.map((equipment, index) => (
+          {rightEquipments.map((equipment, index) => {
+            const qualityValue = extractQualityValue(equipment);
+            return (
             <EquipmentItem key={index}>
               <EquipmentIcon src={equipment.Icon} alt={equipment.Type} grade={equipment.Grade} />
+              <QualityOverlay qualityValue={qualityValue} />
               <EquipmentInfo>
                 <EquipmentType>{equipment.Type}</EquipmentType>
                 <EquipmentName>{equipment.Name}</EquipmentName>
                 <EquipmentGrade>{equipment.Grade}</EquipmentGrade>
               </EquipmentInfo>
             </EquipmentItem>
-          ))}
+            )
+          })}
         </RightEquipmentContainer>
       </EquipmentRow>
     </EquipmentContainer>
