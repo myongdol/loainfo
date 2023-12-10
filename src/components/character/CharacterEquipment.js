@@ -10,6 +10,7 @@ function CharacterEquipment({ equipments }) {
   console.log(equipments)
 
   const excludedTypes = ['문장', '나침반', '부적'];
+  const excludedQualityTypes = ['어빌리티 스톤', '팔찌'];
 
   const filteredEquipments = equipments.filter(
     (equipment) => !excludedTypes.includes(equipment.Type)
@@ -54,11 +55,12 @@ function CharacterEquipment({ equipments }) {
         <RightEquipmentContainer>
           {rightEquipments.map((equipment, index) => {
             const qualityValue = extractQualityValue(equipment);
+            const isExcludedType = excludedQualityTypes.includes(equipment.Type);
             return (
             <EquipmentItem key={index}>
               <EquipmentIconWrapper>
                 <EquipmentIcon src={equipment.Icon} alt={equipment.Type} grade={equipment.Grade} />
-                <QualityOverlay qualityValue={qualityValue} />
+                {!isExcludedType && <QualityOverlay qualityValue={qualityValue} />}
               </EquipmentIconWrapper>
               <EquipmentInfo>
                 <EquipmentType>{equipment.Type}</EquipmentType>
@@ -97,8 +99,8 @@ const EquipmentItem = styled.div`
 
 const EquipmentIconWrapper = styled.div`
   position: relative;
-  width: 56px; 
-  height: 56px;
+  width: 60px; 
+  height: 60px;
   padding: 0;
   border-radius: 5px;
   overflow: hidden;
