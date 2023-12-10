@@ -18,12 +18,11 @@ function CharacterEquipment({ equipments }) {
   const leftEquipmentTypes = ['무기', '투구', '상의', '하의', '장갑', '어깨'];
   const leftEquipments = filteredEquipments.filter(equipment => leftEquipmentTypes.includes(equipment.Type));
   const rightEquipments = filteredEquipments.filter(equipment => !leftEquipmentTypes.includes(equipment.Type));
-  const qualityValue = equipments.Tooltip?.Element_001?.value?.qualityValue;
 
   function extractQualityValue(equipment) {
     try {
       const tooltipData = JSON.parse(equipment.Tooltip);
-      return tooltipData?.Element_001?.value?.qualityValue;
+      return tooltipData.Element_001.value.qualityValue;
     } catch (error) {
       console.error('Error extracting quality value', error);
       return null;
@@ -39,8 +38,10 @@ function CharacterEquipment({ equipments }) {
             const qualityValue = extractQualityValue(equipment);
             return (
             <EquipmentItem key={index}>
-              <EquipmentIcon src={equipment.Icon} alt={equipment.Type} grade={equipment.Grade} />
-              <QualityOverlay qualityValue={qualityValue} />
+              <EquipmentIconWrapper>
+                <EquipmentIcon src={equipment.Icon} alt={equipment.Type} grade={equipment.Grade} />
+                <QualityOverlay qualityValue={qualityValue} />
+              </EquipmentIconWrapper>
               <EquipmentInfo>
                 <EquipmentType>{equipment.Type}</EquipmentType>
                 <EquipmentName>{equipment.Name}</EquipmentName>
@@ -55,8 +56,10 @@ function CharacterEquipment({ equipments }) {
             const qualityValue = extractQualityValue(equipment);
             return (
             <EquipmentItem key={index}>
-              <EquipmentIcon src={equipment.Icon} alt={equipment.Type} grade={equipment.Grade} />
-              <QualityOverlay qualityValue={qualityValue} />
+              <EquipmentIconWrapper>
+                <EquipmentIcon src={equipment.Icon} alt={equipment.Type} grade={equipment.Grade} />
+                <QualityOverlay qualityValue={qualityValue} />
+              </EquipmentIconWrapper>
               <EquipmentInfo>
                 <EquipmentType>{equipment.Type}</EquipmentType>
                 <EquipmentName>{equipment.Name}</EquipmentName>
@@ -89,16 +92,26 @@ const EquipmentItem = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  position: relative;
+`;
+
+const EquipmentIconWrapper = styled.div`
+  position: relative;
+  width: 56px; 
+  height: 56px;
+  padding: 0;
+  border-radius: 5px;
+  overflow: hidden;
 `;
 
 const EquipmentIcon = styled.img`
   width: 40px;
-  height: 40px;
-  margin-right: 10px;
+  height: 42px;
   background-color: ${({ grade }) => equipmentColors[grade]?.background || '#FFFFFF'};
   border: 2px solid ${({ grade }) => equipmentColors[grade]?.border || '#FFFFFF'};
   border-radius: 5px;
-  padding: 8px;
+  padding: 10px;
+  display: block;
 `;
 
 const EquipmentInfo = styled.div`
