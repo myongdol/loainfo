@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useApi from "../util/useApi";
 import CharacterDetails from "../components/characterPageContents/CharacterDetails";
 import CharacterTabs from "../components/characterPageContents/ChracterPageTabs";
+import styled from "styled-components";
 
 
 
@@ -40,11 +41,18 @@ function CharacterPage() {
     if (!profile || !siblings) return <div>캐릭터 정보가 없습니다. 닉네임을 확인 해주세요.</div>;
     
     return (
-        <>
+        <StyledCharacterPage>
             <CharacterDetails profile={profile} />
             <CharacterTabs equipment={equipment} siblings={siblings} />
-        </>
+        </StyledCharacterPage>
     )
 };
 
 export default CharacterPage;
+
+
+
+const StyledCharacterPage = styled.div`
+  background-color: ${props => props.theme.colors.background};
+  height: 100%;
+`;
