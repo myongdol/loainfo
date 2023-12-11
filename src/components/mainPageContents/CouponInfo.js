@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { coupons } from '../data/coupons';
+import { coupons } from '../../data/coupons';
 
 const CouponInfo = () => {
 

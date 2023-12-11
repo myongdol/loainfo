@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Notices from "../components/Notice";
-import Events from "../components/Events";
+import Notices from "../components/mainPageContents/Notice";
+import Events from "../components/mainPageContents/Events";
 import useApi from "../util/useApi";
 import AbyssDungeonInfo from "../components/weeklyContents/AbyssDungeonInfo";
 import GuardianRaidsInfo from "../components/weeklyContents/GuardianRaidsInfo";
@@ -12,7 +12,7 @@ import ChaosGate from "../components/weeklyContents/calendarEvents/ChaosGate";
 import FieldBoss from "../components/weeklyContents/calendarEvents/FieldBoss";
 import Sailing from "../components/weeklyContents/calendarEvents/Sailing";
 import CalendarIsland from "../components/weeklyContents/calendarEvents/CalendarIsland";
-import CouponInfo from "../components/CouponInfo";
+import CouponInfo from "../components/mainPageContents/CouponInfo";
 
 
 

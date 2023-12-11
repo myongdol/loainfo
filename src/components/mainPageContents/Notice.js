@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Pagination from './Pagination';
+import Pagination from '../UI/Pagination'
 
 
 const Notices = ({ notices, itemsPerPage, totalItems, paginate }) => {
