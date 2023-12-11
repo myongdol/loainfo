@@ -5,7 +5,7 @@ import MainContent from "./mainCotent/MainContent";
 import Sidebar from "./mainCotent/Sidebar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import theme from "./styles/theme";
-import CharacterPage from "./components/CharacterPage";
+import CharacterPage from "./pages/CharacterPage";
 
 
 function App() {

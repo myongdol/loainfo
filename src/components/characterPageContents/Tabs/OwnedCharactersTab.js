@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 
 
-function OwnedCharacters({ siblings }) {
+function OwnedCharactersTab({ siblings }) {
 
 
     return (
@@ -22,7 +22,7 @@ function OwnedCharacters({ siblings }) {
     );
   }
   
-  export default OwnedCharacters;
+  export default OwnedCharactersTab;
 
 
 

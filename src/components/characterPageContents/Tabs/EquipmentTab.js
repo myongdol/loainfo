@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { equipmentColors } from '../../styles/equipmentColors';
-import QualityOverlay from './Details/QualityOverlay';
+import { equipmentColors } from '../../../styles/equipmentColors';
+import QualityOverlay from '../Details/QualityOverlay';
 
 
-function CharacterEquipment({ equipments }) {
+function EquipmentTab({ equipments }) {
   if (!equipments || equipments.length === 0) {
     return <div>장비 정보가 없습니다.</div>;
   }
@@ -76,7 +76,7 @@ function CharacterEquipment({ equipments }) {
   );
 }
 
-export default CharacterEquipment;
+export default EquipmentTab;
 
 
 

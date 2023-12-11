@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import OwnedCharacters from "./character/OwnedCharacters";
 import useApi from "../util/useApi";
-import CharacterDetails from "./character/CharacterDetails";
-import CharacterEquipment from "./character/CharacterEquipment";
+import CharacterDetails from "../components/characterPageContents/CharacterDetails";
+import CharacterTabs from "../components/characterPageContents/ChracterPageTabs";
 
 
 
@@ -43,8 +42,7 @@ function CharacterPage() {
     return (
         <>
             <CharacterDetails profile={profile} />
-            <CharacterEquipment equipments={equipment}/>
-            <OwnedCharacters siblings={siblings} />
+            <CharacterTabs equipment={equipment} siblings={siblings} />
         </>
     )
 };
