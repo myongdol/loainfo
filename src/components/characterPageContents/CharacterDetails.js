@@ -74,14 +74,15 @@ export default CharacterDetails;
 
 const CharacterContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-end;
   background-color: rgb(21, 24, 29);
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: center center;
+  background-position: top center;
   background-image: url(${props => props.backgroundImage});
-  height: 400px; 
+  height: 100%; 
   width: 100%;
   position: relative;
   color: white;
@@ -90,30 +91,24 @@ const CharacterContainer = styled.div`
 
 
 const CharacterInfo = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  order: 2;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   color: white;
   padding: 20px;
   align-items: flex-start;
+  margin-top: -20px;
 `;
 
 const CharacterContent = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  order: 3;
   display: flex;
   width: 100%;
   padding: 20px;
   align-items: flex-start;
-  justify-content: flex-end;
+  justify-content: space-between;
+  flex-direction: column;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -146,7 +141,6 @@ const InfoValue = styled.span`
 const TitleContainer = styled.div`
   position: absolute;
   top: 10px;
-  left: 10px; 
   text-align: left;
   flex-direction: column;
 `;

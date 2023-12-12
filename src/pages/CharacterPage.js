@@ -41,10 +41,15 @@ function CharacterPage() {
     if (!profile || !siblings) return <div>캐릭터 정보가 없습니다. 닉네임을 확인 해주세요.</div>;
     
     return (
-        <StyledCharacterPage>
+      <StyledCharacterPage>
+        <CharacterDetailsContainer>
             <CharacterDetails profile={profile} />
+        </CharacterDetailsContainer>
+
+        <CharacterTabsContainer>
             <CharacterTabs equipment={equipment} siblings={siblings} />
-        </StyledCharacterPage>
+        </CharacterTabsContainer>
+      </StyledCharacterPage>
     )
 };
 
@@ -55,4 +60,16 @@ export default CharacterPage;
 const StyledCharacterPage = styled.div`
   background-color: ${props => props.theme.colors.background};
   height: 100%;
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid blue;
+`;
+
+const CharacterDetailsContainer = styled.div`
+  flex: 1;
+  margin-right: 20px;
+`;
+
+const CharacterTabsContainer = styled.div`
+  flex: 3;
 `;
