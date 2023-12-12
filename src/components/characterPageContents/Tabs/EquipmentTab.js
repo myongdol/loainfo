@@ -3,6 +3,13 @@ import { equipmentColors } from '../../../styles/equipmentColors';
 import QualityOverlay from '../Details/QualityOverlay';
 
 
+const breakpoints = {
+  small: '480px',
+  medium: '768px',
+  large: '1024px',
+};
+
+
 function EquipmentTab({ equipments }) {
   if (!equipments || equipments.length === 0) {
     return <div>장비 정보가 없습니다.</div>;
@@ -29,6 +36,7 @@ function EquipmentTab({ equipments }) {
       return null;
     }
   }
+
 
   return (
     <EquipmentContainer>
@@ -137,8 +145,14 @@ const EquipmentGrade = styled.span`
 const EquipmentRow = styled.div`
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 25px;
   width: 100%;
+  flex-direction: row;
+
+  @media (max-width: ${breakpoints.medium}) {
+    flex-direction: column; // 중간 크기 화면에서 열 방향으로 변경
+    gap: 10px;
+  }
 `;
 
 const LeftEquipmentContainer = styled.div`
