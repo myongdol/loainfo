@@ -59,17 +59,18 @@ export default CharacterPage;
 
 const StyledCharacterPage = styled.div`
   background-color: ${props => props.theme.colors.background};
-  height: 100%;
+  min-height: 100%;
   display: flex;
-  justify-content: space-between;
-  border: 2px solid blue;
+  align-items: stretch;
 `;
 
 const CharacterDetailsContainer = styled.div`
-  flex: 1;
-  margin-right: 20px;
+  width: 400px;
+  height: 100vh;
+  margin-right: 10px;
 `;
 
 const CharacterTabsContainer = styled.div`
-  flex: 3;
+  flex: 1;
+  overflow: auto;
 `;
