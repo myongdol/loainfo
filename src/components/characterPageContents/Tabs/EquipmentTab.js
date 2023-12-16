@@ -97,7 +97,6 @@ function EquipmentTab({ equipments }) {
           })}
         </RightEquipmentContainer>
       </EquipmentRow>
-      <TooltipModal isOpen={isModalOpen} onClose={handleCloseModal}  rawTooltipData={currentTooltip} />
     </EquipmentContainer>
   );
 }
