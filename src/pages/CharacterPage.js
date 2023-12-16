@@ -73,4 +73,5 @@ const CharacterDetailsContainer = styled.div`
 const CharacterTabsContainer = styled.div`
   flex: 1;
   overflow: auto;
+  padding-right: 15px;
 `;

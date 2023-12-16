@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { equipmentColors } from '../../../styles/equipmentColors';
 import QualityOverlay from '../Details/QualityOverlay';
+import { useState } from 'react';
+import TooltipModal from '../../UI/Modals/TooltipModal';
 
 
 const breakpoints = {
@@ -11,6 +13,9 @@ const breakpoints = {
 
 
 function EquipmentTab({ equipments }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentTooltip, setCurrentTooltip] = useState(null);
+
   if (!equipments || equipments.length === 0) {
     return <div>장비 정보가 없습니다.</div>;
   }
@@ -26,6 +31,18 @@ function EquipmentTab({ equipments }) {
   const leftEquipmentTypes = ['무기', '투구', '상의', '하의', '장갑', '어깨'];
   const leftEquipments = filteredEquipments.filter(equipment => leftEquipmentTypes.includes(equipment.Type));
   const rightEquipments = filteredEquipments.filter(equipment => !leftEquipmentTypes.includes(equipment.Type));
+
+
+
+  const handleItemClick = (tooltip) => {
+    setCurrentTooltip(JSON.parse(tooltip));
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
 
   function extractQualityValue(equipment) {
     try {
@@ -46,7 +63,7 @@ function EquipmentTab({ equipments }) {
           {leftEquipments.map((equipment, index) => {
             const qualityValue = extractQualityValue(equipment);
             return (
-            <EquipmentItem key={index}>
+            <EquipmentItem key={index} onClick={() => handleItemClick(equipment.Tooltip)}>
               <EquipmentIconWrapper>
                 <EquipmentIcon src={equipment.Icon} alt={equipment.Type} grade={equipment.Grade} />
                 <QualityOverlay qualityValue={qualityValue} />
@@ -65,7 +82,7 @@ function EquipmentTab({ equipments }) {
             const qualityValue = extractQualityValue(equipment);
             const isExcludedType = excludedQualityTypes.includes(equipment.Type);
             return (
-            <EquipmentItem key={index}>
+            <EquipmentItem key={index} onClick={() => handleItemClick(equipment.Tooltip)}>
               <EquipmentIconWrapper>
                 <EquipmentIcon src={equipment.Icon} alt={equipment.Type} grade={equipment.Grade} />
                 {!isExcludedType && <QualityOverlay qualityValue={qualityValue} />}
@@ -80,6 +97,7 @@ function EquipmentTab({ equipments }) {
           })}
         </RightEquipmentContainer>
       </EquipmentRow>
+      <TooltipModal isOpen={isModalOpen} onClose={handleCloseModal}  rawTooltipData={currentTooltip} />
     </EquipmentContainer>
   );
 }
