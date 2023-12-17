@@ -96,6 +96,11 @@ function EquipmentTab({ equipments }) {
             )
           })}
         </RightEquipmentContainer>
+        <TooltipModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          rawTooltipData={currentTooltip}
+        />
       </EquipmentRow>
     </EquipmentContainer>
   );
@@ -167,7 +172,7 @@ const EquipmentRow = styled.div`
   flex-direction: row;
 
   @media (max-width: ${breakpoints.medium}) {
-    flex-direction: column; // 중간 크기 화면에서 열 방향으로 변경
+    flex-direction: column;
     gap: 10px;
   }
 `;

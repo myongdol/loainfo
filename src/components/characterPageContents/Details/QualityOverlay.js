@@ -3,8 +3,18 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-const QualityOverlay = ({ qualityValue }) => {
+const QualityOverlay = ({ qualityValue, inline }) => {
     const qualityColor = getQualityColor(qualityValue);
+
+    if (inline) {
+      return (
+        <InlineQualityBarContainer>
+          <InlineQualityBarFilled width={qualityValue} backgroundColor={qualityColor} />
+          <InlineQualityBarRemaining width={100 - qualityValue} />
+          <StyledQualityValue>{qualityValue}</StyledQualityValue>
+        </InlineQualityBarContainer>
+      );
+    }
 
   return (
     <QualityBarWrapper>
@@ -42,7 +52,7 @@ export default QualityOverlay;
 
 
 const QualityBarWrapper = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
@@ -78,4 +88,23 @@ const StyledQualityValue = styled.div`
   font-size: 1em;
   text-shadow: 0 0 3px #000;
   z-index: 1;
+`;
+
+
+const InlineQualityBarContainer = styled.div`
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  height: 100%;
+`;
+
+const InlineQualityBarFilled = styled.div`
+  background: ${props => props.backgroundColor};
+  width: ${props => props.width}%;
+  height: 100%;
+`;
+
+const InlineQualityBarRemaining = styled.div`
+  background-color: rgba(255, 255, 255, 0.3);
+  width: ${props => props.width}%;
 `;

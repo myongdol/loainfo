@@ -56,13 +56,17 @@ const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
         itemTitleDetails.push(
           <ItemContainer key={`${key}-container`}>
             {iconPath && <StyledImage src={iconPath} alt="Icon" />}
-            {qualityValue !== undefined && <QualityOverlay qualityValue={qualityValue} />}
+            {qualityValue !== undefined && (
+              <QualityOverlay qualityValue={qualityValue} inline={true} />
+            )}
           </ItemContainer>
         );
       }
 
       return <div key={index}>{itemTitleDetails}</div>;
     }
+
+
     switch (element.type) {
       case "SingleTextBox":
       case "MultiTextBox":
@@ -215,4 +219,8 @@ const ItemContainer = styled.div`
 const StyledImage = styled.img`
   width: 80px;
   height: auto;
+`;
+
+const StyledQualityOverlay = styled(QualityOverlay)`
+  display: inline-block; 
 `;
