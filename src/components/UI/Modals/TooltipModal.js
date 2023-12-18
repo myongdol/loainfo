@@ -3,6 +3,8 @@ import styled, { keyframes } from 'styled-components';
 import sanitizeHtml from 'sanitize-html';
 import QualityOverlay from '../../characterPageContents/Details/QualityOverlay';
 
+
+
 const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
   const [parsedData, setParsedData] = useState([]);
 
@@ -39,7 +41,7 @@ const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
           const doc = parser.parseFromString(element.value[detailKey], 'text/html');
           const textContent = doc.body.textContent || "";
           itemTitleDetails.push(
-            <StyledText key={`${key}-${detailKey}`}>{textContent}</StyledText>
+            <StyledQualityOverlay key={`${key}-${detailKey}`}>{textContent}</StyledQualityOverlay>
           );
         }
 
@@ -224,3 +226,4 @@ const StyledImage = styled.img`
 const StyledQualityOverlay = styled(QualityOverlay)`
   display: inline-block; 
 `;
+

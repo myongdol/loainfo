@@ -2,32 +2,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
-const QualityOverlay = ({ qualityValue, inline }) => {
-    const qualityColor = getQualityColor(qualityValue);
-
-    if (inline) {
-      return (
-        <InlineQualityBarContainer>
-          <InlineQualityBarFilled width={qualityValue} backgroundColor={qualityColor} />
-          <InlineQualityBarRemaining width={100 - qualityValue} />
-          <StyledQualityValue>{qualityValue}</StyledQualityValue>
-        </InlineQualityBarContainer>
-      );
-    }
-
-  return (
-    <QualityBarWrapper>
-      <QualityBarContainer>
-        <QualityBarFilled width={qualityValue} backgroundColor={qualityColor} />
-        <QualityBarRemaining width={100 - qualityValue} />
-        <StyledQualityValue>{qualityValue}</StyledQualityValue>
-      </QualityBarContainer>
-    </QualityBarWrapper>
-  );
-};
-
-
 function getQualityColor(qualityValue) {
   if (qualityValue >= 100) {
     return 'linear-gradient(to right, #E68F34, #FF9231, #FFC739)';
@@ -46,6 +20,29 @@ function getQualityColor(qualityValue) {
   };
   return 'linear-gradient(to right, #FF521B, #FF6518)';
 }
+
+
+
+const QualityOverlay = ({ qualityValue, inline }) => {
+    const qualityColor = getQualityColor(qualityValue);
+
+
+    return inline ? (
+      <InlineQualityBarContainer>
+        <QualityBarFilled width={qualityValue} backgroundColor={qualityColor} />
+        <QualityBarRemaining width={100 - qualityValue} />
+        <StyledQualityValue>{qualityValue}</StyledQualityValue>
+      </InlineQualityBarContainer>
+    ) : (
+      <QualityBarWrapper>
+        <QualityBarContainer>
+          <QualityBarFilled width={qualityValue} backgroundColor={qualityColor} />
+          <QualityBarRemaining width={100 - qualityValue} />
+          <StyledQualityValue>{qualityValue}</StyledQualityValue>
+        </QualityBarContainer>
+      </QualityBarWrapper>
+    );
+  };
 
 export default QualityOverlay;
 
@@ -95,16 +92,6 @@ const InlineQualityBarContainer = styled.div`
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
+  position: relative;
   height: 100%;
-`;
-
-const InlineQualityBarFilled = styled.div`
-  background: ${props => props.backgroundColor};
-  width: ${props => props.width}%;
-  height: 100%;
-`;
-
-const InlineQualityBarRemaining = styled.div`
-  background-color: rgba(255, 255, 255, 0.3);
-  width: ${props => props.width}%;
 `;
