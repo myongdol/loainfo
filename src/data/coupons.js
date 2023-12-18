@@ -1,8 +1,8 @@
 export const coupons = [
     {
-      title: "ECLIPSE 업데이트 기념 선물",
-      code: "2023이클립스",
-      validUntil: "2023.12.13(수)점검 전 까지",
+      title: "2023 로스트아크 WINTER SHOWCASE",
+      code: "23윈터쇼케이스감사선물",
+      validUntil: "2024.03.27(수)점검 전 까지",
     },
     {
         title: "카멘 The FIRST 이벤트 승리",
