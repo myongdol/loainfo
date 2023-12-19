@@ -23,26 +23,20 @@ function getQualityColor(qualityValue) {
 
 
 
-const QualityOverlay = ({ qualityValue, inline }) => {
+const QualityOverlay = ({ qualityValue }) => {
     const qualityColor = getQualityColor(qualityValue);
 
-
-    return inline ? (
-      <InlineQualityBarContainer>
+  return (
+    <QualityBarWrapper>
+      <QualityBarContainer>
         <QualityBarFilled width={qualityValue} backgroundColor={qualityColor} />
         <QualityBarRemaining width={100 - qualityValue} />
         <StyledQualityValue>{qualityValue}</StyledQualityValue>
-      </InlineQualityBarContainer>
-    ) : (
-      <QualityBarWrapper>
-        <QualityBarContainer>
-          <QualityBarFilled width={qualityValue} backgroundColor={qualityColor} />
-          <QualityBarRemaining width={100 - qualityValue} />
-          <StyledQualityValue>{qualityValue}</StyledQualityValue>
-        </QualityBarContainer>
-      </QualityBarWrapper>
-    );
-  };
+      </QualityBarContainer>
+    </QualityBarWrapper>
+  );
+};
+
 
 export default QualityOverlay;
 
@@ -85,13 +79,4 @@ const StyledQualityValue = styled.div`
   font-size: 1em;
   text-shadow: 0 0 3px #000;
   z-index: 1;
-`;
-
-
-const InlineQualityBarContainer = styled.div`
-  display: inline-flex;
-  align-items: center;
-  vertical-align: middle;
-  position: relative;
-  height: 100%;
 `;

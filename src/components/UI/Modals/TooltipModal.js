@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import sanitizeHtml from 'sanitize-html';
-import QualityOverlay from '../../characterPageContents/Details/QualityOverlay';
 
 
 
@@ -18,6 +17,40 @@ const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
       }
     }
   }, [isOpen, rawTooltipData]);
+
+  function getQualityColor(qualityValue) {
+    if (qualityValue >= 100) {
+      return 'linear-gradient(to right, #E68F34, #FF9231, #FFC739)';
+    }
+    if (qualityValue >= 90) {
+      return 'linear-gradient(to right, #7A1890, #9B0CD4, #B50CFF)';
+    }
+    if (qualityValue >= 70) {
+      return 'linear-gradient(to right, #0A5EA4, #10A6EF, #10C7FF)';
+    }
+    if (qualityValue >= 30) {
+      return 'linear-gradient(to right, #397108, #B2FC10, #CFFF10)'
+    }
+    if (qualityValue >= 10) {
+      return 'linear-gradient(to right, #FAE410, #FFEE0C, #FFF90D)'
+    };
+    return 'linear-gradient(to right, #FF521B, #FF6518)';
+  }
+  
+  const renderQualityBar = (qualityValue) => {
+    const qualityColor = getQualityColor(qualityValue);
+    return (
+      <QualityBarWrapper>
+        <QualityBarContainer>
+          <QualityBarFilled width={qualityValue} backgroundColor={qualityColor} />
+          <QualityBarRemaining width={qualityValue} />
+          <QualityValue>{qualityValue}</QualityValue>
+        </QualityBarContainer>
+      </QualityBarWrapper>
+    );
+  };
+
+
 
   const renderContent = ([key, element], index) => {
     console.log(element)
@@ -36,15 +69,6 @@ const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
       let iconPath;
 
       for (const detailKey in element.value) {
-        if (detailKey.startsWith("leftStr") || detailKey === "rightStr0") {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(element.value[detailKey], 'text/html');
-          const textContent = doc.body.textContent || "";
-          itemTitleDetails.push(
-            <StyledQualityOverlay key={`${key}-${detailKey}`}>{textContent}</StyledQualityOverlay>
-          );
-        }
-
         if (detailKey === "qualityValue") {
           qualityValue = element.value[detailKey];
         }
@@ -54,13 +78,11 @@ const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
         iconPath = element.value.slotData.iconPath;
       }
 
-      if (iconPath || qualityValue !== undefined) {
+      if (qualityValue !== undefined) {
         itemTitleDetails.push(
           <ItemContainer key={`${key}-container`}>
             {iconPath && <StyledImage src={iconPath} alt="Icon" />}
-            {qualityValue !== undefined && (
-              <QualityOverlay qualityValue={qualityValue} inline={true} />
-            )}
+            {renderQualityBar(qualityValue)}
           </ItemContainer>
         );
       }
@@ -147,7 +169,7 @@ const ModalContainer = styled.div`
   width: 50vw;
   max-width: 500px;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.background};
   padding: 1rem;
   border-radius: 0.3rem;
   display: flex;
@@ -160,6 +182,7 @@ const ModalContainer = styled.div`
 `;
 
 const CloseButton = styled.button`
+  color: white;
   margin-left: auto;
   background: none;
   border: none;
@@ -173,7 +196,7 @@ const ModalHeader = styled.div`
   justify-content: space-between;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid #e5e5e5;
-  color: ${(props) => props.theme.colors.dark};
+  color: ${(props) => props.theme.colors.text};
 `;
 
 const ModalTitle = styled.h4`
@@ -183,15 +206,15 @@ const ModalTitle = styled.h4`
 const ModalBody = styled.div`
   max-height: 60vh;
   overflow: auto;
-  color: black;
   font-family: monospace;
   white-space: pre-wrap;
   word-break: break-all;
+  color: ${(props) => props.theme.colors.text};
 `;
 
 const TooltipItem = styled.div`
   margin-bottom: 10px;
-  color: #333;
+  color: ${(props) => props.theme.colors.text};
   font-size: 14px;
   strong {
     font-weight: bold;
@@ -223,7 +246,44 @@ const StyledImage = styled.img`
   height: auto;
 `;
 
-const StyledQualityOverlay = styled(QualityOverlay)`
-  display: inline-block; 
+const QualityBarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  width: 100%;
+  height: 16px;
+  position: relative;
+  background-color: #FFFFFF;
+  border-radius: 0 0 5px 5px;
 `;
 
+const QualityBarWrapper = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
+
+
+const QualityBarFilled = styled.div`
+  background: ${props => props.backgroundColor};
+  width: ${props => props.width}%;
+  height: 100%;
+  transition: width 0.5s ease-in-out;
+`;
+
+const QualityBarRemaining = styled.div`
+  width: ${props => 100 - props.width}%;
+  height: 100%;
+`;
+
+const QualityValue = styled.span`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 1em;
+  text-shadow: 0 0 3px #000;
+  z-index: 1;
+`;
