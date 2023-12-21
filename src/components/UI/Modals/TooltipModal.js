@@ -6,7 +6,6 @@ import sanitizeHtml from 'sanitize-html';
 
 const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
   const [parsedData, setParsedData] = useState([]);
-
   useEffect(() => {
     if (isOpen && rawTooltipData) {
       try {
@@ -51,63 +50,81 @@ const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
   };
 
 
-
+   
   const renderContent = ([key, element], index) => {
-    console.log(element)
-    if (key === 'Element_000' && element.type === 'NameTagBox') {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(element.value, 'text/html');
-      const textContent = doc.body.textContent || "";
+    console.log(key, element); 
 
-      return <StyledText key={index}>{textContent}</StyledText>;
+
+    if (key === 'firstMsg') {
+      const effectName = extractText(element);
+      console.log('Effect Name:', effectName);
+      return <StyledMessage key={index}>{effectName}</StyledMessage>;
     }
+  
 
-
-    if (element.type === "ItemTitle") {
-      const itemTitleDetails = [];
-      let qualityValue;
-      let iconPath;
-
-      for (const detailKey in element.value) {
-        if (detailKey === "qualityValue") {
-          qualityValue = element.value[detailKey];
+    if (key === 'itemData') {
+      return Object.entries(element).map(([itemKey, itemValue]) => {
+        const levelText = extractLevel(itemValue.label);
+        console.log('Level Text:', levelText);
+        if (levelText) {
+          return <ItemLabel key={itemKey}>{levelText}</ItemLabel>;
         }
-      }
-
-      if (element.value.slotData && element.value.slotData.iconPath) {
-        iconPath = element.value.slotData.iconPath;
-      }
-
-      if (qualityValue !== undefined) {
-        itemTitleDetails.push(
-          <ItemContainer key={`${key}-container`}>
-            {iconPath && <StyledImage src={iconPath} alt="Icon" />}
-            {renderQualityBar(qualityValue)}
-          </ItemContainer>
-        );
-      }
-
-      return <div key={index}>{itemTitleDetails}</div>;
+        return null;
+      }).filter(item => item !== null);
     }
 
 
-    switch (element.type) {
-      case "SingleTextBox":
-      case "MultiTextBox":
-      case "ItemPartBox":
-      case "Progress":
-        return (
-          <TooltipItem key={index} dangerouslySetInnerHTML={{ __html: sanitizeHtml(element.value) }} />
-        );
-      default:
-        return (
-          <TooltipItem key={index}>
-            {JSON.stringify(element.value, null, 2)}
-          </TooltipItem>
-        );
-    }
-  };
+  if (key === 'Element_000' && element.type === 'NameTagBox') {
+    return <StyledText key={index}>{extractText(element.value)}</StyledText>;
+  }
 
+  if (element.type === "ItemTitle") {
+    const itemTitleDetails = [];
+    let qualityValue;
+    let iconPath;
+
+    for (const detailKey in element.value) {
+      if (detailKey === "qualityValue") {
+        qualityValue = element.value[detailKey];
+      }
+    }
+
+    if (element.value.slotData && element.value.slotData.iconPath) {
+      iconPath = element.value.slotData.iconPath;
+    }
+
+    if (qualityValue !== undefined) {
+      itemTitleDetails.push(renderQualityBar(qualityValue));
+    }
+
+    if (iconPath) {
+      itemTitleDetails.unshift(<StyledImage key={`${key}-icon`} src={iconPath} alt="Icon" />);
+    }
+
+    return <ItemContainer key={index}>{itemTitleDetails}</ItemContainer>;
+  }
+
+  if (['Element_002', 'Element_003', 'Element_004', 'Element_005', 'Element_006', 'Element_007', 'Element_008'].includes(key)) {
+    if (element.type === 'SingleTextBox' || element.type === 'ItemPartBox' || element.type === 'Progress') {
+      return (
+        <TooltipItem key={index} dangerouslySetInnerHTML={{ __html: sanitizeHtml(element.value) }} />
+      );
+    }
+  }
+
+  return null;
+};
+
+const extractText = (htmlString) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, 'text/html');
+  return doc.body.textContent || '';
+};
+
+const extractLevel = (htmlString) => {
+  const levelMatch = htmlString.match(/Lv\.\d+/);
+  return levelMatch ? levelMatch[0] : '';
+};
 
   if (!isOpen) return null;
 
@@ -286,4 +303,20 @@ const QualityValue = styled.span`
   font-size: 1em;
   text-shadow: 0 0 3px #000;
   z-index: 1;
+`;
+
+
+const StyledMessage = styled.div`
+  color: #fff;
+  font-size: 20px;
+  border: 2px solid red;
+  margin: 10px;
+`;
+
+const ItemLabel = styled.div`
+  color: #fff;
+  font-size: 20px;
+  border: 2px solid green;
+  text-align: center;
+  padding: 5px;
 `;
