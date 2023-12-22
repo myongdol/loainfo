@@ -104,13 +104,49 @@ const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
     return <ItemContainer key={index}>{itemTitleDetails}</ItemContainer>;
   }
 
-  if (['Element_002', 'Element_003', 'Element_004', 'Element_005', 'Element_006', 'Element_007', 'Element_008'].includes(key)) {
-    if (element.type === 'SingleTextBox' || element.type === 'ItemPartBox' || element.type === 'Progress') {
-      return (
-        <TooltipItem key={index} dangerouslySetInnerHTML={{ __html: sanitizeHtml(element.value) }} />
-      );
+  
+
+  if (key >= 'Element_002' && key <= 'Element_008') {
+    switch (element.type) {
+      case 'SingleTextBox':
+        return (
+          <TooltipItem key={index} dangerouslySetInnerHTML={{ __html: sanitizeHtml(element.value) }} />
+        );
+      case 'ItemPartBox':
+        return (
+          <ItemPartBox key={index}>
+            {Object.entries(element.value).map(([subKey, subValue]) => (
+              <div key={subKey} dangerouslySetInnerHTML={{ __html: sanitizeHtml(subValue) }} />
+            ))}
+          </ItemPartBox>
+        );
+      case 'Progress':
+        return (
+          <ProgressBox key={index}>
+            <div>{element.value.title}</div>
+          </ProgressBox>
+        );
+      default:
+        return null;
     }
+  };
+
+  if (key === 'Element_007' && element.type === 'Progress') {
+    return (
+      <ProgressBox key={index}>
+        <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(element.value.title) }} />
+        <ProgressBar
+          max={element.value.maximum}
+          value={element.value.value}
+          min={element.value.minimum}
+        />
+        <div>현재 값: {element.value.value}</div> 
+        <div>최대 값: {element.value.maximum}</div>
+      </ProgressBox>
+    );
   }
+
+
 
   return null;
 };
@@ -319,4 +355,32 @@ const ItemLabel = styled.div`
   border: 2px solid green;
   text-align: center;
   padding: 5px;
+`;
+
+const ItemPartBox = styled.div`
+
+`;
+
+const ProgressBox = styled.div`
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  color: black;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+`;
+
+const ProgressBar = styled.progress`
+  width: 100%;
+  height: 20px;
+  color: #4caf50;
+  &::-webkit-progress-bar {
+    background-color: #eee;
+  }
+  &::-webkit-progress-value {
+    background-color: #4caf50;
+  }
+  &::-moz-progress-bar {
+    background-color: #4caf50;
+  }
 `;
