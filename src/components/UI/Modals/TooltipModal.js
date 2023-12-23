@@ -53,7 +53,9 @@ const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
    
   const renderContent = ([key, element], index) => {
     console.log(key, element); 
-
+    if (key === 'Element_007') {
+      return null;
+    }
 
     if (key === 'firstMsg') {
       const effectName = extractText(element);
@@ -131,25 +133,9 @@ const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
     }
   };
 
-  if (key === 'Element_007' && element.type === 'Progress') {
-    return (
-      <ProgressBox key={index}>
-        <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(element.value.title) }} />
-        <ProgressBar
-          max={element.value.maximum}
-          value={element.value.value}
-          min={element.value.minimum}
-        />
-        <div>현재 값: {element.value.value}</div> 
-        <div>최대 값: {element.value.maximum}</div>
-      </ProgressBox>
-    );
-  }
-
-
-
   return null;
 };
+
 
 const extractText = (htmlString) => {
   const parser = new DOMParser();
@@ -219,7 +205,7 @@ const ModalContainer = styled.div`
   top: 50%;
   left: 50%;
   z-index: 1050;
-  width: 50vw;
+  width: 70vw;
   max-width: 500px;
   transform: translate(-50%, -50%);
   background-color: ${(props) => props.theme.colors.background};
@@ -259,6 +245,7 @@ const ModalTitle = styled.h4`
 const ModalBody = styled.div`
   max-height: 60vh;
   overflow: auto;
+  overflow-x: hidden;
   font-family: monospace;
   white-space: pre-wrap;
   word-break: break-all;
@@ -345,7 +332,6 @@ const QualityValue = styled.span`
 const StyledMessage = styled.div`
   color: #fff;
   font-size: 20px;
-  border: 2px solid red;
   margin: 10px;
 `;
 
@@ -368,19 +354,4 @@ const ProgressBox = styled.div`
   color: black;
   border-radius: 5px;
   background-color: #f8f8f8;
-`;
-
-const ProgressBar = styled.progress`
-  width: 100%;
-  height: 20px;
-  color: #4caf50;
-  &::-webkit-progress-bar {
-    background-color: #eee;
-  }
-  &::-webkit-progress-value {
-    background-color: #4caf50;
-  }
-  &::-moz-progress-bar {
-    background-color: #4caf50;
-  }
 `;
