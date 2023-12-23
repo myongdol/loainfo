@@ -83,10 +83,12 @@ const CharacterContainer = styled.div`
   background-position: top center;
   background-image: url(${props => props.backgroundImage});
   height: 100%; 
+  min-height: 1100px;
   width: 100%;
   position: relative;
   color: white;
   overflow: hidden;
+  padding-top: 150px;
 `;
 
 
@@ -98,7 +100,11 @@ const CharacterInfo = styled.div`
   color: white;
   padding: 20px;
   align-items: flex-start;
-  margin-top: -20px;
+  margin-top: 80px;
+  position: absolute;
+  top: 350px;
+  left: 0;
+  right: 0;
 `;
 
 const CharacterContent = styled.div`
@@ -109,6 +115,11 @@ const CharacterContent = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   flex-direction: column;
+  position: absolute;
+  top: 700px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
   @media (max-width: 768px) {
     flex-direction: column;
