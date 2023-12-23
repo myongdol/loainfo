@@ -52,14 +52,12 @@ const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
 
    
   const renderContent = ([key, element], index) => {
-    console.log(key, element); 
     if (key === 'Element_007') {
       return null;
     }
 
     if (key === 'firstMsg') {
       const effectName = extractText(element);
-      console.log('Effect Name:', effectName);
       return <StyledMessage key={index}>{effectName}</StyledMessage>;
     }
   
@@ -67,7 +65,6 @@ const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
     if (key === 'itemData') {
       return Object.entries(element).map(([itemKey, itemValue]) => {
         const levelText = extractLevel(itemValue.label);
-        console.log('Level Text:', levelText);
         if (levelText) {
           return <ItemLabel key={itemKey}>{levelText}</ItemLabel>;
         }
@@ -84,6 +81,11 @@ const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
     const itemTitleDetails = [];
     let qualityValue;
     let iconPath;
+    let isExcludedType = false;
+
+    if (element.value.leftStr0.includes('어빌리티 스톤') || element.value.leftStr0.includes('팔찌')) {
+      isExcludedType = true;
+    }
 
     for (const detailKey in element.value) {
       if (detailKey === "qualityValue") {
@@ -95,7 +97,7 @@ const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
       iconPath = element.value.slotData.iconPath;
     }
 
-    if (qualityValue !== undefined) {
+    if (qualityValue !== undefined && !isExcludedType) {
       itemTitleDetails.push(renderQualityBar(qualityValue));
     }
 
@@ -118,7 +120,7 @@ const TooltipModal = ({ isOpen, onClose, rawTooltipData }) => {
         return (
           <ItemPartBox key={index}>
             {Object.entries(element.value).map(([subKey, subValue]) => (
-              <div key={subKey} dangerouslySetInnerHTML={{ __html: sanitizeHtml(subValue) }} />
+              <ItemPartBoxText key={subKey} dangerouslySetInnerHTML={{ __html: sanitizeHtml(subValue) }} />
             ))}
           </ItemPartBox>
         );
@@ -273,6 +275,7 @@ const StyledText = styled.p`
   text-align: center;
   color: #E3C7A1;
   margin: 0;
+  font-size: large;
 `;
 
 const ItemContainer = styled.div`
@@ -338,13 +341,16 @@ const StyledMessage = styled.div`
 const ItemLabel = styled.div`
   color: #fff;
   font-size: 20px;
-  border: 2px solid green;
   text-align: center;
   padding: 5px;
 `;
 
 const ItemPartBox = styled.div`
+  padding-top: 10px;
+`;
 
+const ItemPartBoxText = styled.div`
+  font-size: 12px;
 `;
 
 const ProgressBox = styled.div`
