@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import SidebarItems from "../components/SideBar/SidebarItems";
 import { useEffect, useState } from "react";
+import { StyledButton } from "../components/UI/StyeldButton";
 
 
 function Sidebar() {
@@ -18,9 +19,9 @@ function Sidebar() {
 
     return (
         <StyledSidebar isExpanded={isExpanded}>
-          <ToggleSidebarButton onClick={toggleSidebar}>
-            {isExpanded ? '접기' : '펼치기'}
-          </ToggleSidebarButton>
+           <StyledToggleButton onClick={toggleSidebar}>
+            {isExpanded ? '▲' : '▼'}
+          </StyledToggleButton>
           <SidebarContent isExpanded={isExpanded}>
             <SidebarItems
               href="https://lostark.game.onstove.com/Main"
@@ -170,4 +171,13 @@ const ToggleSidebarButton = styled.button`
   cursor: pointer;
   padding: 5px 10px;
   margin-bottom: 10px;
+`;
+
+const StyledToggleButton = styled(StyledButton)`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em;
+  font-size: 1em;
 `;
