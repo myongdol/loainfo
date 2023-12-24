@@ -1,10 +1,27 @@
 import styled from "styled-components";
 import SidebarItems from "../components/SideBar/SidebarItems";
+import { useEffect, useState } from "react";
 
 
 function Sidebar() {
+  const [isExpanded, setIsExpanded] = useState(
+    JSON.parse(localStorage.getItem('sidebarExpanded')) || false);
+
+  useEffect(() => {
+    localStorage.setItem('sidebarExpanded', JSON.stringify(isExpanded));
+  }, [isExpanded]);
+
+  const toggleSidebar = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+
     return (
-        <StyledSidebar>
+        <StyledSidebar isExpanded={isExpanded}>
+          <ToggleSidebarButton onClick={toggleSidebar}>
+            {isExpanded ? '접기' : '펼치기'}
+          </ToggleSidebarButton>
+          <SidebarContent isExpanded={isExpanded}>
             <SidebarItems
               href="https://lostark.game.onstove.com/Main"
               src="/Images/lostark.png"
@@ -116,6 +133,7 @@ function Sidebar() {
             >
               로아차트
             </SidebarItems>
+          </SidebarContent>
         </StyledSidebar>
     )
 };
@@ -123,19 +141,33 @@ function Sidebar() {
 export default Sidebar;
 
 const StyledSidebar = styled.aside`
-width: 180px; 
-background-color: #e4e4e4;
-padding: 0.25rem;
-box-sizing: border-box;
-background-color: ${(props) => props.theme.colors.dark};
-
+  width: ${(props) => props.isExpanded ? '180px' : '50px'};
+  background-color: #e4e4e4;
+  padding: 0.25rem;
+  box-sizing: border-box;
+  background-color: ${(props) => props.theme.colors.dark};
+  transition: width 0.5s;
+  overflow: hidden;
 
 @media (max-width: 768px) {
-    width: 100%; 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; 
-    justify-content: center; 
-    align-items: center;
+  width: 100%; 
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; 
+  justify-content: center; 
+  align-items: center;
 }
+`;
+const SidebarContent = styled.div`
+  max-height: ${(props) => props.isExpanded ? '1000px' : '0'};
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+`;
+
+const ToggleSidebarButton = styled.button`
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-bottom: 10px;
 `;
