@@ -120,11 +120,6 @@ const CharacterContent = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-  }
 `;
 
 const InfoItem = styled.div`

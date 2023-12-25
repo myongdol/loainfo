@@ -165,14 +165,6 @@ const SidebarContent = styled.div`
   transition: max-height 0.5s ease-in-out;
 `;
 
-const ToggleSidebarButton = styled.button`
-  background: #ddd;
-  border: none;
-  cursor: pointer;
-  padding: 5px 10px;
-  margin-bottom: 10px;
-`;
-
 const StyledToggleButton = styled(StyledButton)`
   width: 100%;
   display: flex;

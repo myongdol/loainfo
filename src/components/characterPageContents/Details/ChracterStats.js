@@ -22,11 +22,9 @@ export default CharacterStats;
 
 const StatsContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: flex-start;
-  margin-right: 20px;
-  min-width: 150px;
-  max-width: 200px;
+  width: 100%;
 `;
 
 const StatType = styled.div`
@@ -37,15 +35,22 @@ const StatType = styled.div`
   padding: 5px 10px;
   margin: 2px 10px 2px 0;
   transition: background-color 0.3s;
+  width: 120px;
 `;
 
 const StatItem = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 5px;
+  width: calc(50% - 10px);
+
+  &:nth-child(2n) {
+    margin-right: 0;
+  }
 `;
 
 const StatValue = styled.span`
-  flex-grow: 1;
   text-align: right;
+  white-space: nowrap;
 `;
