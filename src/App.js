@@ -52,6 +52,7 @@ const ContentContainer = styled.div`
 
 const MainSection = styled.div`
   flex: 1;
+  background-repeat: repeat;
 `;
 
 const GlobalStyle = createGlobalStyle`

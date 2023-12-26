@@ -25,6 +25,8 @@ const StatsContainer = styled.div`
   flex-wrap: wrap;
   align-items: flex-start;
   width: 100%;
+  border-top: 2px solid ${props => props.theme.colors.container};
+  border-bottom: 2px solid ${props => props.theme.colors.container};
 `;
 
 const StatType = styled.div`
@@ -35,7 +37,7 @@ const StatType = styled.div`
   padding: 5px 10px;
   margin: 2px 10px 2px 0;
   transition: background-color 0.3s;
-  width: 120px;
+  width: 90px;
 `;
 
 const StatItem = styled.div`
@@ -53,4 +55,5 @@ const StatItem = styled.div`
 const StatValue = styled.span`
   text-align: right;
   white-space: nowrap;
+  padding-right: 5px;
 `;

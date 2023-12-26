@@ -32,6 +32,7 @@ const TendenciesContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   min-width: 200px;
+  margin: 0;
 `;
     
 const TendencyBarContainer = styled.div`
