@@ -160,7 +160,7 @@ const StyledSidebar = styled.aside`
 }
 `;
 const SidebarContent = styled.div`
-  max-height: ${(props) => props.isExpanded ? '1000px' : '0'};
+  max-height: ${(props) => props.isExpanded ? 'auto' : '0'};
   overflow: hidden;
   transition: max-height 0.5s ease-in-out;
 `;
