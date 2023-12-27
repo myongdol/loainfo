@@ -1,8 +1,12 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 
 
 function OwnedCharactersTab({ siblings }) {
+  useEffect(() => {
+    console.log(siblings);
+  }, [siblings]);
 
   const groupByServer = (characters) => {
     return characters.reduce((groups, character) => {
@@ -43,7 +47,7 @@ export default OwnedCharactersTab;
 
 const Container = styled.div`
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: ${props => props.theme.colors.background};
   border-radius: 8px;
   margin: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -59,6 +63,7 @@ const ListItem = styled.li`
   background-color: white;
   border-radius: 4px;
   margin-bottom: 10px;
+  border: 1px solid ${props => props.theme.colors.softBlueGrey};
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 
   &:last-child {
@@ -68,20 +73,26 @@ const ListItem = styled.li`
 
 const CharacterName = styled.span`
   font-weight: bold;
-  color: #333;
+  color: ${props => props.theme.colors.highlight};
+  margin-right: 10px;
 `;
 
 const CharacterInfo = styled.span`
   font-weight: normal;
-  color: #666;
+  color: ${props => props.theme.colors.dark};
+  margin-left: 5px;
 `;
 
 const ServerSection = styled.section`
+  background-color: ${props => props.theme.colors.container};
+  border-radius: 8px;
   margin-bottom: 20px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const ServerName = styled.h3`
   font-size: 1.2em;
-  color: #333;
+  color: ${props => props.theme.colors.highlight};
   margin-bottom: 10px;
 `;
