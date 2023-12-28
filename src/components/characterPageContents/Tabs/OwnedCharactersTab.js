@@ -19,6 +19,14 @@ function OwnedCharactersTab({ siblings }) {
 
   const charactersByServer = groupByServer(siblings);
 
+  Object.values(charactersByServer).forEach(characters => {
+    characters.sort((a, b) => {
+      const itemLevelA = parseInt(a.ItemMaxLevel.replace(/,/g, ''), 10);
+      const itemLevelB = parseInt(b.ItemMaxLevel.replace(/,/g, ''), 10);
+      return itemLevelB - itemLevelA;
+    });
+  });
+
 
   return (
     <Container>
@@ -28,10 +36,12 @@ function OwnedCharactersTab({ siblings }) {
           <List>
             {characters.map((character, index) => (
               <ListItem key={index}>
-                <CharacterName>{character.CharacterName}</CharacterName> - 
-                <CharacterInfo>레벨: {character.CharacterLevel}</CharacterInfo> - 
-                <CharacterInfo>아이템 레벨: {character.ItemMaxLevel}</CharacterInfo> - 
-                <CharacterInfo>클래스: {character.CharacterClassName}</CharacterInfo>
+                <CharacterName>{character.CharacterName}</CharacterName>
+                <InfoContainer>
+                  <CharacterInfo>전투레벨: {character.CharacterLevel}</CharacterInfo>
+                  <CharacterInfo>아이템 레벨: {character.ItemMaxLevel}</CharacterInfo>
+                  <CharacterInfo>{character.CharacterClassName}</CharacterInfo>
+                </InfoContainer>
               </ListItem>
             ))}
           </List>
@@ -65,10 +75,22 @@ const ListItem = styled.li`
   margin-bottom: 10px;
   border: 1px solid ${props => props.theme.colors.softBlueGrey};
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
   &:last-child {
     margin-bottom: 0;
   }
+`;
+
+const InfoContainer = styled.div`
+  border: 1px solid ${props => props.theme.colors.softBlueGrey};
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const CharacterName = styled.span`
