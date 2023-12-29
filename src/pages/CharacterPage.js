@@ -63,6 +63,8 @@ const StyledCharacterPage = styled.div`
   align-items: stretch;
   min-height: 100vh;
   background-size: cover;
+  background-repeat: repeat;
+  height: 1500px;
 `;
 
 const CharacterDetailsContainer = styled.div`

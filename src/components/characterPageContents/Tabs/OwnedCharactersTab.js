@@ -61,17 +61,24 @@ const Container = styled.div`
   border-radius: 8px;
   margin: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  min-width: 800px;
 `;
 
 const List = styled.ul`
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 `;
 
 const ListItem = styled.li`
+  width: 300px;
+  min-height: 120px;
   padding: 10px;
   background-color: white;
   border-radius: 4px;
+  margin-right: 20px;
   margin-bottom: 10px;
   border: 1px solid ${props => props.theme.colors.softBlueGrey};
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -79,8 +86,19 @@ const ListItem = styled.li`
   flex-direction: column;
   align-items: flex-start;
 
-  &:last-child {
-    margin-bottom: 0;
+  @media (max-width: 600px) {
+    width: calc(50% - 10px);
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: 400px) {
+    width: 100%;
+    margin-right: 0;
   }
 `;
 
