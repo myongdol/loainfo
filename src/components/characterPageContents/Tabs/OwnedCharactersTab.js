@@ -36,9 +36,8 @@ function OwnedCharactersTab({ siblings }) {
           <List>
             {characters.map((character, index) => (
               <ListItem key={index}>
-                <CharacterName>{character.CharacterName}</CharacterName>
+                <CharacterName><Level>Lv{character.CharacterLevel}</Level> {character.CharacterName}</CharacterName>
                 <InfoContainer>
-                  <CharacterInfo>전투레벨: {character.CharacterLevel}</CharacterInfo>
                   <CharacterInfo>아이템 레벨: {character.ItemMaxLevel}</CharacterInfo>
                   <CharacterInfo>{character.CharacterClassName}</CharacterInfo>
                 </InfoContainer>
@@ -135,4 +134,9 @@ const ServerName = styled.h3`
   font-size: 1.2em;
   color: ${props => props.theme.colors.highlight};
   margin-bottom: 10px;
+`;
+
+const Level = styled.span`
+  color: ${props => props.theme.colors.orange};
+  font-weight: bold;
 `;
