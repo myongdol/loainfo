@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
+import ClassIcon from '../../UI/ClassIcons';
 
 
 
@@ -37,10 +38,15 @@ function OwnedCharactersTab({ siblings }) {
             {characters.map((character, index) => (
               <ListItem key={index}>
                 <CharacterName><Level>Lv{character.CharacterLevel}</Level> {character.CharacterName}</CharacterName>
-                <InfoContainer>
-                  <CharacterInfo>아이템 레벨: {character.ItemMaxLevel}</CharacterInfo>
-                  <CharacterInfo>{character.CharacterClassName}</CharacterInfo>
-                </InfoContainer>
+                <ContentWrapper>
+                  <ClassIconWrapper>
+                    <ClassIcon className={character.CharacterClassName} />
+                  </ClassIconWrapper>
+                  <InfoContainer>
+                    <CharacterInfo>아이템 레벨: {character.ItemMaxLevel}</CharacterInfo>
+                    <CharacterInfo>{character.CharacterClassName}</CharacterInfo>
+                  </InfoContainer>
+                </ContentWrapper>
               </ListItem>
             ))}
           </List>
@@ -71,11 +77,20 @@ const List = styled.ul`
   justify-content: flex-start;
 `;
 
+const ClassIconWrapper = styled.div`
+  margin-right: 10px;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const ListItem = styled.li`
   width: 300px;
   min-height: 120px;
   padding: 10px;
-  background-color: white;
+  background-color: ${props => props.theme.colors.dark};
   border-radius: 4px;
   margin-right: 20px;
   margin-bottom: 10px;
@@ -84,6 +99,7 @@ const ListItem = styled.li`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-start;
 
   @media (max-width: 600px) {
     width: calc(50% - 10px);
@@ -118,7 +134,7 @@ const CharacterName = styled.span`
 
 const CharacterInfo = styled.span`
   font-weight: normal;
-  color: ${props => props.theme.colors.dark};
+  color: ${props => props.theme.colors.text};
   margin-left: 5px;
 `;
 
