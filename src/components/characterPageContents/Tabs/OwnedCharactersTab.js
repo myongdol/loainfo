@@ -1,10 +1,13 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import ClassIcon from '../../UI/ClassIcons';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function OwnedCharactersTab({ siblings }) {
+  const navigate = useNavigate();
+
   useEffect(() => {
     console.log(siblings);
   }, [siblings]);
@@ -28,6 +31,10 @@ function OwnedCharactersTab({ siblings }) {
     });
   });
 
+  const handleCharacterClick = (CharacterName) => {
+    navigate(`/character/${CharacterName}`);
+  };
+
 
   return (
     <Container>
@@ -37,7 +44,9 @@ function OwnedCharactersTab({ siblings }) {
           <List>
             {characters.map((character, index) => (
               <ListItem key={index}>
-                <CharacterName><Level>Lv{character.CharacterLevel}</Level> {character.CharacterName}</CharacterName>
+                <CharacterName onClick={() => handleCharacterClick(character.CharacterName)}>
+                  <Level>Lv{character.CharacterLevel}</Level> {character.CharacterName}
+                </CharacterName>
                 <ContentWrapper>
                   <ClassIconWrapper>
                     <ClassIcon className={character.CharacterClassName} />
