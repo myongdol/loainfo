@@ -43,8 +43,8 @@ function OwnedCharactersTab({ siblings }) {
           <ServerName>{serverName}</ServerName>
           <List>
             {characters.map((character, index) => (
-              <ListItem key={index}>
-                <CharacterName onClick={() => handleCharacterClick(character.CharacterName)}>
+              <ListItem key={index} onClick={() => handleCharacterClick(character.CharacterName)}>
+                <CharacterName>
                   <Level>Lv{character.CharacterLevel}</Level> {character.CharacterName}
                 </CharacterName>
                 <ContentWrapper>
@@ -109,6 +109,12 @@ const ListItem = styled.li`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 15px 5px ${props => props.theme.colors.highlight} inset;
+    border-color: ${props => props.theme.colors.highlight};
+  }
 
   @media (max-width: 600px) {
     width: calc(50% - 10px);
