@@ -54,6 +54,18 @@ function EquipmentTab({ equipments }) {
     }
   }
 
+  function extractSetEffect(equipment) {
+    try {
+      const tooltipData = JSON.parse(equipment.Tooltip);
+      const setEffect = tooltipData.Element_008;
+      return setEffect ? setEffect.value : null;
+    } catch (error) {
+      console.error('Error extracting set effect', error);
+      return null;
+    }
+  }
+
+
 
   return (
     <EquipmentContainer>
@@ -62,12 +74,14 @@ function EquipmentTab({ equipments }) {
         <LeftEquipmentContainer>
           {leftEquipments.map((equipment, index) => {
             const qualityValue = extractQualityValue(equipment);
+            const setEffect = extractSetEffect(equipment);
             return (
             <EquipmentItem key={index} onClick={() => handleItemClick(equipment.Tooltip)}>
               <EquipmentIconWrapper>
                 <EquipmentIcon src={equipment.Icon} alt={equipment.Type} grade={equipment.Grade} />
                 <QualityOverlay qualityValue={qualityValue} />
               </EquipmentIconWrapper>
+              {setEffect && <SetEffectDisplay>{setEffect}</SetEffectDisplay>}
               <EquipmentInfo>
                 <EquipmentType>{equipment.Type}</EquipmentType>
                 <EquipmentName>{equipment.Name}</EquipmentName>
@@ -187,4 +201,11 @@ const RightEquipmentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+`;
+
+const SetEffectDisplay = styled.div`
+  // 스타일 정의
+  color: #d4af37; // 예시 색상
+  font-size: 0.8em;
+  // 추가적인 스타일
 `;
