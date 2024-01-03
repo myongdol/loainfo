@@ -57,15 +57,17 @@ function EquipmentTab({ equipments }) {
   function extractSetEffect(equipment) {
     try {
       const tooltipData = JSON.parse(equipment.Tooltip);
-      const setEffect = tooltipData.Element_008;
-      return setEffect ? setEffect.value : null;
+      const parser = new DOMParser();
+      const setNameHtml = parser.parseFromString(tooltipData.Element_009.value.firstMsg, 'text/html');
+      const setLevelHtml = parser.parseFromString(tooltipData.Element_009.value.itemData.Element_000.label, 'text/html');
+      const setName = setNameHtml.body.textContent || ""; // '사멸' 텍스트 추출
+      const setLevel = setLevelHtml.body.textContent || ""; // 'Lv.2' 텍스트 추출
+      return setName && setLevel ? `${setName} ${setLevel}` : null;
     } catch (error) {
       console.error('Error extracting set effect', error);
       return null;
     }
   }
-
-
 
   return (
     <EquipmentContainer>
@@ -81,11 +83,11 @@ function EquipmentTab({ equipments }) {
                 <EquipmentIcon src={equipment.Icon} alt={equipment.Type} grade={equipment.Grade} />
                 <QualityOverlay qualityValue={qualityValue} />
               </EquipmentIconWrapper>
-              {setEffect && <SetEffectDisplay>{setEffect}</SetEffectDisplay>}
               <EquipmentInfo>
                 <EquipmentType>{equipment.Type}</EquipmentType>
                 <EquipmentName>{equipment.Name}</EquipmentName>
                 <EquipmentGrade>{equipment.Grade}</EquipmentGrade>
+                {setEffect && <SetEffectDisplay>{setEffect}</SetEffectDisplay>}
               </EquipmentInfo>
             </EquipmentItem>
             )
@@ -204,8 +206,6 @@ const RightEquipmentContainer = styled.div`
 `;
 
 const SetEffectDisplay = styled.div`
-  // 스타일 정의
-  color: #d4af37; // 예시 색상
+  color: #d4af37;
   font-size: 0.8em;
-  // 추가적인 스타일
 `;
