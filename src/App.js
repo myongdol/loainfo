@@ -6,6 +6,7 @@ import Sidebar from "./mainCotent/Sidebar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import theme from "./styles/theme";
 import CharacterPage from "./pages/CharacterPage";
+import GuildPage from "./pages/GuildPage";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<MainContent/>} />
                 <Route path="/character/:characterName" element={<CharacterPage />} />
+                <Route path="/guilds" element={<GuildPage />} />
               </Routes>
             </MainSection>
             <Sidebar />
@@ -53,6 +55,7 @@ const ContentContainer = styled.div`
 const MainSection = styled.div`
   flex: 1;
   background-repeat: repeat;
+  background-color: ${(props) => props.theme.colors.dark};;
 `;
 
 const GlobalStyle = createGlobalStyle`
