@@ -24,6 +24,7 @@ const GuildRankings = () => {
           <StyledButtons
             key={index}
             onClick={() => handleServerChange(server)}
+            isActive={selectedServer === server}
           >
             {server}
           </StyledButtons>
@@ -61,4 +62,12 @@ const StyledButtons = styled(StyledButton)`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${({ isActive, theme }) => isActive ? theme.colors.highlight : "transparent"};
+  border: 2px solid ${({ isActive, theme }) => isActive ? theme.colors.highlight : theme.colors.softBlueGrey};
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    box-shadow: ${({ isActive, theme }) => isActive ? "none" : `0 0 40px 40px ${theme.colors.highlight} inset`};
+  }
 `;
