@@ -11,17 +11,21 @@ function GemsTab({ gems }) {
 
   return (
     <StyledGemsTab>
-      {Gems && Gems.length > 0 && Gems.map((gem, index) => (
-        <GemItem key={index}>
+      {Gems.map((gem, index) => {
+       const effectName = Effects && Effects[index] ? Effects[index].Name : null;
+
+        return (
+          <GemItem key={index}>
             <GemIcon src={gem.Icon} alt={gem.Name} />
             <GemName dangerouslySetInnerHTML={{ __html: gem.Name }} />
             <GemDetail>레벨: {gem.Level}</GemDetail>
             <GemDetail>등급: {gem.Grade}</GemDetail>
-            {Effects && Effects[index] && (
-                <GemDetail>효과: {Effects[index].Description}</GemDetail>
+            {effectName && (
+              <GemEffect>효과 이름: {effectName}</GemEffect>
             )}
-        </GemItem>
-      ))}
+          </GemItem>
+        );
+      })}
     </StyledGemsTab>
   );
 }
@@ -66,4 +70,10 @@ const GemDetail = styled.div`
   font-size: 14px;
   color: #666;
   margin: 5px 0;
+`;
+
+const GemEffect = styled.div`
+  margin-top: 10px;
+  font-size: 14px;
+  color: #000000;
 `;
