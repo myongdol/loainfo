@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useApi from '../../util/useApi';
 import styled from 'styled-components';
 import { StyledButton } from '../UI/StyeldButton';
+import { useNavigate } from 'react-router-dom';
 
 
 const serverOptions = ['루페온', '실리안', '아만', '카마인', '카제로스', '아브렐슈드', '카단', '니나브'];
@@ -9,9 +10,14 @@ const serverOptions = ['루페온', '실리안', '아만', '카마인', '카제�
 const GuildRankings = () => {
   const [selectedServer, setSelectedServer] = useState('루페온');
   const { data, isLoading, error } = useApi(`/guilds/rankings?serverName=${selectedServer}`);
+  const navigate = useNavigate();
 
   const handleServerChange = (newServer) => {
     setSelectedServer(newServer);
+  };
+
+  const handleClickMasterName = (MasterName) => {
+    navigate(`/character/${MasterName}`);
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -41,7 +47,7 @@ const GuildRankings = () => {
           <GuildItem key={index}>
             <GuildRank>#{guild.Rank}</GuildRank>
             <GuildName>{guild.GuildName}</GuildName>
-            <GuildMaster>{guild.MasterName}</GuildMaster>
+            <GuildMaster onClick={() => handleClickMasterName(guild.MasterName)}>{guild.MasterName}</GuildMaster>
           </GuildItem>
         ))}
       </GuildList>
@@ -120,4 +126,9 @@ const GuildName = styled.span`
 const GuildMaster = styled.span`
   width: 150px;
   text-align: right;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
