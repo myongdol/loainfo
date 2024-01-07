@@ -31,13 +31,20 @@ const GuildRankings = () => {
         ))}
       </ServerButtonsContainer>
 
-      <ul>
+      <GuildList>
+        <GuildListHeader>
+          <GuildRank>순위</GuildRank>
+          <GuildName>길드명</GuildName>
+          <GuildMaster>길드장</GuildMaster>
+        </GuildListHeader>
         {data?.map((guild, index) => (
-          <li key={index}>
-            {guild.GuildName} - Rank: {guild.Rank}
-          </li>
+          <GuildItem key={index}>
+            <GuildRank>#{guild.Rank}</GuildRank>
+            <GuildName>{guild.GuildName}</GuildName>
+            <GuildMaster>{guild.MasterName}</GuildMaster>
+          </GuildItem>
         ))}
-      </ul>
+      </GuildList>
     </GuildPageContainer>
   );
 };
@@ -48,6 +55,7 @@ export default GuildRankings;
 
 const GuildPageContainer = styled.div`
   background-color: ${(props) => props.theme.colors.background};
+  padding: 20px;
 `;
 
 const ServerButtonsContainer = styled.div`
@@ -70,4 +78,46 @@ const StyledButtons = styled(StyledButton)`
     color: #fff;
     box-shadow: ${({ isActive, theme }) => isActive ? "none" : `0 0 40px 40px ${theme.colors.highlight} inset`};
   }
+`;
+
+const GuildList = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+const GuildListHeader = styled.li`
+  display: flex;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.highlight};
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+`;
+
+const GuildItem = styled.li`
+  display: flex;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.container};
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  color: ${({ theme }) => theme.colors.text};
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+`;
+
+const GuildRank = styled.span`
+  width: 50px;
+  font-weight: bold;
+`;
+
+const GuildName = styled.span`
+  flex: 1;
+  text-align: center;
+`;
+
+const GuildMaster = styled.span`
+  width: 150px;
+  text-align: right;
 `;
