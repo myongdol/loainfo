@@ -4,6 +4,7 @@ import useApi from "../util/useApi";
 import CharacterDetails from "../components/characterPageContents/CharacterDetails";
 import CharacterTabs from "../components/characterPageContents/ChracterPageTabs";
 import styled from "styled-components";
+import GemsTab from "../components/characterPageContents/Tabs/GemsTab";
 
 
 
@@ -48,6 +49,7 @@ function CharacterPage() {
 
         <CharacterTabsContainer>
             <CharacterTabs equipment={equipment} siblings={siblings} />
+            <GemsTab gems={gems}/>
         </CharacterTabsContainer>
       </StyledCharacterPage>
     )
