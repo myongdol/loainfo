@@ -48,8 +48,11 @@ function CharacterPage() {
         </CharacterDetailsContainer>
 
         <CharacterTabsContainer>
-            <CharacterTabs equipment={equipment} siblings={siblings} />
-            <GemsTab gems={gems}/>
+            <CharacterTabs 
+              equipment={equipment}
+              siblings={siblings} 
+              gems={gems} 
+            />
         </CharacterTabsContainer>
       </StyledCharacterPage>
     )

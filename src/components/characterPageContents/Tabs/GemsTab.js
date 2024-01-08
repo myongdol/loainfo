@@ -13,7 +13,8 @@ function GemsTab({ gems }) {
     <StyledGemsTab>
       {Gems.map((gem, index) => {
        const effectName = Effects && Effects[index] ? Effects[index].Name : null;
-
+        console.log(Effects);
+        console.log(Gems)
         return (
           <GemItem key={index}>
             <GemIcon src={gem.Icon} alt={gem.Name} />
