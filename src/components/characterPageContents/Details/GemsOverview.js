@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 function GemsOverview({ gems }) {
-  const { Gems } = gems || {};
-
+  const { Gems, Effects } = gems || {};
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   if (!Gems || Gems.length === 0) {
     return <div>보석에 대한 정보가 없습니다.</div>;
   }
 
   return (
     <Container>
-      {Gems.map((gem, index) => (
-        <GemItem key={index}>
-          <GemIcon src={gem.Icon} alt={`레벨 ${gem.Level} 보석`} />
-          <GemLevel>{gem.Level}레벨</GemLevel>
-        </GemItem>
-      ))}
-    </Container>
+      {Gems.map((gem, index) => {
+        const effectName = Effects && Effects[index] ? Effects[index].Name : null;
+
+        return (
+          <GemItem 
+            key={index}
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          > 
+            <GemIcon src={gem.Icon} alt={`레벨 ${gem.Level} 보석`} />
+            <GemLevel>{gem.Level}레벨</GemLevel>
+            {hoveredIndex === index && effectName && (
+              <GemEffect>효과: {effectName}</GemEffect>
+            )}
+          </GemItem>
+          )
+        })}
+      </Container>
   );
 }
 
@@ -54,4 +65,15 @@ const GemIcon = styled.img`
 const GemLevel = styled.div`
   font-size: 14px;
   color: ${props => props.theme.colors.softBlueGrey};
+`;
+
+
+const GemEffect = styled.div`
+  margin-top: 10px;
+  font-size: 14px;
+  color: #000;
+  background-color: ${props => props.theme.colors.softBlueGrey};
+  padding: 5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 `;

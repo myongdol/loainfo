@@ -16,8 +16,8 @@ function GemsTab({ gems }) {
         console.log(Effects);
         console.log(Gems)
         return (
-          <GemItem key={index}>
-            <GemIcon src={gem.Icon} alt={gem.Name} />
+          <GemItem key={index} >
+            <GemIcon src={gem.Icon} alt={`레벨 ${gem.Level} 보석`} />
             <GemName dangerouslySetInnerHTML={{ __html: gem.Name }} />
             <GemDetail>레벨: {gem.Level}</GemDetail>
             <GemDetail>등급: {gem.Grade}</GemDetail>
