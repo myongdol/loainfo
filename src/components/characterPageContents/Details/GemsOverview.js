@@ -37,33 +37,37 @@ export default GemsOverview;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 20px;
+  gap: 10px;
+  padding: 10px;
   background-color: ${props => props.theme.colors.background};
 `;
 
 const GemItem = styled.div`
   background: ${props => props.theme.colors.container};
   border-radius: 8px;
-  padding: 10px;
+  padding: 5px;
   margin: 10px 0;
-  width: 90%;
+  width: 100px;
+  cursor: pointer;
   box-shadow: 0 2px 4px ${props => props.theme.colors.dark};
   text-align: center;
   color: ${props => props.theme.colors.text};
 `;
 
 const GemIcon = styled.img`
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   margin-bottom: 10px;
   border: 2px solid ${props => props.theme.colors.highlight};
 `;
 
 const GemLevel = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   color: ${props => props.theme.colors.softBlueGrey};
 `;
 
