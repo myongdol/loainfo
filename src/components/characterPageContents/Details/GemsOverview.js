@@ -8,9 +8,11 @@ function GemsOverview({ gems }) {
     return <div>보석에 대한 정보가 없습니다.</div>;
   }
 
+  const sortedGems = [...Gems].sort((a, b) => b.Level - a.Level);
+
   return (
     <Container>
-      {Gems.map((gem, index) => {
+      {sortedGems.map((gem, index) => {
         const effectName = Effects && Effects[index] ? Effects[index].Name : null;
 
         return (
@@ -92,12 +94,12 @@ const GemEffect = styled.div`
   &::before {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
     border-width: 10px;
     border-style: solid;
-    border-color: #39d7ff transparent transparent transparent;
+    border-color: #88c9da transparent transparent transparent;
   }
 
   ${GemItem}:hover & {
