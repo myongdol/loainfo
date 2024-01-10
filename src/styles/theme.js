@@ -8,6 +8,7 @@ const theme = {
     orange: '#FFA500;',
       container: '#27405a',
       background: '#20272e',
+      darkbackground: 'rgba(0, 0, 0, 0.5)',
     },
   };
   

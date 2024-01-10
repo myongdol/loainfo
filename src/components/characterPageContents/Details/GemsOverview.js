@@ -22,7 +22,7 @@ function GemsOverview({ gems }) {
             onMouseLeave={() => setHoveredIndex(null)}
           > 
             <GemIcon src={gem.Icon} alt={`레벨 ${gem.Level} 보석`} />
-            <GemLevel>{gem.Level}레벨</GemLevel>
+            <GemName dangerouslySetInnerHTML={{ __html: gem.Name }} /> 
             {hoveredIndex === index && effectName && (
               <GemEffect>{effectName}</GemEffect>
             )}
@@ -45,7 +45,7 @@ const Container = styled.div`
   margin-top: 20px;
   gap: 10px;
   padding: 10px;
-  background-color: ${props => props.theme.colors.background};
+  background-color: ${props => props.theme.colors.darkbackground};
 `;
 
 const GemItem = styled.div`
@@ -68,12 +68,6 @@ const GemIcon = styled.img`
   margin-bottom: 10px;
   border: 2px solid ${props => props.theme.colors.highlight};
 `;
-
-const GemLevel = styled.div`
-  font-size: 12px;
-  color: ${props => props.theme.colors.softBlueGrey};
-`;
-
 
 const GemEffect = styled.div`
   margin-top: 10px;
@@ -99,10 +93,16 @@ const GemEffect = styled.div`
     transform: translateX(-50%);
     border-width: 10px;
     border-style: solid;
-    border-color: #88c9da transparent transparent transparent;
+    border-color: #4cf6fc transparent transparent transparent;
   }
 
   ${GemItem}:hover & {
     display: block;
   }
+`;
+
+const GemName = styled.div`
+  font-size: 14px;
+  color: ${props => props.theme.colors.text};
+  margin-bottom: 5px;
 `;
