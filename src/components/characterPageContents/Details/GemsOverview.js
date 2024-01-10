@@ -22,7 +22,7 @@ function GemsOverview({ gems }) {
             <GemIcon src={gem.Icon} alt={`레벨 ${gem.Level} 보석`} />
             <GemLevel>{gem.Level}레벨</GemLevel>
             {hoveredIndex === index && effectName && (
-              <GemEffect>효과: {effectName}</GemEffect>
+              <GemEffect>{effectName}</GemEffect>
             )}
           </GemItem>
           )
@@ -56,6 +56,7 @@ const GemItem = styled.div`
   box-shadow: 0 2px 4px ${props => props.theme.colors.dark};
   text-align: center;
   color: ${props => props.theme.colors.text};
+  position: relative;
 `;
 
 const GemIcon = styled.img`
@@ -75,9 +76,31 @@ const GemLevel = styled.div`
 const GemEffect = styled.div`
   margin-top: 10px;
   font-size: 14px;
+  width: 100%;
   color: #000;
   background-color: ${props => props.theme.colors.softBlueGrey};
-  padding: 5px;
-  border-radius: 4px;
+  padding: 10px;
+  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: #39d7ff transparent transparent transparent;
+  }
+
+  ${GemItem}:hover & {
+    display: block;
+  }
 `;
