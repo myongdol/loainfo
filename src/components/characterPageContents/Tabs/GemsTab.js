@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import theme from '../../../styles/theme';
 
 function GemsTab({ gems }) {
   const { Gems, Effects } = gems || {};
@@ -12,7 +13,8 @@ function GemsTab({ gems }) {
   return (
     <StyledGemsTab>
       {Gems.map((gem, index) => {
-       const effectName = Effects && Effects[index] ? Effects[index].Name : null;
+        const effect = Effects && Effects[index] ? Effects[index] : null;
+        
         console.log(Effects);
         console.log(Gems)
         return (
@@ -20,9 +22,12 @@ function GemsTab({ gems }) {
             <GemIcon src={gem.Icon} alt={`레벨 ${gem.Level} 보석`} />
             <GemName dangerouslySetInnerHTML={{ __html: gem.Name }} />
             <GemDetail>레벨: {gem.Level}</GemDetail>
-            <GemDetail>등급: {gem.Grade}</GemDetail>
-            {effectName && (
-              <GemEffect>효과 이름: {effectName}</GemEffect>
+            <GemDetail>{effect ? effect.Description : '설명 없음'}</GemDetail>
+            {effect && effect.Icon && (
+              <SkillIcon src={effect.Icon} alt={`${effect.Name} 스킬 아이콘`} />
+            )}
+            {effect && effect.Name && (
+              <GemEffect>효과 이름: {effect.Name}</GemEffect>
             )}
           </GemItem>
         );
@@ -69,7 +74,7 @@ const GemName = styled.div`
 
 const GemDetail = styled.div`
   font-size: 14px;
-  color: #666;
+  color: ${theme.colors.dark};
   margin: 5px 0;
 `;
 
@@ -77,4 +82,10 @@ const GemEffect = styled.div`
   margin-top: 10px;
   font-size: 14px;
   color: #000000;
+`;
+
+const SkillIcon = styled.img`
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
 `;
