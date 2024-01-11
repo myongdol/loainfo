@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import theme from '../../../styles/theme';
 
 function GemsTab({ gems }) {
   const { Gems, Effects } = gems || {};
@@ -46,13 +45,13 @@ const StyledGemsTab = styled.div`
 `;
 
 const GemItem = styled.div`
-  background: #f0f0f0;
+  background: ${props => props.theme.colors.container};
   border-radius: 8px;
   padding: 10px;
   margin: 10px 0;
   width: 90%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
+  color: ${props => props.theme.colors.text};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,24 +63,25 @@ const GemIcon = styled.img`
   height: 60px;
   border-radius: 50%;
   margin-bottom: 10px;
+  border: 2px solid ${props => props.theme.colors.highlight};
 `;
 
 const GemName = styled.div`
   font-size: 16px;
-  color: #333;
+  color: ${props => props.theme.colors.text};
   font-weight: bold;
 `;
 
 const GemDetail = styled.div`
   font-size: 14px;
-  color: ${theme.colors.dark};
+  color: ${props => props.theme.colors.text};
   margin: 5px 0;
 `;
 
 const GemEffect = styled.div`
-  margin-top: 10px;
   font-size: 14px;
-  color: #000000;
+  color: ${props => props.theme.colors.text};
+  margin-top: 10px;
 `;
 
 const SkillIcon = styled.img`
