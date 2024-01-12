@@ -19,7 +19,6 @@ function EquipmentTab({ equipments }) {
   if (!equipments || equipments.length === 0) {
     return <div>장비 정보가 없습니다.</div>;
   }
-  console.log(equipments)
 
   const excludedTypes = ['문장', '나침반', '부적'];
   const excludedQualityTypes = ['어빌리티 스톤', '팔찌'];
