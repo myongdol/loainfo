@@ -134,6 +134,14 @@ function Sidebar() {
             >
               로아차트
             </SidebarItems>
+
+            <SidebarItems
+              href="https://lostbuilds.com/"
+              src="Images/lostBuilds.png"
+              alt="로스트빌드 바로가기"
+            >
+              로스트빌드
+            </SidebarItems>
           </SidebarContent>
         </StyledSidebar>
     )
