@@ -3,6 +3,7 @@ import { equipmentColors } from '../../../styles/equipmentColors';
 import QualityOverlay from '../Details/QualityOverlay';
 import { useState } from 'react';
 import TooltipModal from '../../UI/Modals/TooltipModal';
+import GemsOverview from '../Details/GemsOverview';
 
 
 const breakpoints = {
@@ -12,7 +13,7 @@ const breakpoints = {
 };
 
 
-function EquipmentTab({ equipments }) {
+function EquipmentTab({ equipments, gems }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentTooltip, setCurrentTooltip] = useState(null);
 
@@ -117,6 +118,10 @@ function EquipmentTab({ equipments }) {
           rawTooltipData={currentTooltip}
         />
       </EquipmentRow>
+
+      <GemsContainer>
+        <GemsOverview gems={gems} />
+      </GemsContainer>
     </EquipmentContainer>
   );
 }
@@ -207,4 +212,8 @@ const RightEquipmentContainer = styled.div`
 const SetEffectDisplay = styled.div`
   color: #d4af37;
   font-size: 0.8em;
+`;
+
+const GemsContainer = styled.div`
+  margin-top: 20px; 
 `;

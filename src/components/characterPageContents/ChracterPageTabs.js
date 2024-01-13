@@ -15,7 +15,7 @@ const CharacterTabs = ({ equipment, siblings, gems }) => {
         <StyledButtons onClick={() => setActiveTab('gems')}>보석</StyledButtons>
         <StyledButtons onClick={() => setActiveTab('characters')}>보유 캐릭터</StyledButtons>
       </ButtonsContainer>
-      {activeTab === 'equipment' && <EquipmentTab equipments={equipment} />}
+      {activeTab === 'equipment' && <EquipmentTab equipments={equipment} gems={gems} />}
       {activeTab === 'characters' && <OwnedCharactersTab siblings={siblings} />}
       {activeTab === 'gems' && <GemsTab gems={gems} />}
     </StyledTabs>

@@ -4,7 +4,6 @@ import useApi from "../util/useApi";
 import CharacterDetails from "../components/characterPageContents/CharacterDetails";
 import CharacterTabs from "../components/characterPageContents/ChracterPageTabs";
 import styled from "styled-components";
-import GemsOverview from "../components/characterPageContents/Details/GemsOverview";
 
 
 
@@ -53,7 +52,6 @@ function CharacterPage() {
               siblings={siblings} 
               gems={gems} 
             />
-            <GemsOverview gems={gems} />
         </CharacterTabsContainer>
       </StyledCharacterPage>
     )
