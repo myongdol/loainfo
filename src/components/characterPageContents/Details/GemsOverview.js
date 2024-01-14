@@ -12,6 +12,8 @@ function GemsOverview({ gems }) {
 
   return (
     <Container>
+    <Title>현재 장착중인 보석</Title>
+    <GemContainer>
       {sortedGems.map((gem, index) => {
         const effectName = Effects && Effects[index] ? Effects[index].Name : null;
 
@@ -29,7 +31,8 @@ function GemsOverview({ gems }) {
           </GemItem>
           )
         })}
-      </Container>
+    </GemContainer>
+    </Container>
   );
 }
 
@@ -39,13 +42,26 @@ export default GemsOverview;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
   margin-top: 20px;
   gap: 10px;
   padding: 10px;
   background-color: ${props => props.theme.colors.darkbackground};
+`;
+
+const GemContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
+
+const Title = styled.h3`
+  align-items: flex-start;
+  margin: 0 0 10px 0;
+  width: 100%;
 `;
 
 const GemItem = styled.div`

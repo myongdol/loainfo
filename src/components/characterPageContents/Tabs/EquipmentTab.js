@@ -70,6 +70,7 @@ function EquipmentTab({ equipments, gems }) {
   }
 
   return (
+    <>
     <EquipmentContainer>
       <h3>장비 목록</h3>
       <EquipmentRow>
@@ -118,11 +119,12 @@ function EquipmentTab({ equipments, gems }) {
           rawTooltipData={currentTooltip}
         />
       </EquipmentRow>
-
-      <GemsContainer>
-        <GemsOverview gems={gems} />
-      </GemsContainer>
     </EquipmentContainer>
+
+    <GemsContainer>
+      <GemsOverview gems={gems} />
+    </GemsContainer>
+    </>
   );
 }
 
@@ -136,7 +138,7 @@ const EquipmentContainer = styled.div`
   align-items: flex-start;
   padding: 20px;
   color: white;
-  background: rgba(0, 0, 0, 0.5);
+  background-color: ${props => props.theme.colors.darkbackground};
   border-radius: 10px;
 `;
 
@@ -216,4 +218,5 @@ const SetEffectDisplay = styled.div`
 
 const GemsContainer = styled.div`
   margin-top: 20px; 
+  color: white;
 `;
