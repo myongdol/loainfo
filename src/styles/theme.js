@@ -1,6 +1,8 @@
 const theme = {
     colors: {
       highlight: '#7289da',
+      redHighlight: '#e042e6',
+      lighterHighlight: '#4a6be6',
       text: '#ffffff',
       softBlueGrey: '#99aab5',
       dark: '#2c2f33',
