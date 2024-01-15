@@ -7,15 +7,15 @@ function GemsTab({ gems }) {
   
   if (!gems || gems.length === 0) {
     return <div>보석에 대한 정보가 없습니다.</div>;
-  }
+  };
+
+  const sortedGems = Gems.sort((a, b) => b.Level - a.Level);
 
   return (
     <StyledGemsTab>
-      {Gems.map((gem, index) => {
+      {sortedGems.map((gem, index) => {
         const effect = Effects && Effects[index] ? Effects[index] : null;
         
-        console.log(Effects);
-        console.log(Gems)
         return (
           <GemItem key={index}>
             <GemIcon src={gem.Icon} alt={`레벨 ${gem.Level} 보석`} name={gem.Name}/>
