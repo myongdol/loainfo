@@ -51,6 +51,7 @@ function CharacterPage() {
               equipment={equipment}
               siblings={siblings} 
               gems={gems} 
+              avatars={avatars}
             />
         </CharacterTabsContainer>
       </StyledCharacterPage>
