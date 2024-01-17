@@ -9,10 +9,6 @@ function AvatarTab({ avatars }) {
   if (!avatars || avatars.length === 0) {
     return <div>아바타 정보가 없습니다.</div>;
   }
-  
-  const createMarkup = (htmlString) => {
-    return {__html: htmlString};
-  };
 
   const handleAvatarClick = (tooltip) => {
     setSelectedAvatarTooltip(tooltip);
