@@ -1,23 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import TooltipModal from '../../UI/Modals/TooltipModal';
 
 function AvatarTab({ avatars }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedAvatarTooltip, setSelectedAvatarTooltip] = useState(null);
     
   if (!avatars || avatars.length === 0) {
     return <div>아바타 정보가 없습니다.</div>;
   }
   
+  const createMarkup = (htmlString) => {
+    return {__html: htmlString};
+  };
+
+  const handleAvatarClick = (tooltip) => {
+    setSelectedAvatarTooltip(tooltip);
+    setIsModalOpen(true);
+  };
 
   console.log(avatars);
   return (
     <StyledAvatarTab>
       {avatars.map((avatar, index) => (
-        <AvatarItem key={index}>
+        <AvatarItem key={index} onClick={() => handleAvatarClick(avatar.Tooltip)}>
           <AvatarIcon src={avatar.Icon} alt={`${avatar.Name} 아바타`} />
           <AvatarName>{avatar.Name}</AvatarName>
           <AvatarType>{avatar.Type}</AvatarType>
         </AvatarItem>
       ))}
+      {isModalOpen && (
+        <TooltipModal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+          rawTooltipData={selectedAvatarTooltip} 
+        />
+      )}
     </StyledAvatarTab>
   );
 }
@@ -62,4 +80,10 @@ const AvatarName = styled.div`
 const AvatarType = styled.div`
   font-size: 14px;
   color: ${props => props.theme.colors.text};
+`;
+
+const AvatarDetail = styled.div`
+  font-size: 12px;
+  color: ${props => props.theme.colors.text};
+  margin: 3px 0;
 `;
